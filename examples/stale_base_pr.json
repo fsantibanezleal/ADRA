@@ -1,0 +1,13 @@
+{
+  "source_branch": "task/74783/fix-estado-despacho",
+  "target_branch": "develop",
+  "objective": "Split current-state table creation into its own parallel task.",
+  "work_item": "AB#74783",
+  "git_fixture": {
+    "behind": 12,
+    "deletions": ["refined/nb-prioridad-cobertura.py"],
+    "renames": ["R100\tresources/bundle.resources.schemas.yml\tresources/bundle.resources.schemas.yml.t"]
+  },
+  "bundle_fixture": {"stdout": "Error: schema resource not found", "returncode": 1},
+  "pr_body_draft": "Objective: split task. Validation: looks fine, should be ok."
+}

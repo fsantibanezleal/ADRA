@@ -1,0 +1,8 @@
+# ADRA engine core has NO required dependencies — it runs offline on the Python
+# standard library (the deterministic `mock` provider). Use extras for more:
+#
+#   pip install -e ".[dev]"         # pytest + ruff (run the test suite / lint)
+#   pip install -e ".[anthropic]"   # real provider via the native anthropic SDK
+#
+# Platform connectors (githubkit / databricks-sdk / azure-* / Azure DevOps REST) land
+# as their own extras in Phase 3 — see wip/adra/plan.md.

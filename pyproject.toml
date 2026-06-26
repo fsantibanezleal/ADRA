@@ -1,0 +1,45 @@
+[project]
+name = "adra"
+version = "0.1.0"
+description = "ADRA — Adversarial Dev Review Agent: a deterministic-first, adversarial-validation engine for the software lifecycle (PR review, validation/refutation experiments, auto-docs, human escalation)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Felipe Santibáñez-Leal" }]
+keywords = ["llm", "agent", "code-review", "adversarial-validation", "llm-as-judge", "devops", "provenance"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+]
+# The engine core has NO required third-party dependencies: it runs offline on the
+# Python standard library via the deterministic `mock` provider. Real providers and
+# platform connectors are opt-in extras below.
+dependencies = []
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.40"]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.scripts]
+adra = "cli.__main__:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["adra*", "cli*"]
+
+[tool.setuptools.package-data]
+adra = ["prompts/*.md", "clients/synthetic/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

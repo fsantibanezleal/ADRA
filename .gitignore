@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtualenv
+.venv/
+venv/
+
+# Secrets / local config — NEVER commit a real .env (secrets live in the CAOS_MANAGE vault)
+.env
+*.local
+
+# ADRA run artifacts (immutable provenance written per run)
+runs/
+
+# OS
+.DS_Store
+Thumbs.db
