@@ -113,13 +113,20 @@ class AnthropicChatModel(ChatModel):
         self._max_tokens = max_tokens
 
     def generate(self, system: str, user: str) -> str:
-        message = self._client.messages.create(
-            model=self._model,
-            max_tokens=self._max_tokens,
-            temperature=self._temperature,
-            system=system,
-            messages=[{"role": "user", "content": user}],
-        )
+        kwargs = {
+            "model": self._model,
+            "max_tokens": self._max_tokens,
+            "system": system,
+            "messages": [{"role": "user", "content": user}],
+        }
+        # Some models (e.g. opus-4-8) deprecate `temperature`; only send it when non-default.
+        if self._temperature and self._temperature != 1.0:
+            kwargs["temperature"] = self._temperature
+        try:
+            message = self._client.messages.create(**kwargs)
+        except Exception:
+            kwargs.pop("temperature", None)
+            message = self._client.messages.create(**kwargs)
         return "".join(
             block.text for block in message.content
             if getattr(block, "type", None) == "text"
