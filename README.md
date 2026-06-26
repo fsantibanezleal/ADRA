@@ -7,7 +7,7 @@
 > grounded by **deterministic tools**, with **immutable provenance**. Runs **offline with
 > no API key**.
 
-`pip install adra` · Python ≥ 3.11 · Apache-2.0 · status: `v0.01.000` (engine cut)
+`pip install adra` · Python ≥ 3.11 · Apache-2.0 · status: `v0.04.000`
 
 ---
 
@@ -63,8 +63,8 @@ intake ─▶ plan ─▶ ground (deterministic tools) ─▶ generate ─▶ CR
 - `adra/orchestrator.py` — the hand-rolled, **framework-free** state machine.
 - `adra/critic.py` — deterministic red-team pass (rubric-driven) + LLM semantic attacks.
 - `adra/judge.py` — rubric scoring with **swap-and-average** + reference anchoring.
-- `adra/llm.py` — the tiny ADRA-owned `ChatModel` seam: `mock` (offline) | `anthropic`
-  (native SDK). No LangChain/LangGraph.
+- `adra/llm.py` — the tiny ADRA-owned `ChatModel` seam: `mock` (offline) | any real provider
+  via **pydantic-ai** (`provider:model`, config-only). No LangChain/LangGraph.
 - `adra/tools/` — each returns a `ToolResult` (git / CI / bundle / lang / discovery / sql).
 - `adra/skills/` — the `Skill` base + the six skills.
 - `adra/clients/` — client governance suites (the bundled fictional **Northwind Data
@@ -95,9 +95,9 @@ adra decide "Raise the refresh cadence" "edit the shared CI template" "change it
 ## Enable a real provider
 
 ```bash
-pip install -e ".[anthropic]"            # native anthropic SDK; the seam is provider-agnostic
-export ANTHROPIC_API_KEY=...             # or put it in .env
-export ADRA_PROVIDER=anthropic
+pip install -e ".[llm]"                  # pydantic-ai; the seam is provider-agnostic
+export ANTHROPIC_API_KEY=...             # or put it in .env (any provider's key works)
+export ADRA_PROVIDER=anthropic           # adding a provider is config only: ADRA_PROVIDER / ADRA_MODEL / ADRA_MODEL_<ROLE>
 adra pr-eval --source task/123/x --repo /path/to/repo --external
 ```
 
@@ -117,18 +117,19 @@ export ADRA_CLIENT_DIR=/path/to/your/standards   # or Settings(client_dir=...)
 The rubric references the suite by id and the prompts cite it — the engine code does not
 change per client.
 
-## Connectors & emulator (next phase)
+## Connectors & emulator
 
 The engine grounds through one connector `Protocol` so the same skills run against a real
 platform or a synthetic one:
 
-- **Real**: GitHub (PRs/reviews/issues/contents via `githubkit`), Azure DevOps (REST 7.1),
-  Databricks (`databricks-sdk` + bundles CLI), Azure (`azure-identity` + monitor / health).
+- **Real**: GitHub (PRs/reviews/issues/contents via a thin `httpx` REST v3 client), Azure DevOps
+  (REST 7.1), Databricks (`databricks-sdk` + bundles CLI), Azure (`azure-identity` + monitor / health).
 - **Emulator**: a self-contained platform (synthetic git repos + PRs + wiki + boards + CI +
   a SQLite warehouse) so the full flow runs offline.
 
-> These land in the next phase (the engine + offline mock are complete today). Roadmap +
-> design: tracked in the private management repo's `wip/adra/plan.md`.
+> The GitHub, Azure DevOps, Databricks, and Azure connectors are **implemented**; the offline
+> emulator runs the full flow with no external calls. Each is enabled by its `pip install adra[...]`
+> extra and exercised read-only by default.
 
 ## Security model
 
@@ -136,13 +137,13 @@ Deterministic floor (tools are ground truth; the LLM cannot overturn a blocker) 
 by default (writes require `--external` **and** explicit human confirmation) · human gates on
 PR create / push / merge and any risk claim · English-only + AI-authorship-leak scan on
 anything written to disk · immutable provenance for every run. The agent reads **untrusted**
-repo/PR/issue content — the connector phase adds a dual-LLM / capability split + sandboxed,
-egress-filtered execution + authored-diff secret scanning (OWASP LLM/Agentic Top-10).
+repo/PR/issue content — a dual-LLM / capability split + sandboxed, egress-filtered execution are
+planned for the connector phase (not yet implemented; OWASP LLM/Agentic Top-10).
 
 ## Two-repo layout
 
 ADRA is the **public-destined OSS engine** (this repo) — no secrets, ever. A separate
-private **ADRA Console** (a Veta-style web app + backend) *consumes* this engine for
+private **ADRA Console** (a private web app + backend) *consumes* this engine for
 experiments and real connections behind access control. The engine is the serious tool you
 can run anywhere with your own tokens; the console is the connected instance.
 
@@ -153,13 +154,14 @@ can run anywhere with your own tokens; the console is the connected instance.
 - **New capability:** add a `Skill` subclass + a `prompts/<skill>.md`, register it in
   `adra/skills/__init__.py`, add a `Node`.
 - **New tool:** a function returning a `ToolResult`; call it from a skill's `ground`.
-- **New provider:** a small `ChatModel` subclass in `adra/llm.py`.
+- **New provider:** config only — set `ADRA_PROVIDER` / `ADRA_MODEL` / `ADRA_MODEL_<ROLE>`
+  (pydantic-ai resolves the `provider:model`); no new code.
 
 ## Status
 
-`v0.01.000` — the engine is complete and green offline (11/11 tests). Real connectors, the
-emulator, multi-industry synthetic clients, and the web console are the next phases. Stays
-`0.x` while connectors are partly untested-live.
+`v0.04.000` — the engine is complete and green offline, and the GitHub / Azure DevOps / Databricks
+/ Azure connectors plus the offline emulator are implemented. Multi-industry synthetic clients and
+the web console are the next phases. Stays `0.x` while connectors are partly untested-live.
 
 ## License
 

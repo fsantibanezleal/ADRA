@@ -39,8 +39,9 @@ cited with their public links. Full machine-readable citations are in
 - **Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena** — Zheng et al., 2023
   (`arXiv:2306.05685`). → `papers/llm-as-judge-mtbench.pdf`. Defines position /
   verbosity / self-preference bias → swap-and-average + reference anchoring.
-- **Position Bias in Rubric-Based LLM-as-a-Judge** — (`arXiv:2602.02219`). Rubric
-  ordering induces bias; mitigations the judge applies.
+- **Am I More Pointwise or Pairwise? Revealing Position Bias in Rubric-Based
+  LLM-as-a-Judge** — (`arXiv:2602.02219`). Rubric ordering induces bias; motivates the
+  swap/permutation direction (ADRA does not implement its balanced score-option permutation).
 
 ## 4. Grounding — "don't infer, diagnose"
 

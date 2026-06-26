@@ -13,7 +13,7 @@ dist/
 .venv/
 venv/
 
-# Secrets / local config — NEVER commit a real .env (secrets live in the CAOS_MANAGE vault)
+# Secrets / local config — NEVER commit a real .env (secrets live in your own secret store)
 .env
 *.local
 
