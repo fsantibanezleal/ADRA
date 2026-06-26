@@ -13,8 +13,44 @@ from pathlib import Path
 
 from adra.utils import client_dir as _client_dir
 
-# Default model id: keep aligned with the latest Claude Opus available to the team.
+# Default Anthropic model (native SDK). Keep aligned with the latest Claude Opus.
 DEFAULT_ANTHROPIC_MODEL = "claude-opus-4-8"
+
+# Built-in providers. Anthropic uses its native SDK; every entry below speaks the
+# OpenAI-compatible Chat Completions API, so OpenAI, Groq, xAI, Mistral, DeepSeek,
+# OpenRouter, Together AND local servers (Ollama / LM Studio / vLLM) all work — bring
+# whatever you have, or run a local model for free. Any other OpenAI-compatible service
+# works via ADRA_BASE_URL + ADRA_API_KEY.
+PROVIDERS: dict[str, dict[str, str]] = {
+    "openai":     {"base_url": "https://api.openai.com/v1",      "key_env": "OPENAI_API_KEY",     "default_model": "gpt-4o"},
+    "groq":       {"base_url": "https://api.groq.com/openai/v1", "key_env": "GROQ_API_KEY",       "default_model": "llama-3.3-70b-versatile"},
+    "xai":        {"base_url": "https://api.x.ai/v1",            "key_env": "XAI_API_KEY",        "default_model": "grok-4"},
+    "mistral":    {"base_url": "https://api.mistral.ai/v1",      "key_env": "MISTRAL_API_KEY",    "default_model": "mistral-large-latest"},
+    "deepseek":   {"base_url": "https://api.deepseek.com/v1",    "key_env": "DEEPSEEK_API_KEY",   "default_model": "deepseek-chat"},
+    "openrouter": {"base_url": "https://openrouter.ai/api/v1",   "key_env": "OPENROUTER_API_KEY", "default_model": "openai/gpt-4o"},
+    "together":   {"base_url": "https://api.together.xyz/v1",    "key_env": "TOGETHER_API_KEY",   "default_model": "meta-llama/Llama-3.3-70B-Instruct-Turbo"},
+    "ollama":     {"base_url": "http://localhost:11434/v1",      "key_env": "",                   "default_model": "llama3.1"},
+}
+
+# Auto-detect order when ADRA_PROVIDER is unset: a present key wins; else offline mock.
+_AUTODETECT_ORDER = ("anthropic", "openai", "groq", "xai", "mistral", "deepseek", "openrouter", "together")
+
+
+def default_model(provider: str) -> str:
+    """The default model id for a provider (overridable with ADRA_MODEL)."""
+    if provider in ("anthropic", "mock"):
+        return DEFAULT_ANTHROPIC_MODEL
+    info = PROVIDERS.get(provider)
+    return info["default_model"] if info else DEFAULT_ANTHROPIC_MODEL
+
+
+def _autodetect_provider() -> str:
+    """Pick a provider from whichever API key is present; offline mock if none."""
+    for name in _AUTODETECT_ORDER:
+        key_env = "ANTHROPIC_API_KEY" if name == "anthropic" else PROVIDERS.get(name, {}).get("key_env", "")
+        if key_env and os.environ.get(key_env):
+            return name
+    return "mock"
 
 
 def _load_dotenv(path: Path) -> None:
@@ -38,11 +74,17 @@ def _load_dotenv(path: Path) -> None:
 class Settings:
     """Resolved configuration for a run."""
 
-    # LLM
-    provider: str = "mock"  # "mock" | "anthropic"
+    # LLM (the deterministic loop runs offline with NO key; a provider adds the semantic
+    # layer). provider: mock | anthropic | openai | groq | xai | mistral | deepseek |
+    # openrouter | together | ollama (local). See adra.config.PROVIDERS.
+    provider: str = "mock"
     model: str = DEFAULT_ANTHROPIC_MODEL
     temperature: float = 0.0
     max_tokens: int = 4096
+    # Per-role model overrides so one run can orchestrate across providers (e.g. a strong
+    # model for the critic/judge, a cheaper/faster one for generation). Value per role is
+    # "provider:model" or just "model" (provider inherits the default). Empty => default.
+    role_models: dict[str, str] = field(default_factory=dict)
 
     # Adversarial loop
     max_rounds: int = 3  # generate -> critic -> revise iterations before escalation
@@ -62,6 +104,25 @@ class Settings:
     # unless explicitly enabled (default is dry-run / read-only).
     allow_external_calls: bool = False
 
+    def role(self, role: str) -> tuple[str, str]:
+        """Resolve (provider, model) for a flow role: 'plan'|'generate'|'critic'|'judge'.
+
+        Falls back to the run's default provider/model; overridden per role via
+        ``role_models`` (``ADRA_MODEL_<ROLE>``), value ``"provider:model"`` or ``"model"``.
+        """
+        spec = self.role_models.get(role, "")
+        if not spec:
+            return self.provider, self.model
+        if ":" in spec:
+            prov, _, mdl = spec.partition(":")
+            return (prov or self.provider), (mdl or self.model)
+        return self.provider, spec
+
+    def model_id(self, role: str) -> str:
+        """``provider:model`` string for the given role (for logging / provenance)."""
+        prov, mdl = self.role(role)
+        return f"{prov}:{mdl}"
+
     @property
     def offline(self) -> bool:
         return self.provider == "mock"
@@ -70,22 +131,29 @@ class Settings:
 def load_settings(**overrides) -> Settings:
     """Build :class:`Settings` from env + overrides.
 
-    Provider auto-detects: if ``ADRA_PROVIDER`` is unset, use ``anthropic`` when an
-    API key is present, otherwise fall back to the offline ``mock`` provider.
+    Provider auto-detects: if ``ADRA_PROVIDER`` is unset, the first provider with a
+    present API key wins (Anthropic → OpenAI → Groq → xAI → ...); otherwise the offline
+    ``mock`` provider. Model defaults per provider unless ``ADRA_MODEL`` is set; per-role
+    overrides come from ``ADRA_MODEL_{PLAN,GENERATE,CRITIC,JUDGE}``.
     """
     _load_dotenv(Path(".env"))
 
-    provider = os.environ.get("ADRA_PROVIDER")
-    if provider is None:
-        provider = "anthropic" if os.environ.get("ANTHROPIC_API_KEY") else "mock"
+    provider = os.environ.get("ADRA_PROVIDER") or _autodetect_provider()
+
+    role_models: dict[str, str] = {}
+    for role in ("plan", "generate", "critic", "judge"):
+        spec = os.environ.get(f"ADRA_MODEL_{role.upper()}")
+        if spec:
+            role_models[role] = spec
 
     settings = Settings(
         provider=provider,
-        model=os.environ.get("ADRA_MODEL", DEFAULT_ANTHROPIC_MODEL),
+        model=os.environ.get("ADRA_MODEL") or default_model(provider),
         temperature=float(os.environ.get("ADRA_TEMPERATURE", "0.0")),
         max_tokens=int(os.environ.get("ADRA_MAX_TOKENS", "4096")),
         max_rounds=int(os.environ.get("ADRA_MAX_ROUNDS", "3")),
         allow_external_calls=os.environ.get("ADRA_ALLOW_EXTERNAL", "0") == "1",
+        role_models=role_models,
     )
     repo = os.environ.get("ADRA_REPO_PATH")
     if repo:
