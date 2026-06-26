@@ -1,6 +1,6 @@
 [project]
 name = "adra"
-version = "0.3.0"
+version = "0.4.0"
 description = "ADRA — Adversarial Dev Review Agent: a deterministic-first, adversarial-validation engine for the software lifecycle (PR review, validation/refutation experiments, auto-docs, human escalation)."
 readme = "README.md"
 requires-python = ">=3.11"
