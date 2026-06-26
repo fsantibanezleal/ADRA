@@ -13,7 +13,7 @@ from __future__ import annotations
 
 from adra import critic as critic_mod
 from adra.config import Settings
-from adra.llm import ChatModel, make_chat_model
+from adra.llm import ChatModel, ModelRouter
 from adra.provenance import RunRecord
 from adra.skills import SKILLS
 from adra.state import RunState
@@ -25,7 +25,16 @@ class Orchestrator:
 
     def __init__(self, settings: Settings, model: ChatModel | None = None):
         self.settings = settings
-        self.model = model or make_chat_model(settings)
+        # An explicit model (tests / single-model runs) wins for every role; otherwise the
+        # router resolves a model per role, so the flow can orchestrate across providers.
+        self._fixed = model
+        self.router = ModelRouter(settings)
+
+    def _model(self, role: str) -> ChatModel:
+        return self._fixed or self.router.for_role(role)
+
+    def _model_id(self, role: str) -> str:
+        return "fixed" if self._fixed is not None else self.settings.model_id(role)
 
     def run(self, skill: str, intake: dict) -> tuple[RunState, RunRecord]:
         if skill not in SKILLS:
@@ -38,21 +47,22 @@ class Orchestrator:
         )
 
         # plan -> ground -> generate
-        state.plan = impl.plan(self.model, self.settings, state)
-        record.event("plan", "plan", state.plan)
+        state.plan = impl.plan(self._model("plan"), self.settings, state)
+        record.event("plan", "plan", {**(state.plan or {}), "model": self._model_id("plan")})
 
         state.grounding = impl.ground(self.settings, state)
         record.event("ground", "ground",
                      {k: v.log_dict() for k, v in state.grounding.items()})
 
-        state.draft = impl.generate(self.model, self.settings, state)
-        record.event("generate", "generate", {"draft_preview": clip(state.draft)})
+        state.draft = impl.generate(self._model("generate"), self.settings, state)
+        record.event("generate", "generate",
+                     {"draft_preview": clip(state.draft), "model": self._model_id("generate")})
 
         # CRITIC -> revise loop
         while True:
-            verdict = critic_mod.criticize(self.model, state)
+            verdict = critic_mod.criticize(self._model("critic"), state)
             state.critic_history.append(verdict)
-            record.event("critic", "critic", verdict.to_dict())
+            record.event("critic", "critic", {**verdict.to_dict(), "model": self._model_id("critic")})
             if verdict.clean:
                 state.decision = "accepted"
                 break
@@ -60,7 +70,7 @@ class Orchestrator:
                 state.decision = "escalate"
                 break
             state.rounds += 1
-            state.draft = impl.revise(self.model, self.settings, state, verdict)
+            state.draft = impl.revise(self._model("generate"), self.settings, state, verdict)
             record.event("revise", "revise",
                          {"round": state.rounds, "draft_preview": clip(state.draft)})
 
