@@ -25,9 +25,23 @@ dependencies = []
 # extras) — multi-provider/agnostic, provider:model strings. The OpenAI-compatible long tail
 # (xai/deepseek/openrouter/together/ollama) rides the openai extra's base-url support.
 llm = ["pydantic-ai-slim[anthropic,groq,openai,google]>=1,<2"]
-github = ["httpx>=0.27"]                   # real GitHub connector (REST)
-all = ["pydantic-ai-slim[anthropic,groq,openai,google]>=1,<2", "httpx>=0.27"]
-dev = ["pytest>=8.0", "ruff>=0.6", "httpx>=0.27", "pydantic-ai-slim[anthropic]>=1,<2"]
+github = ["httpx>=0.27"]                              # real GitHub connector (REST v3)
+azuredevops = ["httpx>=0.27"]                         # Azure DevOps connector (REST 7.1)
+databricks = ["databricks-sdk>=0.30"]                 # Databricks SQL Statement Execution
+azure = ["azure-identity>=1.17", "azure-monitor-query>=1.3"]  # Azure Log Analytics (KQL)
+all = [
+    "pydantic-ai-slim[anthropic,groq,openai,google]>=1,<2",
+    "httpx>=0.27",
+    "databricks-sdk>=0.30",
+    "azure-identity>=1.17",
+    "azure-monitor-query>=1.3",
+]
+dev = [
+    "pytest>=8.0", "ruff>=0.6", "httpx>=0.27",
+    "pydantic-ai-slim[anthropic]>=1,<2",
+    "databricks-sdk>=0.30",
+    "azure-identity>=1.17", "azure-monitor-query>=1.3",
+]
 
 [project.scripts]
 adra = "cli.__main__:main"
