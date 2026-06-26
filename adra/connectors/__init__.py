@@ -33,16 +33,42 @@ def get_repo_provider(binding: dict) -> RepoProvider:
             binding["owner"], binding["repo"],
             token=binding.get("token"), allow_external=binding.get("allow_external", False),
         )
+    if provider in ("azure_devops", "azuredevops", "ado"):
+        from adra.connectors.azure_devops import AzureDevOpsRepo
+        return AzureDevOpsRepo(
+            binding["organization"], binding["project"], binding["repo"],
+            token=binding.get("token"), bearer=binding.get("bearer", False),
+            base_url=binding.get("base_url"),
+            allow_external=binding.get("allow_external", False),
+        )
     if provider == "emulator":
         from adra.connectors.emulator import EmulatorRepo
         return EmulatorRepo()
-    raise ValueError(f"unknown repo provider {provider!r}; known: github, emulator")
+    raise ValueError(
+        f"unknown repo provider {provider!r}; known: github, azure_devops, emulator"
+    )
 
 
 def get_data_provider(binding: dict) -> DataProvider:
     """Wire a data provider from a client binding (read-only probes)."""
     provider = binding.get("provider", "emulator")
+    if provider == "databricks":
+        from adra.connectors.databricks import DatabricksData
+        return DatabricksData(
+            binding.get("warehouse_id"),
+            host=binding.get("host"), token=binding.get("token"),
+            catalog=binding.get("catalog"), schema=binding.get("schema"),
+            allow_external=binding.get("allow_external", False),
+        )
+    if provider == "azure":
+        from adra.connectors.azure import AzureMonitorData
+        return AzureMonitorData(
+            binding.get("workspace_id"),
+            timespan_hours=binding.get("timespan_hours", 24),
+        )
     if provider == "emulator":
         from adra.connectors.emulator import EmulatorData
         return EmulatorData()
-    raise ValueError(f"unknown data provider {provider!r}; known: emulator")
+    raise ValueError(
+        f"unknown data provider {provider!r}; known: databricks, azure, emulator"
+    )
