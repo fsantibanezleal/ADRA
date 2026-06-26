@@ -14,5 +14,5 @@ critic's prompt for the `semantic` items.
 
 ## Consequences
 - Code and prompt cannot diverge; criteria are version-controlled and explainable.
-- Each item is traceable to the incident it was learned from.
+- Each item is traceable to the (illustrative) incident case it encodes.
 - Adding a criterion is one data entry (+ a check, if deterministic).

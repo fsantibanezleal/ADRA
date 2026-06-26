@@ -1,44 +1,16 @@
-# Architecture
+# Architecture (moved)
 
-ADRA is a small, explicit state machine (not a heavy framework) with three layered
-ideas: **deterministic-first grounding**, an **adversarial generate→critic→revise
-loop**, and an **immutable provenance record**. The LLM is reached through a tiny
-ADRA-owned `ChatModel` seam (`adra/llm.py`) — no agent framework; the loop is plain,
-readable Python whose node contracts stay stable if it is ever wrapped.
+> This page has been reorganized into the **architecture/** theme folder per the docs standard
+> (folder-per-theme + same-named landing + numbered deep pages). Nothing was lost — the content is
+> expanded across the pages below.
 
-## 1. The orchestrated loop
+Go to **[architecture/architecture.md](./architecture/architecture.md)** — the deep architecture
+wiki:
 
-![ADRA adversarial loop](images/loop.svg)
+1. [01_overview.md](./architecture/01_overview.md) — the orchestrated loop.
+2. [02_layered-design.md](./architecture/02_layered-design.md) — the three layers + module map.
+3. [03_data-flow.md](./architecture/03_data-flow.md) — the one typed contract end to end.
+4. [04_run-sequence.md](./architecture/04_run-sequence.md) — a `pr_eval` run, step by step.
+5. [05_why-deterministic-first.md](./architecture/05_why-deterministic-first.md) — the theory.
 
-- `plan` / `generate` / `revise` call the model; **`ground` is LLM-free**.
-- `criticize` runs the deterministic red-team pass first (the hard floor), then an
-  LLM pass for the semantic criteria — both driven by the **same rubric**.
-- Decision is one of `accepted` | `escalate`; the loop is bounded by `max_rounds`.
-
-## 2. Module interrelations
-
-![Module interrelations](images/module_map.svg)
-
-Everything flows through one typed contract (`state.py`): tools and skills return
-`ToolResult` / `Finding`; the critic returns a `CriticVerdict`; the orchestrator
-threads a `RunState` and writes a `RunRecord`.
-
-## 3. Data flow (what crosses each boundary)
-
-![Data flow](images/data_flow.svg)
-
-The deterministic tools produce **both** the grounding the model may not contradict
-**and** the evidence persisted to the run record (the "second-method proof").
-
-## 4. A run, step by step (pr_eval)
-
-![pr_eval run, step by step](images/run_sequence.svg)
-
-## 5. Why deterministic-first
-
-Best-in-class code review combines deterministic static analysis (high precision)
-with an LLM for semantic findings; ungrounded self-refinement games its own reward
-(`refs`: Reflexion, *Spontaneous Reward Hacking*, *Why LMs Hallucinate*). ADRA puts
-the deterministic floor first so the verdict has a hard, evidence-backed base, and
-the model only adds what tools cannot settle. That floor is also what lets the whole
-loop — and the test suite — run offline with the deterministic mock provider.
+Index: [README.md](./README.md).
