@@ -4,6 +4,19 @@ All notable changes to ADRA are documented here. Versions use the `X.XX.XXX` dis
 format (PEP 440 package version in `pyproject.toml` is the normalized equivalent).
 Stays `0.x` while connectors are partly untested-live.
 
+## [0.03.000] — 2026-06-26
+
+### Added
+- **Connector layer** (`adra/connectors/`): one Protocol family (`RepoProvider` /
+  `DataProvider`) + a factory wired from a client binding. Read-only by default; writes gated.
+- **Real GitHub connector** (REST over httpx): read PRs + their unified diff, list PRs, create
+  issues, comment on PRs (writes gated). CLI: `adra github-review owner/repo <pr#>
+  [--skill code_review|pr_eval] [--post --external]`.
+- **Offline emulator** (`adra/connectors/emulator.py`): 4 multi-industry synthetic PRs
+  (fintech / ecommerce / healthtech / logistics, with planted flaws) + a seeded SQLite
+  warehouse. CLI: `adra emu list|review`.
+- `github` extra (httpx); connector tests (now 14 total).
+
 ## [0.02.000] — 2026-06-26
 
 ### Added
