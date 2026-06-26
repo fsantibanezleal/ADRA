@@ -18,10 +18,12 @@ from typing import Any
 from adra.state import ToolResult
 
 PREFLIGHT = [
-    "profile matches catalog env (prod for prod_*, dev for dev_*)",
+    "profile matches the catalog env (prod for prod_*, dev for dev_*)",
     "`databricks current-user me --profile <p>` returns the expected user",
     "warehouse_id is valid for the profile and is RUNNING",
-    "catalog / schema / table exist (SHOW CATALOGS / SCHEMAS / TABLES)",
+    "the catalog exists in the workspace (SHOW CATALOGS)",
+    "the schema exists (SHOW SCHEMAS IN <catalog>)",
+    "the table exists (SHOW TABLES IN <catalog>.<schema>)",
     "current_user is a member of the granting security group (is_member)",
     "if the warehouse runs as a service principal, the SP has the grant",
 ]
