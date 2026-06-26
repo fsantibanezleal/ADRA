@@ -12,14 +12,16 @@ Two repositories:
   docs. Contains **no secrets, ever** (only `.env.example`). Runs offline with the emulator;
   real connectors work with the user's **own tokens supplied locally** (BYOK), read from the
   environment and never stored by ADRA.
-- **`ADRA_Console` — private**: a Veta-style web app + backend that *consumes* `adra` as a
-  dependency, holds keys from the CAOS_MANAGE vault, runs experiments and real connections,
+- **`ADRA_Console` — private**: a private web app + backend that *consumes* `adra` as a
+  dependency, holds keys from the operator's private secrets store, runs experiments and real connections,
   and is deployed behind access control.
 
-Secrets are redacted from logs and model context; the agent that reads untrusted content
-holds no write capability (dual-LLM split, connector phase).
+Secrets are never written to the run record or logged (provenance logs only provider+model;
+connectors set the auth header without logging the token). A dual-LLM split — the agent that
+reads untrusted content holding no write capability — is planned for the connector phase, not
+yet implemented.
 
 ## Consequences
 - The open repo is safe to publish; the engine is the adoptable artifact.
 - The owner's keys live only on the access-gated console, never in the repo or a public demo.
-- Mirrors the existing `Acc_agentic_core` (library) + apps pattern.
+- Mirrors the common library + apps split (engine published, app private).
