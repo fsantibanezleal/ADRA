@@ -1,20 +1,15 @@
-"""LLM provider factory and the offline mock.
+"""LLM layer — the house standard: pydantic-ai over a `provider:model` seam (ADR-0007
+lane-c, ADR-0053), multi-provider/agnostic, with a deterministic offline fallback (ADR-0052).
 
-ADRA owns a tiny chat-model seam (:class:`ChatModel`) instead of depending on a
-heavy agent framework. The orchestrator is a hand-rolled deterministic state machine
-(see :mod:`adra.orchestrator`); this module is the only place that touches a provider.
-Two adapters ship:
+- Real providers go through **pydantic-ai** (`Agent`): `anthropic` / `openai` / `groq` /
+  `google` / `mistral` natively, and the OpenAI-compatible long tail (`xai` / `deepseek` /
+  `openrouter` / `together` / local `ollama`) via an OpenAI-compatible base URL — the same
+  LiteLLM-class seam. Models are `provider:model` strings chosen by env (ADR-0053).
+- `mock` is the deterministic, keyless fallback so the engine + tests run offline; nothing
+  here is tied to a model version (the `temperature`/params are pydantic-ai's concern).
 
-- ``anthropic`` — a real provider via the native ``anthropic`` SDK (lazy import).
-- ``mock`` — a deterministic offline model so the whole loop runs, and the test
-  suite passes, with **no API key**.
-
-The mock is deliberately a *formatter*, not a reasoner: the substance of every run
-comes from the deterministic tools and the deterministic red-team critic, so the
-offline path still exercises real adversarial validation. Connecting a provider adds
-the semantic layer on top of that deterministic floor. New providers
-(``openai`` / ``groq`` / ``xai``) are one small :class:`ChatModel` subclass each — the
-rest of the engine only knows :class:`ChatModel`.
+New provider/model = config (`ADRA_PROVIDER` / `ADRA_MODEL` / `ADRA_MODEL_<ROLE>`), never
+engine logic. A thin `ChatModel` seam keeps the rest of the engine decoupled from pydantic-ai.
 """
 
 from __future__ import annotations
@@ -26,11 +21,19 @@ import re
 from adra.config import PROVIDERS, Settings
 from adra.nodes import Node
 
-# The node tag the mock reads to pick a canned shape, embedded in the system turn.
 _NODE_TAG = re.compile(r"\[\[ADRA-NODE:([a-z_]+)\]\]")
 
-# Canned, node-keyed responses. They are merged with the deterministic tool
-# findings (the real substance) by each skill, so the offline demo stays honest.
+# pydantic-ai native model-string prefixes per provider (others go via OpenAI-compatible base).
+_PYDANTIC_AI_PREFIX = {
+    "anthropic": "anthropic",
+    "openai": "openai",
+    "groq": "groq",
+    "mistral": "mistral",
+    "google": "google-gla",
+}
+
+# Canned, node-keyed responses for the deterministic offline mock. They are merged with the
+# deterministic tool findings (the real substance) by each skill, so the offline demo stays honest.
 _CANNED: dict[Node, str] = {
     Node.PLAN: json.dumps({"ok": True, "note": "classify intake, select grounding tools"}),
     Node.CODE_REVIEW: json.dumps({
@@ -77,18 +80,15 @@ _CANNED: dict[Node, str] = {
 
 
 class ChatModel:
-    """Minimal chat-model seam: one system + user turn returns text.
-
-    Keeping the seam ADRA-owned (rather than importing a framework's base class)
-    keeps the dependency surface small and the offline mock trivial to construct.
-    """
+    """Minimal chat-model seam: one system + user turn returns text. Decouples the engine
+    from the concrete LLM framework (pydantic-ai) behind it."""
 
     def generate(self, system: str, user: str) -> str:  # pragma: no cover - interface
         raise NotImplementedError
 
 
 class MockChatModel(ChatModel):
-    """Deterministic offline chat model for keyless runs and tests."""
+    """Deterministic offline chat model for keyless runs and tests (ADR-0052 fallback)."""
 
     def generate(self, system: str, user: str) -> str:
         match = _NODE_TAG.search(system) or _NODE_TAG.search(user)
@@ -96,102 +96,52 @@ class MockChatModel(ChatModel):
         return _CANNED.get(node, _CANNED[Node.CODE_REVIEW])
 
 
-class AnthropicChatModel(ChatModel):
-    """Real provider via the native ``anthropic`` SDK (lazy import)."""
-
-    def __init__(self, model: str, temperature: float, max_tokens: int) -> None:
-        try:
-            import anthropic
-        except ImportError as exc:  # pragma: no cover - only when extra missing
-            raise RuntimeError(
-                "provider=anthropic requires `pip install anthropic` and "
-                "ANTHROPIC_API_KEY in the environment."
-            ) from exc
-        self._client = anthropic.Anthropic()
-        self._model = model
-        self._temperature = temperature
-        self._max_tokens = max_tokens
-
-    def generate(self, system: str, user: str) -> str:
-        kwargs = {
-            "model": self._model,
-            "max_tokens": self._max_tokens,
-            "system": system,
-            "messages": [{"role": "user", "content": user}],
-        }
-        # Some models (e.g. opus-4-8) deprecate `temperature`; only send it when non-default.
-        if self._temperature and self._temperature != 1.0:
-            kwargs["temperature"] = self._temperature
-        try:
-            message = self._client.messages.create(**kwargs)
-        except Exception:
-            kwargs.pop("temperature", None)
-            message = self._client.messages.create(**kwargs)
-        return "".join(
-            block.text for block in message.content
-            if getattr(block, "type", None) == "text"
-        )
-
-
-class OpenAICompatChatModel(ChatModel):
-    """Any OpenAI-compatible Chat Completions endpoint.
-
-    Covers OpenAI, Groq, xAI, Mistral, DeepSeek, OpenRouter, Together — and **local,
-    free** servers (Ollama / LM Studio / vLLM) — selected by base URL. Requires the
-    ``openai`` SDK (``pip install adra[openai]``).
+class PydanticAIChatModel(ChatModel):
+    """Real provider via **pydantic-ai** (ADR-0007 lane-c). Native providers use a
+    ``provider:model`` string; the OpenAI-compatible long tail uses an OpenAI base URL.
     """
 
-    def __init__(self, model: str, temperature: float, max_tokens: int,
-                 base_url: str, api_key: str | None) -> None:
+    def __init__(self, provider: str, model: str, max_tokens: int) -> None:
         try:
-            from openai import OpenAI
+            from pydantic_ai import Agent
         except ImportError as exc:  # pragma: no cover - only when extra missing
             raise RuntimeError(
-                "this provider requires `pip install openai` (or `pip install adra[openai]`)."
+                "real providers require `pip install adra[llm]` (pydantic-ai)."
             ) from exc
-        # Local servers (Ollama / LM Studio) accept any non-empty key.
-        self._client = OpenAI(base_url=base_url, api_key=api_key or "not-needed")
-        self._model = model
-        self._temperature = temperature
-        self._max_tokens = max_tokens
+        self._agent = Agent(self._model(provider, model), retries=1)
+
+    @staticmethod
+    def _model(provider: str, model: str):
+        if provider in _PYDANTIC_AI_PREFIX:
+            return f"{_PYDANTIC_AI_PREFIX[provider]}:{model}"
+        info = PROVIDERS.get(provider)
+        if info is None:
+            known = ", ".join(["mock", *_PYDANTIC_AI_PREFIX, *PROVIDERS])
+            raise RuntimeError(f"unknown provider {provider!r}; known: {known}")
+        # OpenAI-compatible base (xai / deepseek / openrouter / together / local ollama).
+        from pydantic_ai.models.openai import OpenAIChatModel
+        from pydantic_ai.providers.openai import OpenAIProvider
+        api_key = os.environ.get("ADRA_API_KEY") or (
+            os.environ.get(info["key_env"]) if info["key_env"] else "not-needed")
+        base_url = os.environ.get("ADRA_BASE_URL") or info["base_url"]
+        return OpenAIChatModel(model, provider=OpenAIProvider(base_url=base_url, api_key=api_key))
 
     def generate(self, system: str, user: str) -> str:
-        resp = self._client.chat.completions.create(
-            model=self._model,
-            temperature=self._temperature,
-            max_tokens=self._max_tokens,
-            messages=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-        )
-        return resp.choices[0].message.content or ""
+        # System carries the node tag + role rules; pass it ahead of the user turn so the
+        # adapter stays framework-version-agnostic (no per-call system_prompt API).
+        result = self._agent.run_sync(f"{system}\n\n---\n\n{user}")
+        return str(getattr(result, "output", "") or "")
 
 
 def make_chat_model_for(provider: str, model: str, temperature: float, max_tokens: int) -> ChatModel:
     """Build a :class:`ChatModel` for an explicit provider + model.
 
-    ``mock`` (offline, no key) and ``anthropic`` (native SDK) are built in; every other
-    provider in :data:`adra.config.PROVIDERS` (OpenAI, Groq, xAI, Mistral, DeepSeek,
-    OpenRouter, Together, local Ollama/LM Studio/vLLM) is reached over the
-    OpenAI-compatible API. Override the endpoint of any other compatible service with
-    ``ADRA_BASE_URL`` + ``ADRA_API_KEY``.
-
-    Raises:
-        RuntimeError: for an unknown provider, or if the needed SDK extra is missing.
+    ``mock`` is the deterministic offline fallback; every real provider goes through
+    pydantic-ai (native ``provider:model`` or an OpenAI-compatible base for the long tail).
     """
     if provider == "mock":
         return MockChatModel()
-    if provider == "anthropic":
-        return AnthropicChatModel(model, temperature, max_tokens)
-    info = PROVIDERS.get(provider)
-    if info is None:
-        known = ", ".join(["mock", "anthropic", *PROVIDERS])
-        raise RuntimeError(f"unknown provider {provider!r}; known: {known}")
-    base_url = os.environ.get("ADRA_BASE_URL") or info["base_url"]
-    api_key = os.environ.get("ADRA_API_KEY") or (
-        os.environ.get(info["key_env"]) if info["key_env"] else None)
-    return OpenAICompatChatModel(model, temperature, max_tokens, base_url, api_key)
+    return PydanticAIChatModel(provider, model, max_tokens)
 
 
 def make_chat_model(settings: Settings) -> ChatModel:
@@ -201,9 +151,9 @@ def make_chat_model(settings: Settings) -> ChatModel:
 
 
 class ModelRouter:
-    """Resolve a :class:`ChatModel` per flow role so a single run can orchestrate across
-    providers — e.g. a strong model for the critic/judge, a cheaper/faster one for
-    generation. Models are cached by ``(provider, model)`` and built lazily.
+    """Resolve a :class:`ChatModel` per flow role so one run can orchestrate across providers
+    — a strong model for the critic/judge, a cheaper/faster one for generation. Cached by
+    ``(provider, model)`` and built lazily.
     """
 
     def __init__(self, settings: Settings) -> None:
@@ -220,16 +170,6 @@ class ModelRouter:
 
 
 def invoke_text(model: ChatModel, system: str, user: str, node: Node) -> str:
-    """Invoke ``model`` with a system+user turn tagged for the offline mock.
-
-    Args:
-        model: The chat model.
-        system: System prompt (role / rules).
-        user: User turn (the actual request + context).
-        node: The graph node this call serves (drives the offline mock).
-
-    Returns:
-        The model's text response.
-    """
+    """Invoke ``model`` with a system+user turn tagged for the offline mock."""
     tagged = f"{system}\n\n[[ADRA-NODE:{node.value}]]"
     return model.generate(tagged, user)
