@@ -34,8 +34,8 @@ def _print_run(state, record) -> int:
     return 0 if state.decision == "accepted" else 2
 
 
-def _run(skill: str, intake: dict, external: bool) -> int:
-    settings = load_settings(allow_external_calls=external)
+def _run(skill: str, intake: dict, external: bool, **overrides) -> int:
+    settings = load_settings(allow_external_calls=external, **overrides)
     state, record = Orchestrator(settings).run(skill, intake)
     return _print_run(state, record)
 
@@ -94,9 +94,8 @@ def main(argv: list[str] | None = None) -> int:
         return _run("code_review", intake, ext)
     if args.cmd == "pr-eval":
         intake = {"source_branch": args.source, "target_branch": args.target}
-        if args.repo:
-            intake["repo"] = args.repo
-        return _run("pr_eval", intake, ext)
+        over = {"repo_path": Path(args.repo)} if args.repo else {}
+        return _run("pr_eval", intake, ext, **over)
     if args.cmd == "experiment":
         return _run("experiment", json.loads(_read(args.spec)), ext)
     if args.cmd == "improve":

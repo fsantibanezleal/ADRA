@@ -113,7 +113,12 @@ def test_judge_swap_average_position_consistency():
     from adra.llm import MockChatModel
     res = compare(MockChatModel(), "artifact A", "artifact B", reference="ref",
                   swap_average=True)
-    assert "averaged" in res and res["position_consistent"] in (True, False)
+    # A real swap runs both orders (A-first and B-first) and averages each artifact's
+    # two slot-scores, so all three passes are present and a winner is named.
+    assert {"forward", "reverse", "averaged"} <= res.keys()
+    assert res["winner"] in ("A", "B")
+    assert res["position_consistent"] in (True, False)
+    assert {"A", "B"} <= res["forward"].keys() and {"A", "B"} <= res["reverse"].keys()
 
 
 def test_multi_provider_factory_and_per_role_routing():
