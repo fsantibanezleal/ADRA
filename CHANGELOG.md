@@ -4,6 +4,32 @@ All notable changes to ADRA are documented here. Versions use the `X.XX.XXX` dis
 format (PEP 440 package version in `pyproject.toml` is the normalized equivalent).
 Stays `0.x` while connectors are partly untested-live.
 
+## [0.04.000] — 2026-06-26
+
+### Added
+- **PyPI publishing** (ADR-0061): `.github/workflows/publish-pypi.yml` builds sdist+wheel
+  and publishes via **PyPI Trusted Publishing (OIDC)** on a published GitHub Release — no
+  stored token. `pip install adra` once the first release is published.
+- **`docs/` wiki** (ADR-0056): a navigable 65-file documentation site (architecture /
+  frameworks / methodologies / guides / use-cases / data-contract / security).
+
+### Fixed
+- **Judge `compare()` swap-and-average is now real**: both artifacts are scored head-to-head
+  in one prompt, re-scored with the order reversed, and averaged; a winner is
+  `position_consistent` only when stable under the swap (was a no-op re-run before).
+- **Critic `unverifiable_no_access`** blocker now fires: it scans all grounding for an
+  `sql_probe` result with a preflight and no rows (was keyed on a name probes never use).
+- **CLI `pr-eval --repo`** is now wired into `load_settings(repo_path=…)` (was a no-op).
+- **`max_tokens`** is forwarded to pydantic-ai via `model_settings`; `temperature` is
+  deliberately not pinned (some current models reject a non-default temperature).
+- **`document --type methodology`** now produces a `Methodology_*` page (was falling through).
+- Access preflight documented consistently as **8 checks** (matches `sql_tools.PREFLIGHT`).
+
+### Changed
+- Public-release hardening: docs scrubbed of internal/private references; unimplemented
+  connector-phase security controls relabeled as planned; README synced to the engine
+  (pydantic-ai, `adra[llm]`, httpx GitHub connector, config-only providers).
+
 ## [0.03.000] — 2026-06-26
 
 ### Added
