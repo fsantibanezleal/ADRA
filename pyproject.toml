@@ -1,6 +1,6 @@
 [project]
 name = "adra"
-version = "0.2.0"
+version = "0.3.0"
 description = "ADRA — Adversarial Dev Review Agent: a deterministic-first, adversarial-validation engine for the software lifecycle (PR review, validation/refutation experiments, auto-docs, human escalation)."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -23,8 +23,9 @@ dependencies = []
 [project.optional-dependencies]
 anthropic = ["anthropic>=0.40"]
 openai = ["openai>=1.40"]                  # also covers groq / xai / mistral / deepseek / openrouter / together / local ollama
-all = ["anthropic>=0.40", "openai>=1.40"]
-dev = ["pytest>=8.0", "ruff>=0.6"]
+github = ["httpx>=0.27"]                   # real GitHub connector (REST)
+all = ["anthropic>=0.40", "openai>=1.40", "httpx>=0.27"]
+dev = ["pytest>=8.0", "ruff>=0.6", "httpx>=0.27"]
 
 [project.scripts]
 adra = "cli.__main__:main"

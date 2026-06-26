@@ -137,3 +137,30 @@ def test_multi_provider_factory_and_per_role_routing():
     assert s.role("critic") == ("mock", "m-critic")
     assert s.role("plan") == ("mock", s.model)            # falls back to the default
     assert isinstance(ModelRouter(s).for_role("critic"), MockChatModel)
+
+
+def test_connectors_emulator_and_intakes():
+    import pytest as _pytest
+
+    from adra.connectors import (
+        PullRequest, code_review_intake, get_data_provider, get_repo_provider, pr_eval_intake,
+    )
+    repo = get_repo_provider({"provider": "emulator"})
+    prs = repo.list_pull_requests()
+    assert len(prs) >= 4 and all(isinstance(p, PullRequest) for p in prs)
+    pr = repo.get_pull_request(102)
+    assert pr.git_state and pr.target_branch == "main"
+    assert "diff" in code_review_intake(pr)
+    assert pr_eval_intake(pr)["git_fixture"]["behind"] == 8
+    # the emulator warehouse runs real SQL
+    data = get_data_provider({"provider": "emulator"})
+    assert data.run_sql("SELECT count(*) FROM payments_settlement")["rows"][0][0] == 3
+    with _pytest.raises(ValueError):
+        get_repo_provider({"provider": "nope"})
+
+
+def test_emulator_pr_eval_escalates_offline(orch):
+    from adra.connectors import get_repo_provider, pr_eval_intake
+    pr = get_repo_provider({"provider": "emulator"}).get_pull_request(102)
+    state, _ = orch.run("pr_eval", pr_eval_intake(pr))
+    assert state.decision == "escalate"  # stale base + dropped bundle resource
