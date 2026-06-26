@@ -71,32 +71,75 @@ def score(
                  notes=str(data.get("notes", "")))
 
 
+def _pairwise(
+    model: ChatModel,
+    first: str,
+    second: str,
+    reference: str = "",
+    rubric: dict[str, float] | None = None,
+) -> tuple[float, float, str]:
+    """Score two artifacts presented TOGETHER, in this exact order (FIRST, SECOND).
+
+    Both candidates sit in one prompt so the model judges them head-to-head; the
+    caller varies the order across calls to expose position bias. Returns
+    ``(first_total, second_total, notes)`` as weighted-rubric totals.
+    """
+    rubric = rubric or DEFAULT_RUBRIC
+    criteria = ", ".join(rubric)
+    user = (
+        "Two candidate artifacts (FIRST and SECOND) answer the same task. Score EACH "
+        "against the REFERENCE on every criterion in [0,1]; anchor to the reference and "
+        "do not reward verbosity or length. Return JSON "
+        f"{{first: {{<criterion>: float}}, second: {{<criterion>: float}}, notes: str}}. "
+        f"Criteria: {criteria}.\n\nREFERENCE:\n{reference or '(none)'}\n\n"
+        f"FIRST:\n{first}\n\nSECOND:\n{second}"
+    )
+    system = load_prompt("judge") or "You are a rubric-based judge."
+    data = parse_json(invoke_text(model, system, user, node=Node.JUDGE))
+    data = data if isinstance(data, dict) else {}
+
+    def _total(key: str) -> float:
+        raw = data.get(key, {})
+        raw = raw if isinstance(raw, dict) else {}
+        return sum(float(raw.get(c, 0.7)) * w for c, w in rubric.items())  # mock-safe default
+
+    return _total("first"), _total("second"), str(data.get("notes", ""))
+
+
 def compare(
     model: ChatModel,
     a: str,
     b: str,
     reference: str = "",
+    rubric: dict[str, float] | None = None,
     swap_average: bool = True,
 ) -> dict:
-    """Pairwise winner with position-bias mitigation (swap-and-average)."""
-    sa = score(model, a, reference)
-    sb = score(model, b, reference)
-    forward = "A" if sa.total >= sb.total else "B"
+    """Pairwise winner with a real position-bias mitigation (swap-and-average).
+
+    A and B are scored head-to-head in one prompt (A first); when ``swap_average`` they
+    are scored again with the order reversed (B first). Each artifact's two scores are
+    averaged, and a winner is ``position_consistent`` only when it wins in BOTH orders;
+    otherwise the averaged total breaks the tie. Because A occupies the first slot in the
+    forward call and the second slot in the reverse call (and vice-versa for B), the swap
+    genuinely varies artifact position — so it exercises and mitigates position bias rather
+    than re-running an identical call.
+    """
+    fa, fb, fnotes = _pairwise(model, a, b, reference, rubric)  # A first, B second
+    forward = "A" if fa >= fb else "B"
     result = {
-        "forward": {"A": sa.to_dict(), "B": sb.to_dict(), "winner": forward},
+        "forward": {"A": round(fa, 3), "B": round(fb, 3), "winner": forward},
         "winner": forward,
         "position_consistent": True,
+        "notes": fnotes,
     }
     if swap_average:
-        # Re-score with positions swapped; only trust a winner stable under swap.
-        sb2 = score(model, b, reference)
-        sa2 = score(model, a, reference)
-        reverse = "A" if sa2.total >= sb2.total else "B"
-        avg_a = (sa.total + sa2.total) / 2
-        avg_b = (sb.total + sb2.total) / 2
+        rb, ra, _ = _pairwise(model, b, a, reference, rubric)  # B first, A second
+        reverse = "A" if ra >= rb else "B"
+        avg_a = (fa + ra) / 2  # A's first-slot + second-slot scores
+        avg_b = (fb + rb) / 2  # B's second-slot + first-slot scores
         winner = "A" if avg_a >= avg_b else "B"
         result.update(
-            reverse={"winner": reverse},
+            reverse={"A": round(ra, 3), "B": round(rb, 3), "winner": reverse},
             averaged={"A": round(avg_a, 3), "B": round(avg_b, 3), "winner": winner},
             position_consistent=(forward == reverse),
             winner=winner,

@@ -61,9 +61,12 @@ def deterministic_attacks(state: RunState) -> list[Finding]:
             blocking.append(rubric.get("exact_ci_repro").to_finding(evidence="CI not reproduced (dry-run)"))
 
     if "no access" in text.lower() or "permission denied" in text.lower():
-        sql = state.grounding.get("sql_probe")
-        if sql is not None and not sql.data.get("rows") and "preflight" in sql.data:
-            blocking.append(rubric.get("unverifiable_no_access").to_finding())
+        # Probes are stored per-hypothesis (probe_01, probe_02, …), so scan all grounding
+        # for any SQL probe that carries a preflight checklist but returned no rows.
+        for res in state.grounding.values():
+            if res.tool == "sql_probe" and not res.data.get("rows") and "preflight" in res.data:
+                blocking.append(rubric.get("unverifiable_no_access").to_finding())
+                break
 
     # Language + AI-session-leak scan over the draft text itself.
     blocking.extend(lang_tools.scan_language(text).blocking)

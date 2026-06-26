@@ -81,5 +81,6 @@ class DocumentSkill(Skill):
         doc_type = state.intake.get("doc_type", "pr")
         name = {"pr": f"PR-{state.intake.get('pr','XXXXX')}.md",
                 "experiment": f"{state.intake.get('slug','experiment')}.md",
-                "lesson": f"{state.intake.get('slug','lesson')}.md"}.get(doc_type, "doc.md")
+                "lesson": f"{state.intake.get('slug','lesson')}.md",
+                "methodology": f"Methodology_{state.intake.get('slug','history')}.md"}.get(doc_type, "doc.md")
         return {name: str(state.draft)}

@@ -108,7 +108,12 @@ class PydanticAIChatModel(ChatModel):
             raise RuntimeError(
                 "real providers require `pip install adra[llm]` (pydantic-ai)."
             ) from exc
-        self._agent = Agent(self._model(provider, model), retries=1)
+        # Forward max_tokens via pydantic-ai ModelSettings (dict form = version-robust).
+        # temperature is deliberately NOT pinned: some current models (e.g. claude-opus-4-8)
+        # reject a non-default temperature, so we leave it to the model default and stay
+        # model-version-agnostic (ADR-0007: the seam pins no version-specific parameter).
+        self._agent = Agent(self._model(provider, model), retries=1,
+                            model_settings={"max_tokens": max_tokens})
 
     @staticmethod
     def _model(provider: str, model: str):
