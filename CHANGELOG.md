@@ -4,6 +4,23 @@ All notable changes to ADRA are documented here. Versions use the `X.XX.XXX` dis
 format (PEP 440 package version in `pyproject.toml` is the normalized equivalent).
 Stays `0.x` while connectors are partly untested-live.
 
+## [0.02.000] — 2026-06-26
+
+### Added
+- **Real multi-provider LLM layer.** A provider factory behind the `ChatModel` seam:
+  Anthropic (native SDK) + OpenAI-compatible (`openai`, `groq`, `xai`, `mistral`, `deepseek`,
+  `openrouter`, `together`) + **local/free** (`ollama` / LM Studio / vLLM), plus any other
+  OpenAI-compatible endpoint via `ADRA_BASE_URL`/`ADRA_API_KEY`. Provider auto-detects from
+  whichever API key is present.
+- **Per-role model routing** (`ModelRouter`): `plan` / `generate` / `critic` / `judge` can
+  each run a different model/provider (`ADRA_MODEL_<ROLE>`), so one run orchestrates across
+  providers; each step records which model ran it (provenance).
+
+### Changed
+- `mock` is now explicitly the **offline-only** lane (zero keys; the deterministic floor
+  carries the verdict) — not the semantic layer. ADR-0003 rewritten to reflect the
+  multi-provider factory (not a reduction).
+
 ## [0.01.000] — 2026-06-26
 
 Initial engine cut — the client-agnostic, deterministic-first adversarial-validation core.

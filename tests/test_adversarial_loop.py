@@ -114,3 +114,26 @@ def test_judge_swap_average_position_consistency():
     res = compare(MockChatModel(), "artifact A", "artifact B", reference="ref",
                   swap_average=True)
     assert "averaged" in res and res["position_consistent"] in (True, False)
+
+
+def test_multi_provider_factory_and_per_role_routing():
+    import pytest as _pytest
+
+    from adra import load_settings
+    from adra.config import PROVIDERS, default_model
+    from adra.llm import MockChatModel, ModelRouter, make_chat_model, make_chat_model_for
+    # offline default builds the deterministic mock with no key
+    assert isinstance(make_chat_model(load_settings(provider="mock")), MockChatModel)
+    # the registry covers paid + local providers
+    for p in ("openai", "groq", "xai", "mistral", "deepseek", "ollama"):
+        assert p in PROVIDERS
+    assert default_model("groq") and default_model("anthropic")
+    # an unknown provider is a clear, immediate error (no network / no openai import)
+    with _pytest.raises(RuntimeError):
+        make_chat_model_for("nope", "x", 0.0, 16)
+    # per-role routing: one run can target a different model per role
+    s = load_settings(provider="mock",
+                      role_models={"critic": "mock:m-critic", "generate": "mock:m-gen"})
+    assert s.role("critic") == ("mock", "m-critic")
+    assert s.role("plan") == ("mock", s.model)            # falls back to the default
+    assert isinstance(ModelRouter(s).for_role("critic"), MockChatModel)

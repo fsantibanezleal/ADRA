@@ -5,8 +5,8 @@ written to ``runs/<run_id>.json``. Downstream, the ``document`` skill turns this
 record into a PR doc / experiment page / methodology-history row, so the technical,
 operational and functional history all trace back to one auditable artifact.
 
-Reference: lineage (the journey) + provenance (origin/who/how/when) joined with
-git for code/config, per current ML-governance practice (see wip research §E).
+Reference: lineage (the journey) + provenance (origin / who / how / when) joined with
+git for code/config, per current ML-governance practice (W3C PROV; see refs/).
 """
 
 from __future__ import annotations

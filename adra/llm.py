@@ -20,9 +20,10 @@ rest of the engine only knows :class:`ChatModel`.
 from __future__ import annotations
 
 import json
+import os
 import re
 
-from adra.config import Settings
+from adra.config import PROVIDERS, Settings
 from adra.nodes import Node
 
 # The node tag the mock reads to pick a canned shape, embedded in the system turn.
@@ -125,21 +126,90 @@ class AnthropicChatModel(ChatModel):
         )
 
 
-def make_chat_model(settings: Settings) -> ChatModel:
-    """Return a configured chat model for the active provider.
+class OpenAICompatChatModel(ChatModel):
+    """Any OpenAI-compatible Chat Completions endpoint.
 
-    Args:
-        settings: Resolved run configuration; ``settings.provider`` selects the adapter.
+    Covers OpenAI, Groq, xAI, Mistral, DeepSeek, OpenRouter, Together — and **local,
+    free** servers (Ollama / LM Studio / vLLM) — selected by base URL. Requires the
+    ``openai`` SDK (``pip install adra[openai]``).
+    """
 
-    Returns:
-        A ready-to-use :class:`ChatModel` (``mock`` offline, ``anthropic`` with a key).
+    def __init__(self, model: str, temperature: float, max_tokens: int,
+                 base_url: str, api_key: str | None) -> None:
+        try:
+            from openai import OpenAI
+        except ImportError as exc:  # pragma: no cover - only when extra missing
+            raise RuntimeError(
+                "this provider requires `pip install openai` (or `pip install adra[openai]`)."
+            ) from exc
+        # Local servers (Ollama / LM Studio) accept any non-empty key.
+        self._client = OpenAI(base_url=base_url, api_key=api_key or "not-needed")
+        self._model = model
+        self._temperature = temperature
+        self._max_tokens = max_tokens
+
+    def generate(self, system: str, user: str) -> str:
+        resp = self._client.chat.completions.create(
+            model=self._model,
+            temperature=self._temperature,
+            max_tokens=self._max_tokens,
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+        )
+        return resp.choices[0].message.content or ""
+
+
+def make_chat_model_for(provider: str, model: str, temperature: float, max_tokens: int) -> ChatModel:
+    """Build a :class:`ChatModel` for an explicit provider + model.
+
+    ``mock`` (offline, no key) and ``anthropic`` (native SDK) are built in; every other
+    provider in :data:`adra.config.PROVIDERS` (OpenAI, Groq, xAI, Mistral, DeepSeek,
+    OpenRouter, Together, local Ollama/LM Studio/vLLM) is reached over the
+    OpenAI-compatible API. Override the endpoint of any other compatible service with
+    ``ADRA_BASE_URL`` + ``ADRA_API_KEY``.
 
     Raises:
-        RuntimeError: If ``provider=anthropic`` but the optional extra is missing.
+        RuntimeError: for an unknown provider, or if the needed SDK extra is missing.
     """
-    if settings.provider == "anthropic":
-        return AnthropicChatModel(settings.model, settings.temperature, settings.max_tokens)
-    return MockChatModel()
+    if provider == "mock":
+        return MockChatModel()
+    if provider == "anthropic":
+        return AnthropicChatModel(model, temperature, max_tokens)
+    info = PROVIDERS.get(provider)
+    if info is None:
+        known = ", ".join(["mock", "anthropic", *PROVIDERS])
+        raise RuntimeError(f"unknown provider {provider!r}; known: {known}")
+    base_url = os.environ.get("ADRA_BASE_URL") or info["base_url"]
+    api_key = os.environ.get("ADRA_API_KEY") or (
+        os.environ.get(info["key_env"]) if info["key_env"] else None)
+    return OpenAICompatChatModel(model, temperature, max_tokens, base_url, api_key)
+
+
+def make_chat_model(settings: Settings) -> ChatModel:
+    """Build the default chat model for ``settings`` (provider + model)."""
+    return make_chat_model_for(
+        settings.provider, settings.model, settings.temperature, settings.max_tokens)
+
+
+class ModelRouter:
+    """Resolve a :class:`ChatModel` per flow role so a single run can orchestrate across
+    providers — e.g. a strong model for the critic/judge, a cheaper/faster one for
+    generation. Models are cached by ``(provider, model)`` and built lazily.
+    """
+
+    def __init__(self, settings: Settings) -> None:
+        self.settings = settings
+        self._cache: dict[tuple[str, str], ChatModel] = {}
+
+    def for_role(self, role: str) -> ChatModel:
+        provider, model = self.settings.role(role)
+        key = (provider, model)
+        if key not in self._cache:
+            self._cache[key] = make_chat_model_for(
+                provider, model, self.settings.temperature, self.settings.max_tokens)
+        return self._cache[key]
 
 
 def invoke_text(model: ChatModel, system: str, user: str, node: Node) -> str:
