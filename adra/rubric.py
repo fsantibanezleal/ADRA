@@ -101,7 +101,7 @@ RUBRIC: tuple[RubricItem, ...] = (
     RubricItem(
         "unverifiable_no_access", "Unverifiable 'no access'", Severity.MAJOR, "access",
         "deterministic", ("experiment",),
-        "Never declare 'no access' to a catalog without exhausting the 6-point "
+        "Never declare 'no access' to a catalog without exhausting the 8-point "
         "profile / warehouse / grants preflight.",
         "CASE-2024-052 — 'no access' concluded on a profile/env mismatch (ADR-0005)."),
     RubricItem(
