@@ -1,5 +1,8 @@
 # ADRA — Adversarial Dev Review Agent
 
+[![License](https://img.shields.io/github/license/fsantibanezleal/ADRA)](LICENSE)
+[![Version](https://img.shields.io/github/v/tag/fsantibanezleal/ADRA?label=version&sort=semver)](https://github.com/fsantibanezleal/ADRA/tags)
+
 > A **client-agnostic, deterministic-first, adversarial-validation engine** that supports
 > the software lifecycle: it reviews PRs, designs and runs validation/refutation
 > experiments, writes documentation back, and **escalates to a human** exactly where a
