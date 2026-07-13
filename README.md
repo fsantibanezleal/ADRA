@@ -43,6 +43,16 @@ proofs and refutations, and escalates when it can't.
 
 Each skill is the same loop, differing only by its domain prompt and deterministic tools.
 
+## Use it as a Claude Code skill
+
+ADRA also ships as a portable **Claude Code Agent Skill** at
+[`skills/adra-applied/`](skills/adra-applied/) — the same deterministic-first method
+delivered into an interactive coding agent. It has no model runtime of its own (the
+agent harness is the runtime) and reaches systems through the already-authenticated
+CLIs (`gh`, `az`, `databricks`, `git`), read-only by default. Install it by copying
+the folder into `~/.claude/skills/`, or enable this repo as a plugin. See
+[`skills/README.md`](skills/README.md).
+
 ## Why deterministic-first
 
 Tools (`git`, the exact CI command, `bundle validate`, language scan, SQL probe) run

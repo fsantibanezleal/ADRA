@@ -1,0 +1,10 @@
+{
+  "name": "adra",
+  "description": "ADRA Applied: a deterministic-first, adversarial dev-review + validation-experiment + documentation skill for Claude Code, across git (GitHub / Azure DevOps), Databricks, and Azure. Deterministic tools are ground truth; writes are dry-run by default; unresolved blockers escalate to a human.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Felipe A. Santibanez-Leal"
+  },
+  "homepage": "https://github.com/fsantibanezleal/ADRA",
+  "license": "Apache-2.0"
+}
