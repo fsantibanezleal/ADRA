@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="640" viewBox="0 0 1600 640"><defs><filter id="shadow" x="-4%" y="-4%" width="108%" height="112%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.10"/></filter><marker id="arrow_blue" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#2563EB"/></marker><marker id="arrow_teal" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#0D9488"/></marker><marker id="arrow_orange" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#C25E18"/></marker><marker id="arrow_rose" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#BE185D"/></marker><marker id="arrow_amber" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#B45309"/></marker><marker id="arrow_violet" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#7C3AED"/></marker><marker id="arrow_slate" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#475569"/></marker><marker id="arrow_green" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#15803D"/></marker><marker id="arrow_bronze" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#B45309"/></marker><marker id="arrow_silver" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#475569"/></marker><marker id="arrow_gold" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#A16207"/></marker></defs><rect x="0" y="0" width="1600" height="640" fill="#FFFFFF"/>
+<rect x="70" y="40" width="70" height="30" rx="7" fill="#1D4ED8"/>
+<text x="105" y="61" font-family="Calibri, Segoe UI, Arial" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">ADRA</text>
+<text x="154" y="70" font-family="Calibri, Segoe UI, Arial" font-size="34" font-weight="700" fill="#0F172A">The control loop</text>
+<text x="70" y="110" font-family="Calibri, Segoe UI, Arial" font-size="17" fill="#475569">plan -&gt; ground -&gt; generate -&gt; critic -&gt; (revise -&gt; critic)* -&gt; decide</text>
+<line x1="70" y1="126" x2="1560" y2="126" stroke="#CBD5E1" stroke-width="1.2"/>
+<rect x="70" y="123" width="96" height="5" rx="2.5" fill="#2563EB"/>
+<rect x="71" y="252" width="170" height="130" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="70" y="250" width="170" height="130" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.6"/>
+<rect x="70" y="250" width="170" height="6" rx="3" fill="#7C3AED"/>
+<line x1="155.0" y1="274.6" x2="155.0" y2="269.3" stroke="#7C3AED" stroke-width="2.0"/>
+<circle cx="155.0" cy="268.6" r="2.1" fill="#7C3AED"/>
+<rect x="142.1" y="274.6" width="25.8" height="20.5" rx="8" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.8"/>
+<circle cx="149.7" cy="283.0" r="2.7" fill="#6D28D9"/>
+<circle cx="160.3" cy="283.0" r="2.7" fill="#6D28D9"/>
+<line x1="149.7" y1="289.8" x2="160.3" y2="289.8" stroke="#6D28D9" stroke-width="2.2" stroke-linecap="round"/>
+<text x="155.0" y="321.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">Plan</text>
+<text x="155.0" y="335.5" font-family="Calibri, Segoe UI, Arial" font-size="10.5" fill="#475569" text-anchor="middle">which checks apply</text>
+<rect x="331" y="252" width="170" height="130" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="330" y="250" width="170" height="130" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.6"/>
+<rect x="330" y="250" width="170" height="6" rx="3" fill="#2563EB"/>
+<circle cx="431.0" cy="283.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="426.3" cy="294.3" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="415.0" cy="299.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="403.7" cy="294.3" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="399.0" cy="283.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="403.7" cy="271.7" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="415.0" cy="267.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="426.3" cy="271.7" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="415.0" cy="283.0" r="16.0" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.4"/>
+<circle cx="415.0" cy="283.0" r="7.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.4"/>
+<text x="415.0" y="321.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">Ground</text>
+<text x="415.0" y="335.5" font-family="Calibri, Segoe UI, Arial" font-size="10.5" fill="#475569" text-anchor="middle">run the tools</text>
+<rect x="591" y="252" width="170" height="130" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="590" y="250" width="170" height="130" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.6"/>
+<rect x="590" y="250" width="170" height="6" rx="3" fill="#7C3AED"/>
+<path d="M 662.84,266.28 L 681.08,266.28 L 687.92,273.12 L 687.92,298.96 L 662.84,298.96 z" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.4"/>
+<path d="M 681.08,266.28 L 681.08,273.12 L 687.92,273.12 z" fill="#7C3AED" opacity="0.18"/>
+<line x1="665.88" y1="279.96" x2="674.658" y2="279.96" stroke="#7C3AED" stroke-width="1.2" opacity="0.7"/>
+<line x1="665.88" y1="284.52" x2="674.658" y2="284.52" stroke="#7C3AED" stroke-width="1.2" opacity="0.7"/>
+<line x1="665.88" y1="289.08" x2="674.658" y2="289.08" stroke="#7C3AED" stroke-width="1.2" opacity="0.7"/>
+<line x1="665.88" y1="293.64" x2="672.264" y2="293.64" stroke="#7C3AED" stroke-width="1.2" opacity="0.7"/>
+<text x="675.0" y="321.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">Generate</text>
+<text x="675.0" y="335.5" font-family="Calibri, Segoe UI, Arial" font-size="10.5" fill="#475569" text-anchor="middle">draft the artifact</text>
+<rect x="851" y="252" width="170" height="130" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="850" y="250" width="170" height="130" rx="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.6"/>
+<rect x="850" y="250" width="170" height="6" rx="3" fill="#B45309"/>
+<line x1="935.0" y1="270.8" x2="935.0" y2="294.4" stroke="#B45309" stroke-width="2.2"/>
+<line x1="928.2" y1="295.9" x2="941.8" y2="295.9" stroke="#B45309" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="922.1" y1="274.6" x2="947.9" y2="274.6" stroke="#B45309" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="935.0" cy="270.8" r="1.9" fill="#B45309"/>
+<line x1="922.1" y1="274.6" x2="922.1" y2="281.5" stroke="#B45309" stroke-width="1.2"/>
+<path d="M 918.3,281.5 A 3.8,2.3 0 0 0 925.9,281.5" fill="#FEF3C7" stroke="#B45309" stroke-width="1.4"/>
+<line x1="947.9" y1="274.6" x2="947.9" y2="281.5" stroke="#B45309" stroke-width="1.2"/>
+<path d="M 944.1,281.5 A 3.8,2.3 0 0 0 951.7,281.5" fill="#FEF3C7" stroke="#B45309" stroke-width="1.4"/>
+<text x="935.0" y="321.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">Critic</text>
+<text x="935.0" y="335.5" font-family="Calibri, Segoe UI, Arial" font-size="10.5" fill="#475569" text-anchor="middle">re-attack vs rubric</text>
+<rect x="1111" y="252" width="170" height="130" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="1110" y="250" width="170" height="130" rx="12" fill="#FFFFFF" stroke="#475569" stroke-width="1.6"/>
+<rect x="1110" y="250" width="170" height="6" rx="3" fill="#475569"/>
+<line x1="1188.2" y1="275.4" x2="1188.2" y2="292.1" stroke="#475569" stroke-width="2.6"/>
+<path d="M 1188.2,283.8 Q 1188.2,280.0 1198.8,280.0" fill="none" stroke="#475569" stroke-width="2.6"/>
+<circle cx="1188.2" cy="272.4" r="3.8" fill="#F1F5F9" stroke="#475569" stroke-width="1.8"/>
+<circle cx="1188.2" cy="295.2" r="3.8" fill="#F1F5F9" stroke="#475569" stroke-width="1.8"/>
+<circle cx="1202.6" cy="280.0" r="3.8" fill="#F1F5F9" stroke="#475569" stroke-width="1.8"/>
+<text x="1195.0" y="321.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">Decide</text>
+<text x="1195.0" y="335.5" font-family="Calibri, Segoe UI, Arial" font-size="10.5" fill="#475569" text-anchor="middle">clean?</text>
+<line x1="240" y1="315" x2="330" y2="315" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow_slate)"/>
+<line x1="500" y1="315" x2="590" y2="315" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow_slate)"/>
+<line x1="760" y1="315" x2="850" y2="315" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow_slate)"/>
+<line x1="1020" y1="315" x2="1110" y2="315" stroke="#475569" stroke-width="2.2" marker-end="url(#arrow_slate)"/>
+<path d="M 880,250 C 785.0,250 785.0,250 690,250" fill="none" stroke="#B45309" stroke-width="2.4" stroke-dasharray="6,5" marker-end="url(#arrow_amber)"/>
+<rect x="755.0" y="237.0" width="60" height="20" rx="10" fill="#FFFFFF" stroke="#B45309" stroke-width="1.0"/>
+<text x="785.0" y="251.0" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="600" fill="#92400E" text-anchor="middle">revise</text>
+<rect x="1331" y="202" width="210" height="84" rx="14" fill="#0F172A" opacity="0.06"/>
+<rect x="1330" y="200" width="210" height="84" rx="14" fill="#FFFFFF" stroke="#15803D" stroke-width="1.6"/>
+<rect x="1330" y="200" width="6" height="84" rx="3" fill="#15803D"/>
+<circle cx="1362.0" cy="226.0" r="13.4" fill="#DCFCE7" stroke="#15803D" stroke-width="1.8"/>
+<path d="M 1355.6,226.6 L 1360.1,231.1 L 1369.0,220.9" fill="none" stroke="#166534" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="1388" y="231.5" font-family="Calibri, Segoe UI, Arial" font-size="15" font-weight="700" fill="#0F172A">Accept</text>
+<rect x="1331" y="302" width="210" height="84" rx="14" fill="#0F172A" opacity="0.06"/>
+<rect x="1330" y="300" width="210" height="84" rx="14" fill="#FFFFFF" stroke="#BE185D" stroke-width="1.6"/>
+<rect x="1330" y="300" width="6" height="84" rx="3" fill="#BE185D"/>
+<circle cx="1362.0" cy="319.6" r="5.1" fill="#FBCFE8" stroke="#BE185D" stroke-width="1.4"/>
+<path d="M 1352.4,336.88 a 9.6,9.6 0 0 1 19.2,0 z" fill="#FBCFE8" stroke="#BE185D" stroke-width="1.4"/>
+<text x="1388" y="331.5" font-family="Calibri, Segoe UI, Arial" font-size="15" font-weight="700" fill="#0F172A">Escalate</text>
+<line x1="1280" y1="300" x2="1330" y2="250" stroke="#15803D" stroke-width="2.4" marker-end="url(#arrow_green)"/>
+<rect x="1275.0" y="262.0" width="60" height="20" rx="10" fill="#FFFFFF" stroke="#15803D" stroke-width="1.0"/>
+<text x="1305.0" y="276.0" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="600" fill="#166534" text-anchor="middle">clean</text>
+<line x1="1280" y1="330" x2="1330" y2="340" stroke="#BE185D" stroke-width="2.4" marker-end="url(#arrow_rose)"/>
+<rect x="1273.5" y="322.0" width="63" height="20" rx="10" fill="#FFFFFF" stroke="#BE185D" stroke-width="1.0"/>
+<text x="1305.0" y="336.0" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="600" fill="#9D174D" text-anchor="middle">blocker</text>
+<text x="70" y="470" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="700" fill="#475569" text-anchor="start">LEGEND</text>
+<rect x="70" y="482" width="150" height="30" rx="15.0" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="145.0" y="501.8" font-family="Calibri, Segoe UI, Arial" font-size="12" font-weight="700" fill="#1D4ED8" text-anchor="middle">deterministic</text>
+<rect x="232" y="482" width="130" height="30" rx="15.0" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.2"/>
+<text x="297.0" y="501.8" font-family="Calibri, Segoe UI, Arial" font-size="12" font-weight="700" fill="#6D28D9" text-anchor="middle">agentic</text>
+<rect x="374" y="482" width="110" height="30" rx="15.0" fill="#FEF3C7" stroke="#B45309" stroke-width="1.2"/>
+<text x="429.0" y="501.8" font-family="Calibri, Segoe UI, Arial" font-size="12" font-weight="700" fill="#92400E" text-anchor="middle">gate</text>
+<text x="70" y="545" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="400" fill="#475569" text-anchor="start">Deterministic steps are ground truth. The revise loop repeats until clean or the round budget escalates to a human.</text>
+<text x="70" y="618" font-family="Calibri, Segoe UI, Arial" font-size="11" fill="#475569">A clean draft is accepted; a surviving blocker after the round budget escalates. The agent never silently approves.</text></svg>

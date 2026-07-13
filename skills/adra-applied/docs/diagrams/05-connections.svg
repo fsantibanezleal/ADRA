@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="930" viewBox="0 0 1600 930"><defs><filter id="shadow" x="-4%" y="-4%" width="108%" height="112%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.10"/></filter><marker id="arrow_blue" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#2563EB"/></marker><marker id="arrow_teal" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#0D9488"/></marker><marker id="arrow_orange" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#C25E18"/></marker><marker id="arrow_rose" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#BE185D"/></marker><marker id="arrow_amber" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#B45309"/></marker><marker id="arrow_violet" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#7C3AED"/></marker><marker id="arrow_slate" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#475569"/></marker><marker id="arrow_green" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#15803D"/></marker><marker id="arrow_bronze" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#B45309"/></marker><marker id="arrow_silver" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#475569"/></marker><marker id="arrow_gold" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#A16207"/></marker></defs><rect x="0" y="0" width="1600" height="930" fill="#FFFFFF"/>
+<rect x="70" y="40" width="70" height="30" rx="7" fill="#1D4ED8"/>
+<text x="105" y="61" font-family="Calibri, Segoe UI, Arial" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">ADRA</text>
+<text x="154" y="70" font-family="Calibri, Segoe UI, Arial" font-size="34" font-weight="700" fill="#0F172A">Connections — CLI-first, read-only by default</text>
+<text x="70" y="110" font-family="Calibri, Segoe UI, Arial" font-size="17" fill="#475569">The skill delegates auth to installed CLIs; writes are gated and outward actions need confirmation.</text>
+<line x1="70" y1="126" x2="1560" y2="126" stroke="#CBD5E1" stroke-width="1.2"/>
+<rect x="70" y="123" width="96" height="5" rx="2.5" fill="#2563EB"/>
+<rect x="61" y="347" width="300" height="250" rx="14" fill="#0F172A" opacity="0.06"/>
+<rect x="60" y="345" width="300" height="250" rx="14" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.6"/>
+<rect x="60" y="345" width="6" height="250" rx="3" fill="#7C3AED"/>
+<line x1="92.0" y1="364.0" x2="92.0" y2="359.5" stroke="#7C3AED" stroke-width="2.0"/>
+<circle cx="92.0" cy="358.8" r="1.8" fill="#7C3AED"/>
+<rect x="81.1" y="364.0" width="21.8" height="17.3" rx="8" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.8"/>
+<circle cx="87.5" cy="371.0" r="2.2" fill="#6D28D9"/>
+<circle cx="96.5" cy="371.0" r="2.2" fill="#6D28D9"/>
+<line x1="87.5" y1="376.8" x2="96.5" y2="376.8" stroke="#6D28D9" stroke-width="2.2" stroke-linecap="round"/>
+<text x="118" y="378.0" font-family="Calibri, Segoe UI, Arial" font-size="18" font-weight="700" fill="#0F172A">adra-applied</text>
+<text x="76" y="407" font-family="Calibri, Segoe UI, Arial" font-size="12" fill="#475569">dry-run by default; --allow-external gates</text>
+<text x="76" y="424" font-family="Calibri, Segoe UI, Arial" font-size="12" fill="#475569">live calls; outward actions confirmed.</text>
+<rect x="431" y="192" width="220" height="110" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="430" y="190" width="220" height="110" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.6"/>
+<rect x="430" y="190" width="220" height="6" rx="3" fill="#2563EB"/>
+<circle cx="556.0" cy="223.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="551.3" cy="234.3" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="540.0" cy="239.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="528.7" cy="234.3" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="524.0" cy="223.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="528.7" cy="211.7" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="540.0" cy="207.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="551.3" cy="211.7" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="540.0" cy="223.0" r="16.0" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.4"/>
+<circle cx="540.0" cy="223.0" r="7.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.4"/>
+<text x="540.0" y="261.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">gh</text>
+<text x="540.0" y="275.5" font-family="Calibri, Segoe UI, Arial" font-size="10.5" fill="#475569" text-anchor="middle">CLI</text>
+<rect x="761" y="192" width="250" height="110" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="760" y="190" width="250" height="110" rx="12" fill="#FFFFFF" stroke="#475569" stroke-width="1.6"/>
+<rect x="760" y="190" width="250" height="6" rx="3" fill="#475569"/>
+<rect x="869.04" y="210.08" width="31.919999999999998" height="25.840000000000003" rx="4" fill="#FFFFFF" stroke="#475569" stroke-width="1.4"/>
+<rect x="869.04" y="210.08" width="31.919999999999998" height="5.32" rx="4" fill="#F1F5F9" stroke="#475569" stroke-width="1.0"/>
+<circle cx="870.6" cy="212.7" r="0.7" fill="#EF4444"/>
+<circle cx="872.3" cy="212.7" r="0.7" fill="#F59E0B"/>
+<circle cx="874.0" cy="212.7" r="0.7" fill="#10B981"/>
+<line x1="872.08" y1="219.2" x2="892.6" y2="219.2" stroke="#475569" stroke-width="1.2" opacity="0.5"/>
+<line x1="872.08" y1="223.0" x2="890.32" y2="223.0" stroke="#475569" stroke-width="1.2" opacity="0.5"/>
+<line x1="872.08" y1="226.8" x2="888.04" y2="226.8" stroke="#475569" stroke-width="1.2" opacity="0.5"/>
+<line x1="872.08" y1="230.6" x2="885.76" y2="230.6" stroke="#475569" stroke-width="1.2" opacity="0.5"/>
+<text x="885.0" y="261.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">GitHub</text>
+<path d="M 360,470 C 395.0,470 395.0,245 430,245" fill="none" stroke="#7C3AED" stroke-width="2.4" marker-end="url(#arrow_violet)"/>
+<line x1="650" y1="245" x2="760" y2="245" stroke="#2563EB" stroke-width="2.0" marker-end="url(#arrow_blue)"/>
+<text x="1040" y="235" font-family="Calibri, Segoe UI, Arial" font-size="12.5" font-weight="400" fill="#475569" text-anchor="start">PRs · issues · diff (read) · comment (gated)</text>
+<text x="1040" y="258" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="700" fill="#2563EB" text-anchor="start">read · gated write</text>
+<rect x="431" y="342" width="220" height="110" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="430" y="340" width="220" height="110" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.6"/>
+<rect x="430" y="340" width="220" height="6" rx="3" fill="#2563EB"/>
+<circle cx="556.0" cy="373.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="551.3" cy="384.3" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="540.0" cy="389.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="528.7" cy="384.3" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="524.0" cy="373.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="528.7" cy="361.7" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="540.0" cy="357.0" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="551.3" cy="361.7" r="3.0" fill="#2563EB" opacity="0.9"/>
+<circle cx="540.0" cy="373.0" r="16.0" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.4"/>
+<circle cx="540.0" cy="373.0" r="7.6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.4"/>
+<text x="540.0" y="411.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">az repos</text>
+<text x="540.0" y="425.5" font-family="Calibri, Segoe UI, Arial" font-size="10.5" fill="#475569" text-anchor="middle">CLI</text>
+<rect x="761" y="342" width="250" height="110" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="760" y="340" width="250" height="110" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.6"/>
+<rect x="760" y="340" width="250" height="6" rx="3" fill="#2563EB"/>
+<rect x="869.04" y="360.08" width="31.919999999999998" height="25.840000000000003" rx="4" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.4"/>
+<rect x="869.04" y="360.08" width="31.919999999999998" height="5.32" rx="4" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.0"/>
+<circle cx="870.6" cy="362.7" r="0.7" fill="#EF4444"/>
+<circle cx="872.3" cy="362.7" r="0.7" fill="#F59E0B"/>
+<circle cx="874.0" cy="362.7" r="0.7" fill="#10B981"/>
+<line x1="872.08" y1="369.2" x2="892.6" y2="369.2" stroke="#2563EB" stroke-width="1.2" opacity="0.5"/>
+<line x1="872.08" y1="373.0" x2="890.32" y2="373.0" stroke="#2563EB" stroke-width="1.2" opacity="0.5"/>
+<line x1="872.08" y1="376.8" x2="888.04" y2="376.8" stroke="#2563EB" stroke-width="1.2" opacity="0.5"/>
+<line x1="872.08" y1="380.6" x2="885.76" y2="380.6" stroke="#2563EB" stroke-width="1.2" opacity="0.5"/>
+<text x="885.0" y="411.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">Azure DevOps</text>
+<path d="M 360,470 C 395.0,470 395.0,395 430,395" fill="none" stroke="#7C3AED" stroke-width="2.4" marker-end="url(#arrow_violet)"/>
+<line x1="650" y1="395" x2="760" y2="395" stroke="#2563EB" stroke-width="2.0" marker-end="url(#arrow_blue)"/>
+<text x="1040" y="385" font-family="Calibri, Segoe UI, Arial" font-size="12.5" font-weight="400" fill="#475569" text-anchor="start">PRs · work items (read) · comment (gated)</text>
+<text x="1040" y="408" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="700" fill="#2563EB" text-anchor="start">read · gated write</text>
+<rect x="431" y="492" width="220" height="110" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="430" y="490" width="220" height="110" rx="12" fill="#FFFFFF" stroke="#BE185D" stroke-width="1.6"/>
+<rect x="430" y="490" width="220" height="6" rx="3" fill="#BE185D"/>
+<circle cx="556.0" cy="523.0" r="3.0" fill="#BE185D" opacity="0.9"/>
+<circle cx="551.3" cy="534.3" r="3.0" fill="#BE185D" opacity="0.9"/>
+<circle cx="540.0" cy="539.0" r="3.0" fill="#BE185D" opacity="0.9"/>
+<circle cx="528.7" cy="534.3" r="3.0" fill="#BE185D" opacity="0.9"/>
+<circle cx="524.0" cy="523.0" r="3.0" fill="#BE185D" opacity="0.9"/>
+<circle cx="528.7" cy="511.7" r="3.0" fill="#BE185D" opacity="0.9"/>
+<circle cx="540.0" cy="507.0" r="3.0" fill="#BE185D" opacity="0.9"/>
+<circle cx="551.3" cy="511.7" r="3.0" fill="#BE185D" opacity="0.9"/>
+<circle cx="540.0" cy="523.0" r="16.0" fill="#FBCFE8" stroke="#BE185D" stroke-width="1.4"/>
+<circle cx="540.0" cy="523.0" r="7.6" fill="#FFFFFF" stroke="#BE185D" stroke-width="1.4"/>
+<text x="540.0" y="561.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">databricks</text>
+<text x="540.0" y="575.5" font-family="Calibri, Segoe UI, Arial" font-size="10.5" fill="#475569" text-anchor="middle">CLI</text>
+<rect x="761" y="492" width="250" height="110" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="760" y="490" width="250" height="110" rx="12" fill="#FFFFFF" stroke="#BE185D" stroke-width="1.6"/>
+<rect x="760" y="490" width="250" height="6" rx="3" fill="#BE185D"/>
+<path d="M 868.85,506.28 L 868.85,534.438 A 16.15,3.8000000000000003 0 0 0 901.15,534.438 L 901.15,506.28" fill="#FBCFE8" stroke="#BE185D" stroke-width="1.4"/>
+<ellipse cx="885.0" cy="506.28" rx="16.15" ry="3.8000000000000003" fill="#FBCFE8" stroke="#BE185D" stroke-width="1.4"/>
+<path d="M 868.85,515.6659999999999 A 16.15,3.8000000000000003 0 0 0 901.15,515.6659999999999" fill="none" stroke="#BE185D" stroke-width="1.0" opacity="0.6"/>
+<path d="M 868.85,525.052 A 16.15,3.8000000000000003 0 0 0 901.15,525.052" fill="none" stroke="#BE185D" stroke-width="1.0" opacity="0.6"/>
+<text x="885.0" y="561.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">Databricks</text>
+<path d="M 360,470 C 395.0,470 395.0,545 430,545" fill="none" stroke="#7C3AED" stroke-width="2.4" marker-end="url(#arrow_violet)"/>
+<line x1="650" y1="545" x2="760" y2="545" stroke="#BE185D" stroke-width="2.0" marker-end="url(#arrow_rose)"/>
+<text x="1040" y="535" font-family="Calibri, Segoe UI, Arial" font-size="12.5" font-weight="400" fill="#475569" text-anchor="start">SQL warehouse (read) · bundle validate · deploy (gated)</text>
+<text x="1040" y="558" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="700" fill="#BE185D" text-anchor="start">read · gated write</text>
+<rect x="431" y="642" width="220" height="110" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="430" y="640" width="220" height="110" rx="12" fill="#FFFFFF" stroke="#C25E18" stroke-width="1.6"/>
+<rect x="430" y="640" width="220" height="6" rx="3" fill="#C25E18"/>
+<circle cx="556.0" cy="673.0" r="3.0" fill="#C25E18" opacity="0.9"/>
+<circle cx="551.3" cy="684.3" r="3.0" fill="#C25E18" opacity="0.9"/>
+<circle cx="540.0" cy="689.0" r="3.0" fill="#C25E18" opacity="0.9"/>
+<circle cx="528.7" cy="684.3" r="3.0" fill="#C25E18" opacity="0.9"/>
+<circle cx="524.0" cy="673.0" r="3.0" fill="#C25E18" opacity="0.9"/>
+<circle cx="528.7" cy="661.7" r="3.0" fill="#C25E18" opacity="0.9"/>
+<circle cx="540.0" cy="657.0" r="3.0" fill="#C25E18" opacity="0.9"/>
+<circle cx="551.3" cy="661.7" r="3.0" fill="#C25E18" opacity="0.9"/>
+<circle cx="540.0" cy="673.0" r="16.0" fill="#F9E8DB" stroke="#C25E18" stroke-width="1.4"/>
+<circle cx="540.0" cy="673.0" r="7.6" fill="#FFFFFF" stroke="#C25E18" stroke-width="1.4"/>
+<text x="540.0" y="711.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">git / az</text>
+<text x="540.0" y="725.5" font-family="Calibri, Segoe UI, Arial" font-size="10.5" fill="#475569" text-anchor="middle">CLI</text>
+<rect x="761" y="642" width="250" height="110" rx="12" fill="#0F172A" opacity="0.06"/>
+<rect x="760" y="640" width="250" height="110" rx="12" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.6"/>
+<rect x="760" y="640" width="250" height="6" rx="3" fill="#0D9488"/>
+<rect x="869.04" y="660.08" width="31.919999999999998" height="25.840000000000003" rx="4" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.4"/>
+<rect x="869.04" y="660.08" width="31.919999999999998" height="5.32" rx="4" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.0"/>
+<circle cx="870.6" cy="662.7" r="0.7" fill="#EF4444"/>
+<circle cx="872.3" cy="662.7" r="0.7" fill="#F59E0B"/>
+<circle cx="874.0" cy="662.7" r="0.7" fill="#10B981"/>
+<line x1="872.08" y1="669.2" x2="892.6" y2="669.2" stroke="#0D9488" stroke-width="1.2" opacity="0.5"/>
+<line x1="872.08" y1="673.0" x2="890.32" y2="673.0" stroke="#0D9488" stroke-width="1.2" opacity="0.5"/>
+<line x1="872.08" y1="676.8" x2="888.04" y2="676.8" stroke="#0D9488" stroke-width="1.2" opacity="0.5"/>
+<line x1="872.08" y1="680.6" x2="885.76" y2="680.6" stroke="#0D9488" stroke-width="1.2" opacity="0.5"/>
+<text x="885.0" y="711.0" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F172A" text-anchor="middle">local repo / Azure</text>
+<path d="M 360,470 C 395.0,470 395.0,695 430,695" fill="none" stroke="#7C3AED" stroke-width="2.4" marker-end="url(#arrow_violet)"/>
+<line x1="650" y1="695" x2="760" y2="695" stroke="#C25E18" stroke-width="2.0" marker-end="url(#arrow_orange)"/>
+<text x="1040" y="685" font-family="Calibri, Segoe UI, Arial" font-size="12.5" font-weight="400" fill="#475569" text-anchor="start">merge-base · diff · logs (read-only)</text>
+<text x="1040" y="708" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="700" fill="#C25E18" text-anchor="start">read-only</text>
+<rect x="60" y="782" width="1480" height="66" rx="10" fill="#DCFCE7" stroke="#15803D" stroke-width="1.4"/>
+<path d="M 84.0,803.8 L 95.8,825.1 L 72.2,825.1 z" fill="#DCFCE7" stroke="#15803D" stroke-width="1.6"/>
+<line x1="84.0" y1="810.0" x2="84.0" y2="818.4" stroke="#166534" stroke-width="2.4"/>
+<circle cx="84.0" cy="821.7" r="1.1" fill="#166534"/>
+<text x="110" y="820.0" font-family="Calibri, Segoe UI, Arial" font-size="13" fill="#166534">Read-only / dry-run by default. gh / az / databricks profiles hold the auth — no tokens live in the scripts.</text>
+<text x="70" y="908" font-family="Calibri, Segoe UI, Arial" font-size="11" fill="#475569">Endpoints, warehouse ids, org/project and the production reference branch are configuration in a local .env (git-ignored).</text></svg>
