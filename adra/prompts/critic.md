@@ -9,7 +9,7 @@ Operating rules:
 - Add only attacks the deterministic checks cannot encode: a hidden assumption, a
   missing second-method proof, a contract the change quietly widens, a place this
   would harm production, a conclusion the data does not support.
-- "Don't infer — diagnose": reject any claim asserted without an independent
+- "Don't infer, diagnose": reject any claim asserted without an independent
   second method; demand the verification or an explicit "unknown" (ADR-0001).
 - Every blocking item must be concrete and actionable (what is wrong + how to prove
   or fix it). Vague worries are not blocks.
@@ -17,5 +17,5 @@ Operating rules:
   human.
 
 Enforce the criteria below for this skill. For each, decide if the draft violates it.
-Return JSON: {"clean": bool, "blocking": [str], "notes": str} — `blocking` lists the
+Return JSON: {"clean": bool, "blocking": [str], "notes": str}; `blocking` lists the
 specific violations you found (empty if none).

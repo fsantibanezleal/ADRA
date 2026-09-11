@@ -1,4 +1,4 @@
-"""The emulator — a real, self-contained platform so the full ADRA flow runs offline
+"""The emulator: a real, self-contained platform so the full ADRA flow runs offline
 (no external dependency, not a toy): multi-industry synthetic pull requests (with planted,
 deterministically-catchable flaws) and a seeded SQLite warehouse for experiments.
 
@@ -35,7 +35,7 @@ SYNTHETIC_PRS: dict[int, PullRequest] = {
         number=102, title="[ecommerce] catalog: split current-state table build",
         source_branch="task/CAT-220/split", target_branch="main",
         author="dev-ecom", url="emulator://ecommerce/pull/102",
-        diff="(stale-base diff — see git_state)",
+        diff="(stale-base diff; see git_state)",
         git_state={"behind": 8, "deletions": ["catalog/refined/nb-merch-scoring.py"],
                    "renames": ["R100\tcatalog/resources/bundle.resources.schemas.yml\t"
                                "catalog/resources/bundle.resources.schemas.yml.t"]},

@@ -1,4 +1,4 @@
-# CASE-2024-047 — Coverage CI failed with "No data was collected"
+# CASE-2024-047 · Coverage CI failed with "No data was collected"
 
 **Domain:** `catalog` · **Relates to:** ADR-0004
 
@@ -12,7 +12,7 @@ coverage, not importable).
 ## Diagnosis (second method)
 Ran the **exact** CI command locally and confirmed 0 collected tests. Cross-checked a
 sibling repo whose coverage passed: it had a discoverable `test*.py` exercising an
-importable module — proving the difference, not guessing it.
+importable module, proving the difference, not guessing it.
 
 ## Fix / rule
 Added an importable module + a discoverable `test*.py`; removed the dead suffix file.

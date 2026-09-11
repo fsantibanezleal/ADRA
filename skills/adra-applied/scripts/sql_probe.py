@@ -1,4 +1,4 @@
-"""sql_probe.py — run a SQL statement on the shared warehouse (ADR-0005).
+"""sql_probe.py · run a SQL statement on the shared warehouse (ADR-0005).
 
 Uses the Databricks SQL Statement Execution API through the databricks CLI. This
 is the only sanctioned way to run an experiment probe: the shared serverless SQL

@@ -1,4 +1,4 @@
-# ADR-0007 — Client-agnostic grounding; no client/domain in the engine
+# ADR-0007 · Client-agnostic grounding; no client/domain in the engine
 
 **Status:** Accepted
 

@@ -6,16 +6,16 @@ grounded in the engine code **and** in validated literature (real DOIs/arXiv ids
 
 ## Read in order
 
-1. [01_adversarial-spine.md](./01_adversarial-spine.md) — the generate → critic → revise loop:
+1. [01_adversarial-spine.md](./01_adversarial-spine.md): the generate → critic → revise loop:
    refute, don't bless; the research lineage (ReAct, Reflexion, Self-Refine, Constitutional AI,
    multi-agent debate) and why the critic is blocking.
-2. [02_llm-as-judge.md](./02_llm-as-judge.md) — LLM-as-a-judge with documented bias mitigations:
-   swap-and-average, reference anchoring, rubric weighting — with the scoring equation.
-3. [03_shared-rubric.md](./03_shared-rubric.md) — one typed rubric as the single source of the
+2. [02_llm-as-judge.md](./02_llm-as-judge.md): LLM-as-a-judge with documented bias mitigations:
+   swap-and-average, reference anchoring, rubric weighting, with the scoring equation.
+3. [03_shared-rubric.md](./03_shared-rubric.md): one typed rubric as the single source of the
    criteria; deterministic vs semantic items; the "code and prompt can't drift" property.
-4. [04_deterministic-first.md](./04_deterministic-first.md) — grounding-first ("don't infer —
+4. [04_deterministic-first.md](./04_deterministic-first.md): grounding-first ("don't infer,
    diagnose"): tools settle what they can, the model adds the rest, the floor carries the verdict.
-5. [05_human-escalation.md](./05_human-escalation.md) — disciplined escalation: never silent
+5. [05_human-escalation.md](./05_human-escalation.md): disciplined escalation: never silent
    approval; what stays human-owned and why (NIST AI RMF *manage/govern*).
 
 ## The spine at a glance
@@ -31,11 +31,11 @@ grounded in the engine code **and** in validated literature (real DOIs/arXiv ids
 ## What this section IS and is NOT
 
 - **IS** the methodological backbone tied to specific engine code and real sources.
-- **IS NOT** a research survey for its own sake — every method here is *implemented*. Where a paper
+- **IS NOT** a research survey for its own sake: every method here is *implemented*. Where a paper
   is cited, it explains a choice that exists in `adra/`, not an aspiration.
 
 ## See also
 
-- [../architecture/architecture.md](../architecture/architecture.md) — how these methods are wired.
-- [../../refs/README.md](../../refs/README.md) — the annotated bibliography (grouped by pillar).
-- [../use-cases/use-cases.md](../use-cases/use-cases.md) — the methods applied per skill.
+- [../architecture/architecture.md](../architecture/architecture.md): how these methods are wired.
+- [../../refs/README.md](../../refs/README.md): the annotated bibliography (grouped by pillar).
+- [../use-cases/use-cases.md](../use-cases/use-cases.md): the methods applied per skill.

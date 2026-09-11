@@ -2,8 +2,8 @@
 
 ADRA's most important "framework" is the one with **zero install cost**: the Python standard
 library. The engine core declares **no third-party dependencies** (`pyproject.toml`:
-`dependencies = []`). Everything that runs offline — the deterministic tools, the orchestrator,
-the provenance log, the CLI, and the self-contained emulator — is built on stdlib alone. This is
+`dependencies = []`). Everything that runs offline (the deterministic tools, the orchestrator,
+the provenance log, the CLI, and the self-contained emulator) is built on stdlib alone. This is
 what makes "runs offline with no API key" a true claim (ADR-0001, ADR-0002, ADR-0008).
 
 ## At a glance
@@ -11,13 +11,13 @@ what makes "runs offline with no API key" a true claim (ADR-0001, ADR-0002, ADR-
 | | |
 |---|---|
 | Packages | none (CPython standard library) |
-| Install | nothing — `pip install adra` with **no extras** runs the full offline path |
+| Install | nothing: `pip install adra` with **no extras** runs the full offline path |
 | Key stdlib modules | `sqlite3` (emulator warehouse) · `subprocess` (git / CI / bundle / databricks CLI) · `argparse` (CLI) · `dataclasses` / `enum` / `json` (domain model + provenance) · `re` / `fnmatch` (lang + discovery checks) · `base64` (ADO PAT auth) |
 | Decision | ADR-0001 (deterministic-first), ADR-0002 (framework-free orchestrator), ADR-0008 (emulator) |
 
 ## Read in order
 
-1. [01_the-emulator.md](./01_the-emulator.md) — the self-contained platform: synthetic
+1. [01_the-emulator.md](./01_the-emulator.md) · the self-contained platform: synthetic
    multi-industry PRs (with planted, deterministically-catchable flaws) + a seeded SQLite
    warehouse, both implementing the connector Protocol so the full flow runs offline.
 
@@ -33,7 +33,7 @@ what makes "runs offline with no API key" a true claim (ADR-0001, ADR-0002, ADR-
 | Offline LLM mock | `json`, `re` (node-keyed canned answers) | `llm.py` |
 
 The deterministic tools (`git`, the exact CI command, `databricks bundle validate`, the SQL
-warehouse, the language scan, test discovery) are the **verdict-carrying floor** — and they all
+warehouse, the language scan, test discovery) are the **verdict-carrying floor**, and they all
 run on stdlib + locally-installed CLIs. A missing CLI or disabled external calls returns a
 `ToolResult(ran=False, reason=...)`, so the package always runs.
 
@@ -48,6 +48,6 @@ run on stdlib + locally-installed CLIs. A missing CLI or disabled external calls
 
 - [01_the-emulator.md](./01_the-emulator.md)
 - [../../architecture/05_why-deterministic-first.md](../../architecture/05_why-deterministic-first.md)
-  — why the floor (stdlib) carries the verdict.
-- [../../data-contract/02_connector-shapes.md](../../data-contract/02_connector-shapes.md) — the
+  · why the floor (stdlib) carries the verdict.
+- [../../data-contract/02_connector-shapes.md](../../data-contract/02_connector-shapes.md) · the
   Protocol the emulator implements.

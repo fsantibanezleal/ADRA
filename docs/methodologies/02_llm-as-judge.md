@@ -30,7 +30,7 @@ criterion keeps the offline path well-defined.
 ## The three bias mitigations
 
 LLM judges have known biases (Zheng et al. 2023, MT-Bench, `arXiv:2306.05685`; and rubric-ordering
-bias — "Am I More Pointwise or Pairwise? Revealing Position Bias in Rubric-Based LLM-as-a-Judge",
+bias: "Am I More Pointwise or Pairwise? Revealing Position Bias in Rubric-Based LLM-as-a-Judge",
 `arXiv:2602.02219`). ADRA counters each:
 
 1. **Swap-and-average (position bias).** `compare(model, a, b, ...)` scores both artifacts
@@ -42,8 +42,8 @@ bias — "Am I More Pointwise or Pairwise? Revealing Position Bias in Rubric-Bas
 
    Disagreement under swap is a signal to **escalate** (ADR-0005), not to pick arbitrarily.
    Toggle via `Settings.judge_swap_average` (default `True`).
-2. **Reference anchoring (taste/prior bias).** Scores are anchored to a concrete reference — the
-   **exact CI command**, the **existing repo convention**, or the **data contract** — not the
+2. **Reference anchoring (taste/prior bias).** Scores are anchored to a concrete reference (the
+   **exact CI command**, the **existing repo convention**, or the **data contract**), not the
    model's prior. The prompt: "Anchor to the reference; do not reward verbosity."
 3. **Verbosity & self-preference.** The externalized `prompts/judge.md` instructs: reward evidence
    and correctness, never length; judge on the rubric, not on whether the artifact matches how the
@@ -66,13 +66,13 @@ position swap routes to escalation."
 ## References
 
 Zheng et al. 2023 (MT-Bench, `arXiv:2306.05685`) · "Am I More Pointwise or Pairwise? Revealing
-Position Bias in Rubric-Based LLM-as-a-Judge" (`arXiv:2602.02219`) — motivates the swap direction
+Position Bias in Rubric-Based LLM-as-a-Judge" (`arXiv:2602.02219`): motivates the swap direction
 (its balanced score-option permutation is not implemented here). See
 [../../refs/README.md](../../refs/README.md) §3.
 
 ## See also
 
-- [01_adversarial-spine.md](./01_adversarial-spine.md) — the critic the judge complements.
-- [03_shared-rubric.md](./03_shared-rubric.md) — the criteria source.
-- [../frameworks/01_pydantic-ai/03_usage-and-gotchas.md](../frameworks/01_pydantic-ai/03_usage-and-gotchas.md)
-  — routing a strong model to the judge.
+- [01_adversarial-spine.md](./01_adversarial-spine.md): the critic the judge complements.
+- [03_shared-rubric.md](./03_shared-rubric.md): the criteria source.
+- [../frameworks/01_pydantic-ai/03_usage-and-gotchas.md](../frameworks/01_pydantic-ai/03_usage-and-gotchas.md):
+  routing a strong model to the judge.

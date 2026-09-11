@@ -1,14 +1,14 @@
-# 04 · Missing & outlier data — degrade lanes and gating
+# 04 · Missing & outlier data · degrade lanes and gating
 
 How ADRA handles inputs that are absent, unavailable, or pathological. The principle (ADR-0001):
-**never fabricate** — a data gap becomes an honest "unknown" or a `ran=False` tool result, gated so
+**never fabricate**: a data gap becomes an honest "unknown" or a `ran=False` tool result, gated so
 it cannot silently pass as success.
 
 Landing: [data-contract.md](./data-contract.md).
 
 ## The degrade lane: `ToolResult(ran=False, reason=...)`
 
-Every deterministic tool degrades gracefully when its dependency or permission is missing — it
+Every deterministic tool degrades gracefully when its dependency or permission is missing; it
 returns `ran=False` with a `reason`, never a fabricated finding:
 
 | Situation | Tool result |
@@ -20,7 +20,7 @@ returns `ran=False` with a `reason`, never a fabricated finding:
 | missing creds / warehouse / workspace | `RuntimeError` at construction/probe time (Databricks/Azure), never opaque |
 
 Because the package's verdict is carried by the deterministic floor, a `ran=False` tool simply
-contributes no blocker — and the run continues honestly rather than asserting a green it cannot
+contributes no blocker, and the run continues honestly rather than asserting a green it cannot
 prove.
 
 ## Fixtures: reproduce the exact decision logic offline
@@ -41,13 +41,13 @@ The deterministic checks are written to reject pathological inputs, not just nor
 
 - **Coverage / test parsing** keys on regex matches; a *missing* count is `None` (not `0`), so the
   "0 tests" blocker fires only on an actual `Ran 0 tests`, and "no data" on an actual
-  `No data was collected` — absence is distinguished from zero.
+  `No data was collected`; absence is distinguished from zero.
 - **Severity predicates** are explicit (`is_blocking` ∈ {BLOCKER, MAJOR}); a `MINOR`/`NIT` never
   blocks, so a low-severity outlier doesn't escalate.
 - **The unverified-claim scan** turns hedging language (`probably`, `seems to`, `no access`, …)
-  into a blocker — so a draft that *papers over* missing data with vague wording is rejected.
+  into a blocker, so a draft that *papers over* missing data with vague wording is rejected.
 
-> Engineering note (portfolio rule): numeric guards must reject NaN — use `!(x > 0)` rather than
+> Engineering note (portfolio rule): numeric guards must reject NaN; use `!(x > 0)` rather than
 > `x <= 0`, since `NaN <= 0` is false. ADRA's parsers avoid the trap by distinguishing `None`
 > (no match) from `0`; any new numeric tool check should follow the same NaN-safe pattern.
 
@@ -56,7 +56,7 @@ The deterministic checks are written to reject pathological inputs, not just nor
 `sql_probe` carries an 8-point `PREFLIGHT` in its `data` whenever it can't run live (profile↔env
 match, `current-user`, warehouse RUNNING, catalog/schema/table existence, group membership, SP
 grant). The rubric item `unverifiable_no_access` then **blocks** any draft that concludes "no
-access" while the probe returned no rows but carries that preflight — so a missing-grant config is
+access" while the probe returned no rows but carries that preflight, so a missing-grant config is
 never reported as a data finding (illustrative case Northwind `CASE-2024-052`). The companion semantic item
 `conclusion_beyond_evidence` blocks concluding anything the probe rows don't support.
 
@@ -76,7 +76,7 @@ connector phase adds the dual-LLM / capability split + sandboxing (see
 
 ## See also
 
-- [../methodologies/04_deterministic-first.md](../methodologies/04_deterministic-first.md) — the
+- [../methodologies/04_deterministic-first.md](../methodologies/04_deterministic-first.md): the
   "diagnose, don't infer" principle.
-- [03_run-record.md](./03_run-record.md) — `ran`/`reason` are persisted in the record.
-- [../use-cases/03_experiment.md](../use-cases/03_experiment.md) — the preflight in action.
+- [03_run-record.md](./03_run-record.md): `ran`/`reason` are persisted in the record.
+- [../use-cases/03_experiment.md](../use-cases/03_experiment.md): the preflight in action.

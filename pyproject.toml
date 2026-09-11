@@ -1,7 +1,7 @@
 [project]
 name = "adra"
-version = "0.4.0"
-description = "ADRA — Adversarial Dev Review Agent: a deterministic-first, adversarial-validation engine for the software lifecycle (PR review, validation/refutation experiments, auto-docs, human escalation)."
+version = "0.4.1"
+description = "ADRA · Adversarial Dev Review Agent: a deterministic-first, adversarial-validation engine for the software lifecycle (PR review, validation/refutation experiments, auto-docs, human escalation)."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
@@ -22,7 +22,7 @@ dependencies = []
 
 [project.optional-dependencies]
 # House standard for the LLM layer (ADR-0007 lane-c, ADR-0053): pydantic-ai (+ its provider
-# extras) — multi-provider/agnostic, provider:model strings. The OpenAI-compatible long tail
+# extras); multi-provider/agnostic, provider:model strings. The OpenAI-compatible long tail
 # (xai/deepseek/openrouter/together/ollama) rides the openai extra's base-url support.
 llm = ["pydantic-ai-slim[anthropic,groq,openai,google]>=1,<2"]
 github = ["httpx>=0.27"]                              # real GitHub connector (REST v3)

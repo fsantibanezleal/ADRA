@@ -1,4 +1,4 @@
-# httpx — the Azure DevOps connector (`AzureDevOpsRepo`)
+# httpx · the Azure DevOps connector (`AzureDevOpsRepo`)
 
 `adra/connectors/azure_devops.py` is a thin, fully-owned Azure DevOps REST API **7.1** client
 over `httpx`. It implements the same `RepoProvider` Protocol as the GitHub connector, so the
@@ -61,8 +61,8 @@ Both call `_require_write()` (raises `PermissionError` unless `allow_external=Tr
 
 ## Gotchas
 
-- **`diff` is a change summary, not a patch** (see above) — don't expect line-level hunks from ADO.
-- **PAT auth uses an empty username** in Basic auth — a non-obvious Azure DevOps convention.
+- **`diff` is a change summary, not a patch** (see above); don't expect line-level hunks from ADO.
+- **PAT auth uses an empty username** in Basic auth, a non-obvious Azure DevOps convention.
 - **Work-item creation uses a different API + content type** than Git, hence the dedicated call.
 - **`api-version=7.1` is pinned on every request** via `_v`.
 
@@ -74,7 +74,7 @@ Both call `_require_write()` (raises `PermissionError` unless `allow_external=Tr
 
 ## See also
 
-- [01_github.md](./01_github.md) — the sibling GitHub connector.
-- [../../data-contract/02_connector-shapes.md](../../data-contract/02_connector-shapes.md) — the
+- [01_github.md](./01_github.md) · the sibling GitHub connector.
+- [../../data-contract/02_connector-shapes.md](../../data-contract/02_connector-shapes.md) · the
   `PullRequest` shape both connectors return.
-- [../../security/security.md](../../security/security.md) — the gated-write posture.
+- [../../security/security.md](../../security/security.md) · the gated-write posture.

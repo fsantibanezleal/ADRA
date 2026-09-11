@@ -1,7 +1,7 @@
 """Line-art icon library (24x24 grid, scalable).
 
 Each icon draws within the box [x, x+s] x [y, y+s] using the SvgBackend
-primitives. Stroke-based, rounded — modern and legible at any size. These give the
+primitives. Stroke-based, rounded; modern and legible at any size. These give the
 diagrams real iconography instead of plain boxes.
 
 Use via ``draw(bk, name, x, y, s, color)`` or the ICONS registry.

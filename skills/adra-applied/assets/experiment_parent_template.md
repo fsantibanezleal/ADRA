@@ -2,7 +2,7 @@
      YYYYMMDD-<slug>/ of the same name. English on disk; translate prose + headings to
      the wiki's language on publish (Spanish for this org's wiki). Keep dead-ends visible. -->
 
-# <WI-id> — <problem in one line>
+# <WI-id> · <problem in one line>
 
 > <one-line statement of what this experiment sets out to confirm or refute>
 
@@ -48,7 +48,7 @@
 ## 7. Status and next steps
 
 - Decision: <draft / in progress / completed / discarded>
-- PR: <full URL> — merged <time> — CD <status>
+- PR: <full URL> · merged <time> · CD <status>
 
 ## References
 

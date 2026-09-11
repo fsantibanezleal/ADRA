@@ -1,8 +1,8 @@
 """ADRA command-line interface.
 
-Run a capability through the adversarial loop and print the artifacts — over a provided
+Run a capability through the adversarial loop and print the artifacts: over a provided
 intake, a **real GitHub PR**, or the offline **emulator**. Offline by default (the
-deterministic ``mock`` provider — no API key); set ``ADRA_PROVIDER`` + a key for the
+deterministic ``mock`` provider, no API key); set ``ADRA_PROVIDER`` + a key for the
 semantic layer, and ``--external`` to let tools/connectors call out (default: read-only).
 Point ADRA at a client's governance suite with ``ADRA_CLIENT_DIR``.
 """
@@ -41,7 +41,7 @@ def _run(skill: str, intake: dict, external: bool, **overrides) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="adra", description="ADRA — Adversarial Dev Review Agent")
+    p = argparse.ArgumentParser(prog="adra", description="ADRA · Adversarial Dev Review Agent")
     p.add_argument("--external", action="store_true",
                    help="allow deterministic tools/connectors to call out (default: read-only)")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -133,7 +133,7 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"#{pr.number}  {pr.title}")
             return 0
         if args.pr is None:
-            print("emu review <pr> — pass a PR number (see `adra emu list`)")
+            print("emu review <pr>: pass a PR number (see `adra emu list`)")
             return 1
         pr = prov.get_pull_request(args.pr)
         print(f"emulator PR #{pr.number}: {pr.title}")

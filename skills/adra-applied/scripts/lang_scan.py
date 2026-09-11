@@ -1,4 +1,4 @@
-"""lang_scan.py — English-only and authoring-tool-leak scan (always safe).
+"""lang_scan.py · English-only and authoring-tool-leak scan (always safe).
 
 Flags two things that must never reach a code repo or PR:
   * authoring-tool / AI-session leak (BLOCKER): tool or vendor names, "co-authored-by",

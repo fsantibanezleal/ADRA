@@ -1,4 +1,4 @@
-# ADR-0001 — Deterministic-first grounding and second-method proof
+# ADR-0001 · Deterministic-first grounding and second-method proof
 
 **Status:** Accepted
 

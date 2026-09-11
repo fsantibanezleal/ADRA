@@ -1,4 +1,4 @@
-# Experiments — confirm or refute, against data
+# Experiments · confirm or refute, against data
 
 Use this to validate a reported issue, evaluate the state of a table / pipeline /
 job / resource, or test any hypothesis against the data platform. The discipline
@@ -19,7 +19,7 @@ Two deterministic sources, before any hypothesis is trusted:
 
 1. **The real code**, cited line by line (file:line), not paraphrased.
 2. **SQL / system tables**, run on the **shared SQL warehouse** via
-   `scripts/sql_probe.py` — never a fresh interactive cluster. Pick the profile
+   `scripts/sql_probe.py`, never a fresh interactive cluster. Pick the profile
    that matches the catalog env (`prod` for `prod_*`, `dev` for `dev_*`).
 
 ## State falsifiable, ranked hypotheses
@@ -43,7 +43,7 @@ and an impact-if-true, and is tied to a standalone probe.
 4. For each discarded hypothesis: record the discard **with the data** that
    discarded it.
 5. Work one probe per iteration (`v00..vN`). Keep dead-ends and redirections
-   visible — show how the evidence moved the conclusion.
+   visible: show how the evidence moved the conclusion.
 
 ## The access preflight
 
@@ -51,7 +51,7 @@ Before ever writing "no access," run all 8 steps with `scripts/preflight.py`:
 profile/env match, `current-user me`, warehouse `RUNNING`, `SHOW CATALOGS`, `SHOW
 SCHEMAS IN <c>`, `SHOW TABLES IN <c>.<s>`, `is_member('<group>')`, and the
 service-principal grant if the warehouse runs as an SP. Only after 8/8 still fail
-do you report it — with every output attached.
+do you report it, with every output attached.
 
 ## Conclude and synthesize
 

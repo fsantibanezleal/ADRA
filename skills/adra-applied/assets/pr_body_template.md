@@ -19,11 +19,11 @@
 ## Validation
 
 ```
-<exact CI command output — the real command, not an approximation>
+<exact CI command output: the real command, not an approximation>
 ```
 
 - Coverage: <N>% (gate <M>%)
-- `databricks bundle validate -t <env>`: <Validation OK! | n/a — no resources/ change>
+- `databricks bundle validate -t <env>`: <Validation OK! | n/a: no resources/ change>
 
 ## Risks / mitigations
 

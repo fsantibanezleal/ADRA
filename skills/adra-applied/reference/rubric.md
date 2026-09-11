@@ -1,4 +1,4 @@
-# Rubric — the portable checks (ADR/CASE-referenced)
+# Rubric · the portable checks (ADR/CASE-referenced)
 
 Apply these in the critic step. Every `BLOCKER` and `MAJOR` is blocking: if one
 survives, the artifact is not clean. Each check cites the architecture decision it
@@ -46,9 +46,9 @@ tokens (catalogs, branches, CI command) are configuration.
 - The deterministic floor is ground truth: never re-litigate what a tool settled;
   add only what the tools cannot encode.
 - Record confirmed and discarded findings with numbers. When you cannot verify,
-  write "unknown" — do not assert.
+  write "unknown"; do not assert.
 
 The narrative behind each id (the real incidents) lives in the client governance
-suite — `adra/clients/synthetic/northwind/adr/` and `.../cases/` — which
+suite, `adra/clients/synthetic/northwind/adr/` and `.../cases/`, which
 `adra/rubric.py` binds to these ids (single source). Retarget to a different client
 by swapping the suite (`ADRA_CLIENT_DIR`), not these ids.

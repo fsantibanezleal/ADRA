@@ -1,4 +1,4 @@
-# ADR-0002 — Hand-rolled orchestrator, not an agent-framework runtime
+# ADR-0002 · Hand-rolled orchestrator, not an agent-framework runtime
 
 **Status:** Accepted
 

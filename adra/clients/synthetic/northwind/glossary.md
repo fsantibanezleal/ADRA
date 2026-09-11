@@ -9,10 +9,10 @@
 | DLT | Delta Live Tables (declarative pipelines) |
 | Medallion | `landing` → `trusted` → `refined` schema split |
 | Warehouse | Shared serverless SQL warehouse for ad-hoc queries / experiments |
-| SKU | Stock-keeping unit — a `catalog` product identifier |
+| SKU | Stock-keeping unit, a `catalog` product identifier |
 | Threshold | A configurable decision target in `analytics` (e.g. a fraud-score cutoff) |
 | Conversion | Order conversion rate (%) tracked in `analytics` |
-| Forecast/risk output | `analytics` decision-support output — a likelihood/recommendation, not a guarantee |
+| Forecast/risk output | `analytics` decision-support output: a likelihood/recommendation, not a guarantee |
 | Data contract | The documented schema + semantics of a published UC table |
 | Provenance run record | The immutable JSON ADRA writes per run (evidence + decisions) |
 | Preflight | The 8-point access checklist before declaring "no access" (`adr/ADR-0005`) |

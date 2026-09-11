@@ -1,4 +1,4 @@
-# ADR-0004 — One shared, typed rubric for all adversarial criteria
+# ADR-0004 · One shared, typed rubric for all adversarial criteria
 
 **Status:** Accepted
 

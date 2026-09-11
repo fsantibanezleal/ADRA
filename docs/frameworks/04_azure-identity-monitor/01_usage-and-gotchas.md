@@ -1,4 +1,4 @@
-# azure-identity + azure-monitor-query — usage & gotchas
+# azure-identity + azure-monitor-query · usage & gotchas
 
 `adra/connectors/azure.py` defines `AzureMonitorData`, a read-only `DataProvider` that runs
 **KQL** probes against an Azure Log Analytics workspace.
@@ -16,7 +16,7 @@ AzureMonitorData(workspace_id=None, *, credential=None, timespan_hours=24)
 - **Workspace id required**: `workspace_id=` or `AZURE_LOG_ANALYTICS_WORKSPACE_ID`; absent →
   `RuntimeError`.
 - The credential is `credential or DefaultAzureCredential()`. Constructing it is cheap and **does
-  not hit the network** — the token is acquired lazily on the first query, so the connector
+  not hit the network**: the token is acquired lazily on the first query, so the connector
   degrades at *query* time if the chain can't resolve a usable identity.
 - `LogsQueryClient` is built lazily (`_logs_client`) the first time a probe runs; missing
   `azure-monitor-query` → a clear `RuntimeError` only then.
@@ -50,7 +50,7 @@ raises on `LogsQueryStatus.FAILURE`, and maps the first table's columns/rows int
 
 ## See also
 
-- [../03_databricks-sdk/01_usage-and-safety.md](../03_databricks-sdk/01_usage-and-safety.md) — the
+- [../03_databricks-sdk/01_usage-and-safety.md](../03_databricks-sdk/01_usage-and-safety.md) · the
   sibling read-only data provider (Databricks SQL).
-- [../../use-cases/03_experiment.md](../../use-cases/03_experiment.md) — the experiment skill that
+- [../../use-cases/03_experiment.md](../../use-cases/03_experiment.md) · the experiment skill that
   consumes a `DataProvider`.

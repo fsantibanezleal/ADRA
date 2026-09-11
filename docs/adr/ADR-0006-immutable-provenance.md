@@ -1,4 +1,4 @@
-# ADR-0006 — Immutable provenance run record
+# ADR-0006 · Immutable provenance run record
 
 **Status:** Accepted
 

@@ -1,4 +1,4 @@
-# CASE-2024-031 — Stale-base PR dropped a notebook and bundle resources
+# CASE-2024-031 · Stale-base PR dropped a notebook and bundle resources
 
 **Domain:** `orders` · **Relates to:** ADR-0002, ADR-0003
 

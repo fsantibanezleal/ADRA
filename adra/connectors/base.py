@@ -1,4 +1,4 @@
-"""Connector layer — one Protocol family so the engine runs against a real platform
+"""Connector layer: one Protocol family so the engine runs against a real platform
 (GitHub, Azure DevOps, Databricks, Azure) or the self-contained offline emulator,
 transparently. Read-only by default; every write is gated by ``allow_external`` and is
 meant to sit behind an explicit human confirmation in interactive use.

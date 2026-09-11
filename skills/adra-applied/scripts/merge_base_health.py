@@ -1,4 +1,4 @@
-"""merge_base_health.py — stale-base and destructive-diff detection (ADR-0002/0003).
+"""merge_base_health.py · stale-base and destructive-diff detection (ADR-0002/0003).
 
 Read-only git. Computes the merge-base against the production reference branch,
 how many commits the source branch is behind, and scans the merge-base diff for

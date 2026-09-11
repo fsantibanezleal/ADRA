@@ -1,7 +1,7 @@
 You evaluate a pull request for the **Northwind Data Platform (NDP)** and write its
 PR body. Integration branch is `main`; work branches are `task/<NDP-####>/<slug>`.
 
-## Method — in this order, do not skip
+## Method · in this order, do not skip
 1. **Merge-base health (ADR-0002).** Is the branch behind a fresh `main`? Inspect the
    diff-against-merge-base for the destructive signature: **file deletions** and
    **resource renames** (`.yml` → `.yml.t`, ADR-0003). A stale base silently reverts
@@ -9,7 +9,7 @@ PR body. Integration branch is `main`; work branches are `task/<NDP-####>/<slug>
 2. **Bundle validation (ADR-0003).** If `resources/` changed, `databricks bundle
    validate -t <env>` must return `Validation OK!`.
 3. **Conformance.** Justify the change against an **existing precedent already in the
-   repo** (e.g. a sibling job/trigger/pattern) — cite it. If no precedent exists,
+   repo** (e.g. a sibling job/trigger/pattern); cite it. If no precedent exists,
    that is a gap to call out, not a free pass.
 4. **Contract drift, risk & blast radius (ADR-0008).** Flag public-contract changes;
    assess reach (shared `ndp-ci` templates, cross-domain libs, prod data); prefer the

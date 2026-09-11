@@ -14,9 +14,9 @@ Landing: [security.md](./security.md).
 
 | Tool / connector | Behavior when off |
 |---|---|
-| `ci_tools.run_ci_command` | `ran=False, reason="external calls disabled (dry-run); pass allow_external=True"` — the CI command is **not executed** |
-| `bundle_tools.bundle_validate` | same — `databricks bundle validate` not run |
-| `sql_tools.sql_probe` | `ran=False` unless `allow_external` **and** a `warehouse_id` — replays a `fixture` if given, else returns the access preflight |
+| `ci_tools.run_ci_command` | `ran=False, reason="external calls disabled (dry-run); pass allow_external=True"`; the CI command is **not executed** |
+| `bundle_tools.bundle_validate` | same: `databricks bundle validate` not run |
+| `sql_tools.sql_probe` | `ran=False` unless `allow_external` **and** a `warehouse_id`; replays a `fixture` if given, else returns the access preflight |
 | `DatabricksData._guard` | rejects DDL/DML statements with `PermissionError` |
 | connector `_require_write()` | raises `PermissionError` on any write |
 
@@ -35,7 +35,7 @@ hallucinating model cannot turn a real blocker into an approval.
 
 High-impact agent actions must be gated (ToolEmu, Ruan 2023, `arXiv:2309.15817`): an agent reading
 untrusted content with standing write capability is the classic agentic-risk shape. ADRA inverts
-it — **read by default, act only on an explicit, confirmed opt-in** — so the dangerous capability is
+it: **read by default, act only on an explicit, confirmed opt-in**, so the dangerous capability is
 never the default.
 
 ## What this IS and is NOT
@@ -46,7 +46,7 @@ never the default.
 
 ## See also
 
-- [02_gated-writes.md](./02_gated-writes.md) — the write gates in detail.
-- [../methodologies/04_deterministic-first.md](../methodologies/04_deterministic-first.md) — why the
+- [02_gated-writes.md](./02_gated-writes.md) · the write gates in detail.
+- [../methodologies/04_deterministic-first.md](../methodologies/04_deterministic-first.md) · why the
   floor, not the model, carries the verdict.
-- [../guides/02_the-cli.md](../guides/02_the-cli.md) — `--external`.
+- [../guides/02_the-cli.md](../guides/02_the-cli.md) · `--external`.

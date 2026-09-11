@@ -1,4 +1,4 @@
-# ADR-0001 — Deterministic-first grounding
+# ADR-0001 · Deterministic-first grounding
 
 **Status:** Accepted
 
@@ -16,5 +16,5 @@ tool stands regardless of the model's opinion. The LLM only adds what tools cann
 ## Consequences
 - Verdicts carry evidence, not opinion; the offline path (mock provider) still produces a
   real adversarial outcome because the deterministic floor carries it.
-- The whole loop — and the test suite — runs with no API key.
+- The whole loop, and the test suite, runs with no API key.
 - New deterministic signal is added as a tool returning a typed `ToolResult`.

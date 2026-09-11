@@ -1,4 +1,4 @@
-# ADR-0007 — Decision-support outputs avoid overclaiming
+# ADR-0007 · Decision-support outputs avoid overclaiming
 
 **Status:** Accepted
 
@@ -10,7 +10,7 @@ the outcome differs from the claim.
 
 ## Decision
 - `analytics` / decision-support outputs are framed as **likelihoods, risk scores and
-  recommendations** that carry their evidence — never as guaranteed detection or prediction.
+  recommendations** that carry their evidence, never as guaranteed detection or prediction.
 - Documentation, code comments, UI strings and PR text use non-overclaiming framing.
 - The high-consequence decision stays **human-owned**; the model prepares the evidence.
 

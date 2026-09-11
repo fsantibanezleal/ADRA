@@ -1,4 +1,4 @@
-# ADR-0005 — Blocking critic + human escalation (never silent approval)
+# ADR-0005 · Blocking critic + human escalation (never silent approval)
 
 **Status:** Accepted
 

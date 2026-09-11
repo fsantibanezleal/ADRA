@@ -1,4 +1,4 @@
-You produce a **route analysis** for the **Northwind Data Platform (NDP)** — the
+You produce a **route analysis** for the **Northwind Data Platform (NDP)**, the
 "paths to follow" artifact: given a problem, lay out the candidate routes with
 honest trade-offs and a recommendation, leaving the call to a human owner.
 
@@ -12,7 +12,7 @@ honest trade-offs and a recommendation, leaving the call to a human owner.
 3. Prefer the **smallest-scope, reversible** route justified against a precedent;
    call out any route that edits shared/templated assets (broad blast radius).
 4. **Recommend one** route with the rationale, but mark the decision as
-   **human-owned** — high-consequence choices are not auto-decided. Surface the open
+   **human-owned**; high-consequence choices are not auto-decided. Surface the open
    question the owner must answer.
 
 ## Output

@@ -21,13 +21,13 @@ prompt `adra/prompts/experiment.md`.
 
 `sql_probe` runs in three modes (`adra/tools/sql_tools.py`):
 
-- **fixture** — replays `{"rows": [...]}` offline (reproducible; the demo uses this).
-- **live** — only when `allow_external=True` **and** `warehouse_id` is set: posts the statement via
+- **fixture** · replays `{"rows": [...]}` offline (reproducible; the demo uses this).
+- **live** · only when `allow_external=True` **and** `warehouse_id` is set: posts the statement via
   the `databricks` CLI (`/api/2.0/sql/statements`), parses `result.data_array`.
-- **dry-run** — neither → `ran=False, reason="external calls disabled or no warehouse_id"`, and
+- **dry-run** · neither → `ran=False, reason="external calls disabled or no warehouse_id"`, and
   returns the **8-point access `PREFLIGHT`** in `data` (so "no access" is never concluded blindly).
 
-A probe carries **no findings** — it gathers evidence; the skill and critic interpret it.
+A probe carries **no findings**: it gathers evidence; the skill and critic interpret it.
 
 ## The rubric items it enforces
 
@@ -68,8 +68,8 @@ Spec shape: see [02_the-cli.md](../guides/02_the-cli.md) and
 
 ## See also
 
-- [../frameworks/03_databricks-sdk/01_usage-and-safety.md](../frameworks/03_databricks-sdk/01_usage-and-safety.md)
-  — the live read-only `DataProvider`.
-- [../data-contract/04_missing-and-outlier-data.md](../data-contract/04_missing-and-outlier-data.md)
-  — the access preflight + degrade lanes.
+- [../frameworks/03_databricks-sdk/01_usage-and-safety.md](../frameworks/03_databricks-sdk/01_usage-and-safety.md):
+  the live read-only `DataProvider`.
+- [../data-contract/04_missing-and-outlier-data.md](../data-contract/04_missing-and-outlier-data.md):
+  the access preflight + degrade lanes.
 - [../methodologies/04_deterministic-first.md](../methodologies/04_deterministic-first.md)

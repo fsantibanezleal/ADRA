@@ -1,4 +1,4 @@
-"""provenance.py — append-only run record (ADR-0006).
+"""provenance.py · append-only run record (ADR-0006).
 
 Documentation is generated from this record, not from memory. The record captures
 the plan, the grounding evidence, the drafts, the critic rounds, and the decision.

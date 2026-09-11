@@ -132,14 +132,14 @@
 <circle cx="92.0" cy="750.0" r="13.4" fill="#DCFCE7" stroke="#15803D" stroke-width="1.8"/>
 <path d="M 85.6,750.6 L 90.1,755.1 L 99.0,744.9" fill="none" stroke="#166534" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="118" y="756.0" font-family="Calibri, Segoe UI, Arial" font-size="16" font-weight="700" fill="#0F172A">Accept</text>
-<text x="76" y="786" font-family="Calibri, Segoe UI, Arial" font-size="12" fill="#475569">Clean run — approve, evidence attached.</text>
+<text x="76" y="786" font-family="Calibri, Segoe UI, Arial" font-size="12" fill="#475569">Clean run: approve, evidence attached.</text>
 <rect x="461" y="726" width="360" height="104" rx="14" fill="#0F172A" opacity="0.06"/>
 <rect x="460" y="724" width="360" height="104" rx="14" fill="#FFFFFF" stroke="#BE185D" stroke-width="1.6"/>
 <rect x="460" y="724" width="6" height="104" rx="3" fill="#BE185D"/>
 <circle cx="492.0" cy="743.6" r="5.1" fill="#FBCFE8" stroke="#BE185D" stroke-width="1.4"/>
 <path d="M 482.4,760.88 a 9.6,9.6 0 0 1 19.2,0 z" fill="#FBCFE8" stroke="#BE185D" stroke-width="1.4"/>
 <text x="518" y="756.0" font-family="Calibri, Segoe UI, Arial" font-size="16" font-weight="700" fill="#0F172A">Escalate to human</text>
-<text x="476" y="786" font-family="Calibri, Segoe UI, Arial" font-size="12" fill="#475569">Unresolved blocker — hand back with evidence.</text>
+<text x="476" y="786" font-family="Calibri, Segoe UI, Arial" font-size="12" fill="#475569">Unresolved blocker: hand back with evidence.</text>
 <line x1="230" y1="700" x2="230" y2="722" stroke="#15803D" stroke-width="2.4" marker-end="url(#arrow_green)"/>
 <rect x="200.0" y="698.0" width="60" height="20" rx="10" fill="#FFFFFF" stroke="#15803D" stroke-width="1.0"/>
 <text x="230.0" y="712.0" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="600" fill="#166534" text-anchor="middle">clean</text>
@@ -156,7 +156,7 @@
 <line x1="1219.32" y1="281.12" x2="1226.712" y2="281.12" stroke="#475569" stroke-width="1.2" opacity="0.7"/>
 <line x1="1219.32" y1="284.96" x2="1224.696" y2="284.96" stroke="#475569" stroke-width="1.2" opacity="0.7"/>
 <text x="1253" y="282.5" font-family="Calibri, Segoe UI, Arial" font-size="17" font-weight="700" fill="#0F172A">Provenance</text>
-<text x="1211" y="312" font-family="Calibri, Segoe UI, Arial" font-size="12" fill="#475569">Immutable run record —</text>
+<text x="1211" y="312" font-family="Calibri, Segoe UI, Arial" font-size="12" fill="#475569">Immutable run record:</text>
 <text x="1211" y="329" font-family="Calibri, Segoe UI, Arial" font-size="12" fill="#475569">plan, grounding, drafts,</text>
 <text x="1211" y="346" font-family="Calibri, Segoe UI, Arial" font-size="12" fill="#475569">critic rounds, decision.</text>
 <text x="1211" y="363" font-family="Calibri, Segoe UI, Arial" font-size="12" fill="#475569">Documentation is generated</text>

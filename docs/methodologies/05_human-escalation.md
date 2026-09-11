@@ -32,14 +32,14 @@ High-consequence actions are never autonomous:
 The `decide` skill is the explicit formalization of this: it produces a routes table scored on
 **effort · blast radius · reversibility · risk · precedent**, a recommendation, and an explicit
 **human-owned** decision (see [../use-cases/06_decide.md](../use-cases/06_decide.md)). The judge
-reinforces it too — a verdict that is **not stable under position swap** routes to escalation
+reinforces it too: a verdict that is **not stable under position swap** routes to escalation
 rather than an arbitrary pick (ADR-0005; see [02_llm-as-judge.md](./02_llm-as-judge.md)).
 
 ## Why (the governance basis)
 
 | Principle | Source | In ADRA |
 |---|---|---|
-| Govern / map / measure / **manage** AI risk; keep humans in control of high-consequence calls | **NIST AI RMF — GenAI Profile** (`AI 600-1`, 2024) | the human gates above; provenance for every run |
+| Govern / map / measure / **manage** AI risk; keep humans in control of high-consequence calls | **NIST AI RMF: GenAI Profile** (`AI 600-1`, 2024) | the human gates above; provenance for every run |
 | High-impact agent actions must be **gated** (dry-run by default) | **ToolEmu** (Ruan 2023, `arXiv:2309.15817`) | writes require `--external` + confirmation |
 | Use **decision support**, not black-box event "detection", for high-stakes calls | **Rudin 2019** (`arXiv:1811.10154`) | the `overclaim_language` rubric item; `decide` is human-owned |
 
@@ -61,7 +61,7 @@ NIST AI RMF GenAI Profile (`AI 600-1`) · ToolEmu (Ruan 2023, `arXiv:2309.15817`
 
 ## See also
 
-- [01_adversarial-spine.md](./01_adversarial-spine.md) — the loop that escalates.
-- [../use-cases/06_decide.md](../use-cases/06_decide.md) — the human-owned route-analysis skill.
-- [../security/security.md](../security/security.md) — the gated-write posture.
+- [01_adversarial-spine.md](./01_adversarial-spine.md): the loop that escalates.
+- [../use-cases/06_decide.md](../use-cases/06_decide.md): the human-owned route-analysis skill.
+- [../security/security.md](../security/security.md): the gated-write posture.
 - [../adr/ADR-0005-blocking-critic-and-escalation.md](../adr/ADR-0005-blocking-critic-and-escalation.md)

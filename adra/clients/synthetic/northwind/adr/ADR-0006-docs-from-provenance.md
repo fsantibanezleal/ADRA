@@ -1,4 +1,4 @@
-# ADR-0006 — Documentation is generated from provenance
+# ADR-0006 · Documentation is generated from provenance
 
 **Status:** Accepted
 

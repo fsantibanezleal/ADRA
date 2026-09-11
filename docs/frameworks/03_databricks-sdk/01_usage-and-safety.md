@@ -1,4 +1,4 @@
-# databricks-sdk — usage & safety
+# databricks-sdk · usage & safety
 
 `adra/connectors/databricks.py` defines `DatabricksData`, a read-only `DataProvider` over the
 Databricks SQL **Statement Execution API**.
@@ -37,7 +37,7 @@ message), and maps the response with `_to_table` (schema column names + `result.
 ADRA never writes to the warehouse. Two layers enforce it (ADR-0008 / security doctrine):
 
 1. **Grant-level (recommended, deterministic):** back the connector with a **SELECT-only service
-   principal**. This is the real boundary — RBAC, not agent logic.
+   principal**. This is the real boundary: RBAC, not agent logic.
 2. **In-loop guard (defence in depth):** `_guard` rejects statements whose first token is in
    `_FORBIDDEN_PREFIXES` (`insert, update, delete, merge, drop, truncate, alter, create, replace,
    grant, revoke, copy, call, use`) with a `PermissionError`, unless `allow_external=True` (a
@@ -49,10 +49,10 @@ ADRA never writes to the warehouse. Two layers enforce it (ADR-0008 / security d
   `experiment` loop) shells to the `databricks` CLI or replays a fixture and encodes the 8-point
   access `PREFLIGHT` (so "no access" is never concluded without exhausting profile/warehouse/grants).
   `DatabricksData` is the live SDK-based `DataProvider`. Same read-only posture, different layer.
-- **Warehouse, not cluster.** Probes run on a SQL warehouse — no interactive cluster spin-up.
+- **Warehouse, not cluster.** Probes run on a SQL warehouse, no interactive cluster spin-up.
 - **`wait_timeout` default `30s`** bounds a probe; a long query returns a failed/timed state, not a
   hang.
-- **Missing dep / creds / warehouse all raise clearly** — never an opaque error.
+- **Missing dep / creds / warehouse all raise clearly**, never an opaque error.
 
 ## What this IS and is NOT
 
@@ -61,8 +61,8 @@ ADRA never writes to the warehouse. Two layers enforce it (ADR-0008 / security d
 
 ## See also
 
-- [../../use-cases/03_experiment.md](../../use-cases/03_experiment.md) — the experiment skill.
-- [../05_stdlib-emulator/05_stdlib-emulator.md](../05_stdlib-emulator/05_stdlib-emulator.md) — the
+- [../../use-cases/03_experiment.md](../../use-cases/03_experiment.md) · the experiment skill.
+- [../05_stdlib-emulator/05_stdlib-emulator.md](../05_stdlib-emulator/05_stdlib-emulator.md) · the
   offline SQLite warehouse (`EmulatorData`) that runs the same probes with no Databricks.
 - [../../data-contract/04_missing-and-outlier-data.md](../../data-contract/04_missing-and-outlier-data.md)
-  — the access preflight and degrade lanes.
+  · the access preflight and degrade lanes.

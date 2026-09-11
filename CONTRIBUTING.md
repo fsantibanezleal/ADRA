@@ -36,6 +36,9 @@ This project uses a three-level branch flow:
 - User-facing UI strings may be localized (bilingual where the product is bilingual).
 - Match the style of the surrounding code (naming, formatting, comment density).
 - Add or update tests and documentation alongside the change.
+- No em-dashes and no emoji in tracked content (ADR-0067); `python scripts/check_content.py` is the guard
+  and it runs in the test suite. Directional arrows in Markdown prose are listed for review and must be
+  notation (a pipeline, a rename, a mapping), never a stand-in for a word.
 
 ## Local setup
 

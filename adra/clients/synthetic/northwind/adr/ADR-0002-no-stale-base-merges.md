@@ -1,11 +1,11 @@
-# ADR-0002 — No stale-base merges (merge-base health)
+# ADR-0002 · No stale-base merges (merge-base health)
 
 **Status:** Accepted
 
 ## Context
 A pull request whose branch is based on an outdated `main` can, on merge, silently
-revert or delete work that landed in the meantime — including notebooks and bundle
-resources — because its diff is computed against an old base.
+revert or delete work that landed in the meantime, including notebooks and bundle
+resources, because its diff is computed against an old base.
 
 ## Decision
 - Every PR is checked for **merge-base health**: compute the merge-base and the

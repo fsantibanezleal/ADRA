@@ -1,6 +1,6 @@
 # Capabilities (moved)
 
-> Reorganized into the **use-cases/** theme folder per the docs standard — one deep page per skill.
+> Reorganized into the **use-cases/** theme folder per the docs standard: one deep page per skill.
 
 Go to **[use-cases/use-cases.md](./use-cases/use-cases.md)**:
 
