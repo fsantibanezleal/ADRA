@@ -1,4 +1,4 @@
-# ADR-0005 — Experiments run on the shared SQL warehouse; 8-point access preflight
+# ADR-0005 · Experiments run on the shared SQL warehouse; 8-point access preflight
 
 **Status:** Accepted
 

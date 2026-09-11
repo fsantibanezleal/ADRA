@@ -1,8 +1,8 @@
 <!-- Experiment synthesis page. File name: v0X-synthesis.md. Integrates every
      dimension, recommends, lists pending items, links the PR. Mark superseded
-     recommendations as superseded — do not delete them. English on disk. -->
+     recommendations as superseded; do not delete them. English on disk. -->
 
-# v0X — Synthesis and recommendation
+# v0X · Synthesis and recommendation
 
 > Result (current version): <one-line actionable result>
 

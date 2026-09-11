@@ -1,4 +1,4 @@
-# ADR-0004 — Test discovery is `test*.py`; product logic must be importable
+# ADR-0004 · Test discovery is `test*.py`; product logic must be importable
 
 **Status:** Accepted
 
@@ -9,7 +9,7 @@ logic that lives only inside notebooks (excluded from coverage and not importabl
 
 ## Decision
 - Test files **must match `test*.py`** (prefix). A `*_test.py` (suffix) file is never
-  collected — it is dead code and must be renamed or removed.
+  collected; it is dead code and must be renamed or removed.
 - A test directory must contain `__init__.py` to be recursed into.
 - Product logic that needs coverage must live in **importable, non-notebook** modules
   (plain `.py` outside `tests/`).

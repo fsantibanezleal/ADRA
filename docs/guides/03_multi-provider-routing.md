@@ -1,7 +1,7 @@
 # 03 · Connecting a provider & per-role routing
 
 The deterministic loop runs offline with no key. Connecting a provider adds the **semantic layer**
-on top (semantic findings, richer prose) — it never overturns a deterministic blocker. Providers
+on top (semantic findings, richer prose); it never overturns a deterministic blocker. Providers
 are pydantic-ai behind ADRA's `ChatModel` seam (see
 [../frameworks/01_pydantic-ai/01_pydantic-ai.md](../frameworks/01_pydantic-ai/01_pydantic-ai.md)).
 
@@ -12,7 +12,7 @@ Read order: 02 → **03** → 04. Landing: [guides.md](./guides.md).
 ```bash
 pip install -e ".[anthropic]"        # or adra[llm] / adra[all]
 export ADRA_PROVIDER=anthropic
-export ANTHROPIC_API_KEY=...         # BYOK — read from the env, never stored by ADRA, never logged
+export ANTHROPIC_API_KEY=...         # BYOK: read from the env, never stored by ADRA, never logged
 # optional model pin (defaults per provider otherwise):
 export ADRA_MODEL=claude-haiku-4-5
 ```
@@ -31,7 +31,7 @@ Anthropic model ids are bare: `claude-haiku-4-5`, `claude-sonnet-4-6`, `claude-o
 
 ## Per-role routing (one run, multiple providers)
 
-ADRA resolves a model **per flow role** — `plan`, `generate`, `critic`, `judge` — so a single run
+ADRA resolves a model **per flow role** (`plan`, `generate`, `critic`, `judge`), so a single run
 can orchestrate across providers. The canonical pattern is a strong model for the
 critic/judge and a cheaper/faster one for generation:
 
@@ -55,7 +55,7 @@ advisory (the critic enforces), so a cheaper model is fine.
 export ADRA_PROVIDER=ollama          # default base http://localhost:11434/v1, model llama3.1
 ```
 
-No key needed — runs against your local server, fully offline-capable.
+No key needed: runs against your local server, fully offline-capable.
 
 ## What this IS and is NOT
 
@@ -67,6 +67,6 @@ No key needed — runs against your local server, fully offline-capable.
 ## See also
 
 - [../frameworks/01_pydantic-ai/01_pydantic-ai.md](../frameworks/01_pydantic-ai/01_pydantic-ai.md)
-- [../methodologies/02_llm-as-judge.md](../methodologies/02_llm-as-judge.md) — why route a strong
+- [../methodologies/02_llm-as-judge.md](../methodologies/02_llm-as-judge.md) · why route a strong
   model to the judge.
-- [04_retarget-a-client.md](./04_retarget-a-client.md) — ground on your standards.
+- [04_retarget-a-client.md](./04_retarget-a-client.md) · ground on your standards.

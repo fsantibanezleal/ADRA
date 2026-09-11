@@ -1,4 +1,4 @@
-# Workflow — the loop, the tools, and the Review phase
+# Workflow · the loop, the tools, and the Review phase
 
 ## Contents
 
@@ -59,20 +59,20 @@ any outward action.
 1. **Resolve** the target (`resolve_target.py`): repo, host, production reference
    branch, source/target, diff, exact CI command.
 2. **Ground**, in this order (the first is the destructive failure mode):
-   - `merge_base_health.py` — if behind, require rebase/recreate; if deletions or
+   - `merge_base_health.py`: if behind, require rebase/recreate; if deletions or
      `.yml`→`.yml.t` renames, block until confirmed.
-   - `bundle_validate.py` — only if the diff touches `resources/`; require
+   - `bundle_validate.py`: only if the diff touches `resources/`; require
      `Validation OK!`.
-   - `run_ci.py` — reproduce the **exact** CI command; block on non-zero exit,
+   - `run_ci.py`: reproduce the **exact** CI command; block on non-zero exit,
      `Ran 0 tests`, or "No data was collected"; note coverage vs the gate.
-   - test discovery — `test*.py` prefix, `__init__.py` present, coverable logic in
+   - test discovery: `test*.py` prefix, `__init__.py` present, coverable logic in
      importable non-notebook modules.
-   - `lang_scan.py` — over the diff and any drafted text.
+   - `lang_scan.py`: over the diff and any drafted text.
 3. **Generate** the review. Read the grounding first and reference it; do not
    re-derive it. Add only what the tools cannot settle: swallowed errors, contract
    drift, hidden coupling/concurrency, minimum-functional violations, and (for
    geoscience) risk-pattern framing. For any "this is dead code" claim, cite the
-   proof (not collected by discovery, unreferenced) — do not assert it.
+   proof (not collected by discovery, unreferenced); do not assert it.
 4. **Critic + verdict.** Apply [rubric.md](rubric.md). Any blocker → **changes
    requested**. A clean run → **approve**, with the evidence attached.
 5. **Output.** A review with a deterministic-findings section and a semantic
@@ -90,7 +90,7 @@ contains secrets. The Document phase generates pages from it.
 
 ## Escalation
 
-Stop and hand back to a human — with the evidence and a recommendation — when a
+Stop and hand back to a human, with the evidence and a recommendation, when a
 blocker cannot be resolved, access still fails after the full preflight, a
 conclusion would exceed the evidence, or an outward action needs approval. Do not
 fabricate a pass.

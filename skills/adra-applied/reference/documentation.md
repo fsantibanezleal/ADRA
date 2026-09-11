@@ -1,4 +1,4 @@
-# Documentation — generated from provenance
+# Documentation · generated from provenance
 
 Author documentation from the run record, not from memory (ADR-0006). Cite
 evidence files and commit-pinned links. Everything English on disk / code / paths;
@@ -25,15 +25,15 @@ geoscience uses risk-pattern framing (ADR-0007).
 
 Use the templates in `assets/`:
 
-- `experiment_parent_template.md` — the dated parent page: work-item link,
+- `experiment_parent_template.md`: the dated parent page: work-item link,
   context, test-environment setup, the ranked hypothesis table, the iteration
   itinerary (one row per `vNN`, status), design-decisions table, non-goals, status
   + PR, references, metadata.
-- `experiment_version_template.md` — one per `vNN` step: opens with a "Closes: …"
+- `experiment_version_template.md`: one per `vNN` step: opens with a "Closes: …"
   line, one probe, tables/SVG, a link to the next.
-- `experiment_synthesis_template.md` — the closing synthesis: integrate all
+- `experiment_synthesis_template.md`: the closing synthesis: integrate all
   dimensions, an actionable recommendation, pending items, and the PR. Mark any
-  superseded recommendation as superseded — do not delete it.
+  superseded recommendation as superseded; do not delete it.
 
 Folder layout: a dated top page `YYYYMMDD-<slug>.md` plus a sibling folder
 `YYYYMMDD-<slug>/` with the same name; sub-pages use clean `vNN-` slugs and never
@@ -73,7 +73,7 @@ Before closing a PR that makes docs stale, produce:
   show the diff (`git diff --no-index`); wait for explicit approval; apply onto the
   wiki; review `git status`/`git diff` again; `git add <specific files>` (never
   `git add .` or `-A`); confirm the commit identity is the expected one; confirm
-  the push; then `git commit` + `git push`. Never auto-push a shared wiki — a
+  the push; then `git commit` + `git push`. Never auto-push a shared wiki: a
   mistake there is visible to every product.
 
 Run `scripts/lang_scan.py` over every page before it is staged.

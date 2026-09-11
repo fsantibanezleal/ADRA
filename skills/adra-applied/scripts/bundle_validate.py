@@ -1,4 +1,4 @@
-"""bundle_validate.py — Databricks Asset Bundle validation (ADR-0003).
+"""bundle_validate.py · Databricks Asset Bundle validation (ADR-0003).
 
 Runs `databricks bundle validate -t <env>` from the repo root. The validate is
 read-only, but reaching a live workspace requires --allow-external.

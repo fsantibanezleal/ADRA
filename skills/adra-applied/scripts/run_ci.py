@@ -1,4 +1,4 @@
-"""run_ci.py — reproduce the EXACT CI command (ADR-0001/0004).
+"""run_ci.py · reproduce the EXACT CI command (ADR-0001/0004).
 
 Runs the repository's exact CI command (never an approximation) and parses the
 test count, the "no data collected" signal, and the coverage percentage.

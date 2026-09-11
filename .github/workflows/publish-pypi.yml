@@ -1,6 +1,6 @@
 name: Publish to PyPI
 
-# ADR-0061 — Trusted Publishing (OIDC): no API token is stored anywhere.
+# ADR-0061 · Trusted Publishing (OIDC): no API token is stored anywhere.
 # One-time human step: configure the PyPI pending publisher for
 #   project=adra · owner=fsantibanezleal · repo=ADRA · workflow=publish-pypi.yml · environment=pypi
 # Then publishing a GitHub Release (tag vX.XX.XXX) builds + publishes automatically.

@@ -1,7 +1,7 @@
 # 01 · Install & run
 
 ADRA is `pip install adra` (Python ≥ 3.11, Apache-2.0). The **engine core has no required
-third-party dependencies** — it runs offline on the standard library via the deterministic `mock`
+third-party dependencies**: it runs offline on the standard library via the deterministic `mock`
 provider. Real providers and platform connectors are opt-in extras.
 
 Read order: **01** → 02. Landing: [guides.md](./guides.md).
@@ -18,7 +18,7 @@ python scripts/demo_offline.py                        # all six skills, determin
 Expected from the demo: the stale-base PR is **blocked + escalated**; the language/leak review is
 **blocked**; the clean experiment / improve / document / decide runs are **accepted**.
 
-> Use a local `.venv` — never a global interpreter (project convention; isolated environments).
+> Use a local `.venv`, never a global interpreter (project convention; isolated environments).
 
 ## Extras (only what you use)
 
@@ -77,4 +77,4 @@ print(state.decision)            # "accepted" | "escalate"
 ## See also
 
 - [02_the-cli.md](./02_the-cli.md) · [03_multi-provider-routing.md](./03_multi-provider-routing.md)
-- [05_local-scripts.md](./05_local-scripts.md) — the `scripts/` and `.env` workflow.
+- [05_local-scripts.md](./05_local-scripts.md) · the `scripts/` and `.env` workflow.

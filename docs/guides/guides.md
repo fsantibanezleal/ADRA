@@ -1,20 +1,20 @@
 # Guides
 
-How to **use the ADRA engine on your own repos and data** — install, the CLI, connecting a
+How to **use the ADRA engine on your own repos and data**: install, the CLI, connecting a
 provider and routing per role, pointing the engine at another client's governance, and the local
 scripts.
 
 ## Read in order
 
-1. [01_install-and-run.md](./01_install-and-run.md) — `pip install adra`, the offline quickstart,
+1. [01_install-and-run.md](./01_install-and-run.md) · `pip install adra`, the offline quickstart,
    the full env-var config table, programmatic use.
-2. [02_the-cli.md](./02_the-cli.md) — every command: `review` · `pr-eval` · `experiment` ·
+2. [02_the-cli.md](./02_the-cli.md) · every command: `review` · `pr-eval` · `experiment` ·
    `improve` · `document` · `decide` · `github-review` · `emu`, with `--external`.
-3. [03_multi-provider-routing.md](./03_multi-provider-routing.md) — connect a provider, BYOK,
+3. [03_multi-provider-routing.md](./03_multi-provider-routing.md) · connect a provider, BYOK,
    per-role routing, the OpenAI-compatible long tail, local Ollama.
-4. [04_retarget-a-client.md](./04_retarget-a-client.md) — `ADRA_CLIENT_DIR`: ground the engine on
+4. [04_retarget-a-client.md](./04_retarget-a-client.md) · `ADRA_CLIENT_DIR`: ground the engine on
    any client's governance suite (no code change).
-5. [05_local-scripts.md](./05_local-scripts.md) — `scripts/` (demo, setup, test, per-skill runners)
+5. [05_local-scripts.md](./05_local-scripts.md) · `scripts/` (demo, setup, test, per-skill runners)
    and the `.env` workflow.
 
 ## The 30-second version
@@ -35,7 +35,7 @@ export ADRA_PROVIDER=anthropic ANTHROPIC_API_KEY=...
 adra github-review owner/repo 42 --skill pr_eval      # read-only by default
 ```
 
-## Using ADRA on OTHER data — the three levers
+## Using ADRA on OTHER data · the three levers
 
 | You want to… | Lever | Page |
 |---|---|---|
@@ -52,8 +52,8 @@ real write also needs explicit confirmation. See [../security/security.md](../se
 
 ## See also
 
-- [../use-cases/use-cases.md](../use-cases/use-cases.md) — what each skill does, in depth.
-- [../frameworks/frameworks.md](../frameworks/frameworks.md) — the extras the connectors/providers
+- [../use-cases/use-cases.md](../use-cases/use-cases.md) · what each skill does, in depth.
+- [../frameworks/frameworks.md](../frameworks/frameworks.md) · the extras the connectors/providers
   need.
-- [../data-contract/data-contract.md](../data-contract/data-contract.md) — the exact intake shapes
+- [../data-contract/data-contract.md](../data-contract/data-contract.md) · the exact intake shapes
   the CLI builds.

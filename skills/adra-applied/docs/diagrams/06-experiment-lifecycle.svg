@@ -69,7 +69,7 @@
 <circle cx="384.0" cy="440.7" r="1.1" fill="#92400E"/>
 <text x="410" y="439.0" font-family="Calibri, Segoe UI, Arial" font-size="13" fill="#92400E">8-point access preflight before ever concluding 'no access' (profile · warehouse · grants); raw rows persisted as evidence.</text>
 <line x1="1095" y1="402" x2="1095" y2="372" stroke="#B45309" stroke-width="2.4" marker-end="url(#arrow_amber)"/>
-<text x="60" y="540" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#475569" text-anchor="start">PUBLISH — two-phase gate (never auto-push a shared wiki)</text>
+<text x="60" y="540" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#475569" text-anchor="start">PUBLISH · two-phase gate (never auto-push a shared wiki)</text>
 <rect x="60" y="560" width="270" height="40" rx="20.0" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.2"/>
 <text x="195.0" y="586.4" font-family="Calibri, Segoe UI, Arial" font-size="16" font-weight="700" fill="#0F766E" text-anchor="middle">draft (writable)</text>
 <line x1="330" y1="580" x2="360" y2="580" stroke="#475569" stroke-width="2.0" marker-end="url(#arrow_slate)"/>

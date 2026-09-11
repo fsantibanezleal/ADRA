@@ -2,7 +2,7 @@
 
 Every ADRA run writes one immutable, JSON-serializable `RunRecord` to `runs/<run_id>.json`
 (`adra/provenance.py`). It is the **deep change-history / evidence layer**: every step's inputs,
-the tool evidence, the critic verdicts, the decision, and the artifacts — all traceable to one
+the tool evidence, the critic verdicts, the decision, and the artifacts, all traceable to one
 auditable artifact (ADR-0006). The `document` skill renders it into the human history layers.
 
 Landing: [data-contract.md](./data-contract.md).
@@ -36,7 +36,7 @@ critic_passes=N | last_clean=…`).
 | `plan` | `plan` | the plan + resolved plan model id |
 | `ground` | `ground` | each tool's `log_dict()` (findings + summarized data) |
 | `generate` | `generate` | a clipped draft preview + generate model id |
-| `critic` | `critic` | the `CriticVerdict` (clean/blocking/attacks_tried/notes) + critic model id — **one per pass** |
+| `critic` | `critic` | the `CriticVerdict` (clean/blocking/attacks_tried/notes) + critic model id; **one per pass** |
 | `revise` | `revise` | round number + clipped draft preview (one per revise round) |
 | `decide` | `decide` | the final `decision` |
 
@@ -53,14 +53,14 @@ while keeping every finding.
 | `CriticVerdict` | `clean, blocking, attacks_tried, notes`; `.messages` |
 | `RunState` | `skill, intake, plan, grounding, draft, findings, critic_history, rounds, decision, artifacts` |
 
-The `RunRecord` mirrors `RunState` as the append-only, on-disk log — `RunState` is the mutable
+The `RunRecord` mirrors `RunState` as the append-only, on-disk log: `RunState` is the mutable
 in-memory thread; `RunRecord` is the immutable persisted history.
 
 ## Why immutable / why it matters
 
 Append-only provenance is the audit trail (internal-algorithmic-auditing + model-card practice;
-W3C PROV — see [../../refs/README.md](../../refs/README.md) §6). Because every verdict carries its
-tool evidence in this record, a run is **replayable and defensible** — the second-method proof is
+W3C PROV; see [../../refs/README.md](../../refs/README.md) §6). Because every verdict carries its
+tool evidence in this record, a run is **replayable and defensible**: the second-method proof is
 on disk, not in the model's prose. The `document` skill turns the record into PR/experiment/
 methodology pages (see [../use-cases/05_document.md](../use-cases/05_document.md)).
 
@@ -73,7 +73,7 @@ methodology pages (see [../use-cases/05_document.md](../use-cases/05_document.md
 
 ## See also
 
-- [../architecture/03_data-flow.md](../architecture/03_data-flow.md) — the contracts that flow into
+- [../architecture/03_data-flow.md](../architecture/03_data-flow.md): the contracts that flow into
   the record.
-- [../use-cases/05_document.md](../use-cases/05_document.md) — rendering the record to docs.
+- [../use-cases/05_document.md](../use-cases/05_document.md): rendering the record to docs.
 - [../adr/ADR-0006-immutable-provenance.md](../adr/ADR-0006-immutable-provenance.md)

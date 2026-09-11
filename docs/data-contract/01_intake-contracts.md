@@ -11,7 +11,7 @@ Landing: [data-contract.md](./data-contract.md).
 
 | Key | Req | Type | Meaning |
 |---|---|---|---|
-| `diff` | ✅ | str | unified diff / patch text (`+++ b/<path>` lines drive `added_paths`) |
+| `diff` | yes | str | unified diff / patch text (`+++ b/<path>` lines drive `added_paths`) |
 | `ci_command` | – | str | the **exact** CI command to reproduce |
 | `ci_fixture` | – | `{stdout, returncode}` | replay a captured CI result offline |
 
@@ -19,7 +19,7 @@ Landing: [data-contract.md](./data-contract.md).
 
 | Key | Req | Type | Meaning |
 |---|---|---|---|
-| `source_branch` | ✅ | str | branch under review (default `HEAD`) |
+| `source_branch` | yes | str | branch under review (default `HEAD`) |
 | `target_branch` | – | str | integration branch (default `develop`) |
 | `objective` | – | str | PR objective (fills the body) |
 | `git_fixture` | – | `{behind:int, deletions:[str], renames:[str]}` | replay merge-base health offline |
@@ -34,8 +34,8 @@ Landing: [data-contract.md](./data-contract.md).
 |---|---|---|---|
 | `slug` | – | str | artifact base name (default `experiment`) |
 | `warehouse_id` | – | str | SQL warehouse id (required for live execution) |
-| `probes` | ✅ | `[{sql, profile, fixture?}]` | one probe per entry |
-| &nbsp;&nbsp;`probes[].sql` | ✅ | str | the SQL statement |
+| `probes` | yes | `[{sql, profile, fixture?}]` | one probe per entry |
+| &nbsp;&nbsp;`probes[].sql` | yes | str | the SQL statement |
 | &nbsp;&nbsp;`probes[].profile` | – | str | `prod` / `dev` (default `prod`) |
 | &nbsp;&nbsp;`probes[].fixture` | – | `{rows:[[...]]}` | replay rows offline |
 
@@ -43,7 +43,7 @@ Landing: [data-contract.md](./data-contract.md).
 
 | Key | Req | Type | Meaning |
 |---|---|---|---|
-| `context` | ✅ | str | what to improve (also scanned for language/leak) |
+| `context` | yes | str | what to improve (also scanned for language/leak) |
 
 ## `document`
 
@@ -58,8 +58,8 @@ Landing: [data-contract.md](./data-contract.md).
 
 | Key | Req | Type | Meaning |
 |---|---|---|---|
-| `problem` | ✅ | str | the decision to make (also scanned) |
-| `routes` | ✅ | `[str]` | candidate routes (≥1) |
+| `problem` | yes | str | the decision to make (also scanned) |
+| `routes` | yes | `[str]` | candidate routes (≥1) |
 
 ## How the CLI / connectors build intakes
 
@@ -74,16 +74,16 @@ Landing: [data-contract.md](./data-contract.md).
 - `behind` is an integer **commit count**.
 - `returncode` is a process exit code (`0` = ok).
 - All text is expected **English** (the language scan flags Spanish + AI-leak).
-- `fixture` keys make any tool reproducible offline without changing its decision logic — see
+- `fixture` keys make any tool reproducible offline without changing its decision logic; see
   [04_missing-and-outlier-data.md](./04_missing-and-outlier-data.md).
 
 ## What this IS and is NOT
 
 - **IS** the precise, code-verified key set each skill reads.
-- **IS NOT** a rigid schema object — intake is an open dict; unknown keys are ignored, missing
+- **IS NOT** a rigid schema object: intake is an open dict; unknown keys are ignored, missing
   optional keys degrade (not crash).
 
 ## See also
 
-- [02_connector-shapes.md](./02_connector-shapes.md) — where `PullRequest` → intake.
-- [../use-cases/use-cases.md](../use-cases/use-cases.md) — what each skill does with the intake.
+- [02_connector-shapes.md](./02_connector-shapes.md): where `PullRequest` → intake.
+- [../use-cases/use-cases.md](../use-cases/use-cases.md): what each skill does with the intake.

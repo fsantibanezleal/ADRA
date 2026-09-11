@@ -1,4 +1,4 @@
-"""ADRA — Adversarial Dev Review Agent.
+"""ADRA · Adversarial Dev Review Agent.
 
 A client-agnostic, deterministic-first, adversarial-validation engine that supports the
 software lifecycle. It formalizes six capabilities a team runs informally under
@@ -33,4 +33,4 @@ __all__ = [
     "RunState",
 ]
 
-__version__ = "0.4.0"  # PEP 440 package version; display/tag version is v0.04.000 (see VERSION)
+__version__ = "0.4.1"  # PEP 440 package version; display/tag version is v0.04.001 (see VERSION)

@@ -1,6 +1,6 @@
 """The adversarial critic (blocking).
 
-The formalization of "don't infer — diagnose". The critic *attacks* the draft, not
+The formalization of "don't infer, diagnose". The critic *attacks* the draft, not
 approves it. It runs a deterministic red-team pass first (the hard floor), then an
 LLM pass for the semantic criteria. Both passes are driven by the **same shared
 rubric** (:mod:`adra.rubric`), so "what we check" never diverges between code and
@@ -83,7 +83,7 @@ def llm_critique(model: ChatModel, system: str, state: RunState) -> tuple[list[F
     """Ask the model for semantic attacks the deterministic pass cannot encode.
 
     Returns:
-        ``(findings, notes)`` — findings are MAJOR semantic issues the model raised.
+        ``(findings, notes)``: findings are MAJOR semantic issues the model raised.
     """
     user = (
         "Adversarially review this draft against the criteria. Try to BREAK it. "

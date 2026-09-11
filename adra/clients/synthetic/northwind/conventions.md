@@ -9,7 +9,7 @@
   `adr/ADR-0006`.
 
 ## Naming
-- Catalogs: `<env>_<domain>_<subdomain>` — e.g. `prod_orders_fulfilment`. `env` ∈
+- Catalogs: `<env>_<domain>_<subdomain>`, e.g. `prod_orders_fulfilment`. `env` ∈
   `dev` / `preprod` / `prod`.
 - Schemas follow the medallion split: `landing` / `trusted` / `refined`.
 - DAB resource files: `bundle.resources.<kind>.yml` and they **stay `.yml`** (see
@@ -42,5 +42,5 @@ PR description uses these sections, in order:
 
 ## Decision-support framing
 `analytics` products are **decision support**: outputs are *forecasts, risk scores and
-recommendations* with their evidence — never claims to "guarantee", "prevent",
+recommendations* with their evidence, never claims to "guarantee", "prevent",
 "detect" or "predict" an outcome (see `adr/ADR-0007`).

@@ -14,8 +14,8 @@ prompt `adra/prompts/improve.md`.
 | **Input** (intake) | `context` (what to improve, as text) |
 | **plan** | declares tool: `lang_scan` |
 | **ground** (deterministic) | `lang_tools.scan_language(context)` |
-| **generate** | model returns `{proposal, rationale, minimal_change, dead_code_removed:[…], validation_command}` — justify every kept element; drop anything that doesn't change a CI result |
-| **output** | `proposal.md` — Proposal / Rationale (minimum functional) / Minimal change / Dead code removed / Validation command |
+| **generate** | model returns `{proposal, rationale, minimal_change, dead_code_removed:[…], validation_command}`: justify every kept element; drop anything that doesn't change a CI result |
+| **output** | `proposal.md`: Proposal / Rationale (minimum functional) / Minimal change / Dead code removed / Validation command |
 
 ## The rubric items it enforces
 
@@ -49,6 +49,6 @@ adra improve "Remove a redundant test file CI never collects."
 
 ## See also
 
-- [01_code-review.md](./01_code-review.md) — shares `minimum_functional` / `convention_conformance`.
-- [../methodologies/03_shared-rubric.md](../methodologies/03_shared-rubric.md) — the rubric.
+- [01_code-review.md](./01_code-review.md): shares `minimum_functional` / `convention_conformance`.
+- [../methodologies/03_shared-rubric.md](../methodologies/03_shared-rubric.md): the rubric.
 - [../data-contract/01_intake-contracts.md](../data-contract/01_intake-contracts.md)

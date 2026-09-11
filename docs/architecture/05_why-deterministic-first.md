@@ -1,7 +1,7 @@
 # 05 · Why deterministic-first
 
 The defining architectural choice (ADR-0001): deterministic tools run **before** the LLM and
-carry the verdict. This page is the theory behind it — the failure modes it closes and what it
+carry the verdict. This page is the theory behind it: the failure modes it closes and what it
 buys.
 
 Read order: 04 → **05**. Landing: [architecture.md](./architecture.md).
@@ -11,13 +11,13 @@ Read order: 04 → **05**. Landing: [architecture.md](./architecture.md).
 The AI-code-review space splits in two, and both miss the same spot:
 
 - **Reviewers** (CodeRabbit, Greptile, Qodo, Korbit, Sourcery, Bito) feed linters into an LLM,
-  but **the model's prose is the verdict** — hallucinated and "consistently-stated-but-false"
+  but **the model's prose is the verdict**: hallucinated and "consistently-stated-but-false"
   findings leak through; the deterministic signals are inputs, never the gate.
 - **Autonomous coders** (Devin, OpenHands, SWE-agent, Sweep) *write* code and treat "tests pass"
   as success rather than adversarially trying to prove the change **wrong**.
 
 ADRA occupies the gap: a **deterministic spine** that *grounds* a **blocking adversarial critic**
-whose job is to **refute**, not bless, each artifact — every finding carrying its evidence, with
+whose job is to **refute**, not bless, each artifact, every finding carrying its evidence, with
 disciplined **human escalation** when nothing deterministic backs the verdict.
 
 ## The two failure modes it closes
@@ -26,16 +26,16 @@ disciplined **human escalation** when nothing deterministic backs the verdict.
 
 *Why Language Models Hallucinate* (Kalai et al., 2025) and *Calibrated LMs Must Hallucinate*
 (Kalai & Vempala, 2023) make the statistical case that a calibrated language model will produce
-confident, false statements at some rate — it cannot be fully eliminated by better prompting.
+confident, false statements at some rate; it cannot be fully eliminated by better prompting.
 The architectural response is **not to trust the model as the arbiter**: settle everything a tool
 *can* settle with the tool, and require the model to "verify with an independent method or say
-'unknown'" for the rest. In the rubric this is the `unverified_claim` item ("don't infer —
+'unknown'" for the rest. In the rubric this is the `unverified_claim` item ("don't infer,
 diagnose").
 
 ### 2. Ungrounded self-refinement games its own reward
 
 *Reflexion* (Shinn et al., 2023) and *Self-Refine* (Madaan et al., 2023) show iterative
-self-critique helps — **when the feedback is grounded**. *Spontaneous Reward Hacking in Iterative
+self-critique helps, **when the feedback is grounded**. *Spontaneous Reward Hacking in Iterative
 Self-Refinement* shows the opposite: a critic that scores against its own prior, with no external
 ground truth, learns to satisfy itself rather than the task. ADRA's critic therefore runs a
 **deterministic red-team pass first** (the hard floor) and treats it as non-overridable; the LLM
@@ -63,7 +63,7 @@ review.
 ## What this IS and is NOT
 
 - **IS** a design that makes the *floor* authoritative and the *model* additive.
-- **IS NOT** a claim that the LLM is unimportant — the semantic pass is where contract drift and
+- **IS NOT** a claim that the LLM is unimportant; the semantic pass is where contract drift and
   swallowed errors are caught. It is a claim about **ordering and authority**: tools decide what
   they can; the model decides only the rest; the human decides anything high-consequence.
 
@@ -75,7 +75,7 @@ Reward Hacking* (`arXiv:2407.04549`). See [../../refs/README.md](../../refs/READ
 
 ## See also
 
-- [methodologies/04_deterministic-first.md](../methodologies/04_deterministic-first.md) — the
+- [methodologies/04_deterministic-first.md](../methodologies/04_deterministic-first.md) · the
   methodology framing of the same principle.
-- [methodologies/01_adversarial-spine.md](../methodologies/01_adversarial-spine.md) — the
+- [methodologies/01_adversarial-spine.md](../methodologies/01_adversarial-spine.md) · the
   generate→critic→revise lineage.

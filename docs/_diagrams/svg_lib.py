@@ -1,6 +1,6 @@
 """High-quality SVG drawing backend for the ADRA deck.
 
-Rich primitives: gradients, soft drop-shadows, vector paths, arcs — so diagrams
+Rich primitives: gradients, soft drop-shadows, vector paths, arcs, so diagrams
 are real visual compositions (iconography + depth), not boxes with bullet lists.
 The PPTX deck embeds the rendered SVGs, so this backend is the single visual source
 of truth; it can use the full SVG feature set.

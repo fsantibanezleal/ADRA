@@ -1,4 +1,4 @@
-# pydantic-ai — usage & gotchas
+# pydantic-ai · usage & gotchas
 
 ## Install
 
@@ -37,7 +37,7 @@ If `ADRA_PROVIDER` is unset, ADRA auto-detects the first provider whose key is p
 | `openrouter` | OpenAI-compatible base | `openai/gpt-4o` | `OPENROUTER_API_KEY` |
 | `together` | OpenAI-compatible base | `meta-llama/Llama-3.3-70B-Instruct-Turbo` | `TOGETHER_API_KEY` |
 | `ollama` (local) | OpenAI-compatible base `http://localhost:11434/v1` | `llama3.1` | none |
-| any other | `ADRA_BASE_URL` + `ADRA_API_KEY` | — | — |
+| any other | `ADRA_BASE_URL` + `ADRA_API_KEY` | n/a | n/a |
 | `mock` | offline, no network | `claude-haiku-4-5` (label only) | none |
 
 The native vs OpenAI-compatible split is in `PydanticAIChatModel._model`: providers in
@@ -74,11 +74,11 @@ caches a `ChatModel` per `(provider, model)` and resolves it per role
   (default `0.0`) and `max_tokens` are passed through the factory; the seam does not pin any
   model-version-specific parameter.
 - **Keys are BYOK and never persisted.** ADRA reads the key from the environment (or `ADRA_API_KEY`
-  for the OpenAI-compatible base) and never writes it anywhere — see
+  for the OpenAI-compatible base) and never writes it anywhere; see
   [../../security/security.md](../../security/security.md).
 
 ## See also
 
 - [01_what-it-is.md](./01_what-it-is.md) · [02_why.md](./02_why.md)
-- [../../guides/01_install-and-run.md](../../guides/01_install-and-run.md) — full config table.
-- [../../security/04_secret-handling.md](../../security/04_secret-handling.md) — BYOK + redaction.
+- [../../guides/01_install-and-run.md](../../guides/01_install-and-run.md) · full config table.
+- [../../security/04_secret-handling.md](../../security/04_secret-handling.md) · BYOK + redaction.

@@ -1,7 +1,7 @@
 """Deterministic tools (no LLM).
 
-Every tool returns a :class:`~adra.state.ToolResult` — typed ``Finding`` objects
-plus raw ``data`` evidence — used for two things at once:
+Every tool returns a :class:`~adra.state.ToolResult`, typed ``Finding`` objects
+plus raw ``data`` evidence, used for two things at once:
 
 1. *grounding* the LLM (findings the model may not contradict), and
 2. *evidence* in the provenance record (the second-method proof).

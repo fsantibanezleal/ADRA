@@ -1,4 +1,4 @@
-"""preflight.py — the 8-point catalog access checklist (ADR-0005 / CASE-2024-052).
+"""preflight.py · the 8-point catalog access checklist (ADR-0005 / CASE-2024-052).
 
 Run this before ever concluding "no access." It walks the eight checks as real
 commands and reports the first one that fails (the likely cause). Only if all
@@ -92,7 +92,7 @@ def run_live(a) -> list:
             step(7, "current_user is a member of the granting group", ok,
                  f"is_member('{a.group}')={member}")
 
-    # 8: SP grant — cannot be auto-verified
+    # 8: SP grant; cannot be auto-verified
     step(8, "service-principal grant (if warehouse runs as SP)", True,
          "manual: if the warehouse runs as a service principal, confirm the SP has the grant")
     return steps
@@ -104,7 +104,7 @@ def build(steps: list) -> tuple[list, dict]:
     for s in failed:
         findings.append(c.finding(
             c.MAJOR, "access_preflight_failed",
-            f"preflight step {s['n']} failed: {s['name']} — {s.get('detail', '')}",
+            f"preflight step {s['n']} failed: {s['name']} · {s.get('detail', '')}",
             source="preflight"))
     data = {"steps": steps, "passed": len(steps) - len(failed), "total": len(steps),
             "all_passed": not failed}

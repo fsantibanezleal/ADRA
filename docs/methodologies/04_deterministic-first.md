@@ -1,4 +1,4 @@
-# 04 · Deterministic-first grounding ("don't infer — diagnose")
+# 04 · Deterministic-first grounding ("don't infer, diagnose")
 
 The methodological core (ADR-0001): deterministic tools run **before** the LLM, are **ground
 truth**, and **carry the verdict**. The model adds only what the tools cannot settle. This page is
@@ -9,12 +9,12 @@ Read order: 03 → **04** → 05. Landing: [methodologies.md](./methodologies.md
 
 ## The principle in one line
 
-> Don't infer — **diagnose**. Settle everything a tool can settle with the tool; for the rest,
+> Don't infer, **diagnose**. Settle everything a tool can settle with the tool; for the rest,
 > verify with an independent second method or say **"unknown"**.
 
 This is encoded as the cross-cutting `unverified_claim` rubric item, and enforced mechanically by
 the critic's `_UNVERIFIED_RE` scan (`probably`, `i assume`, `likely`, `should be fine`, `seems to`,
-`no access`, `can't read`, `must be because`, `that's because`) — any such phrase in a draft is a
+`no access`, `can't read`, `must be because`, `that's because`); any such phrase in a draft is a
 blocking finding demanding the second method or an explicit "unknown".
 
 ## Why it is non-negotiable (the theory)
@@ -33,21 +33,21 @@ model may not contradict, and as the second-method proof in the provenance recor
 | Tool | Settles, mechanically |
 |---|---|
 | `git_tools.merge_base_health` | stale base (`behind`), hidden deletions, `.yml → .yml.t` resource drops |
-| `ci_tools.run_ci_command` | the **exact** CI command's result — non-zero exit, `Ran 0 tests`, coverage `No data` |
+| `ci_tools.run_ci_command` | the **exact** CI command's result: non-zero exit, `Ran 0 tests`, coverage `No data` |
 | `bundle_tools.bundle_validate` | `databricks bundle validate` returned `Validation OK` (or not) |
 | `lang_tools.scan_language` | Spanish content (MAJOR) + AI-session leak (BLOCKER) |
 | `discovery_tools.check_test_discovery` | a `*_test.py` suffix CI's `test*.py` glob never collects |
 | `sql_tools.sql_probe` | warehouse rows (+ the 8-point access preflight so "no access" is never asserted blindly) |
 
 A tool that cannot run (missing CLI, external calls disabled) returns `ToolResult(ran=False,
-reason=...)` — it degrades, it doesn't fabricate. NaN-safe and missing-data handling are detailed
+reason=...)`: it degrades, it doesn't fabricate. NaN-safe and missing-data handling are detailed
 in [../data-contract/04_missing-and-outlier-data.md](../data-contract/04_missing-and-outlier-data.md).
 
 ## Ordering is the architecture
 
 `ground` runs before `generate`/`critic`; a blocking finding raised by a tool **stands regardless
 of the model's opinion** (`pr_eval` even forces `changes-requested` whenever any grounding tool
-reports a blocker). Because the floor carries the verdict, the whole loop — and the test suite —
+reports a blocker). Because the floor carries the verdict, the whole loop, and the test suite,
 runs **offline with the `mock` provider**. Connecting a real provider only adds the semantic
 layer; it can never overturn a deterministic blocker.
 
@@ -55,7 +55,7 @@ layer; it can never overturn a deterministic blocker.
 
 - **IS** a discipline of ordering and authority: tools decide what they can, the model decides
   only the rest, a human decides anything high-consequence.
-- **IS NOT** anti-LLM. The semantic pass is where swallowed errors and contract drift are caught —
+- **IS NOT** anti-LLM. The semantic pass is where swallowed errors and contract drift are caught;
   it is *additive on top of* a hard, evidence-backed floor.
 
 ## References

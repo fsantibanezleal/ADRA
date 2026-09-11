@@ -1,4 +1,4 @@
-# Use cases — the six skills
+# Use cases · the six skills
 
 One deep page per capability. Each follows the same template: **input → grounding (deterministic)
 → generate → output artifact → the rubric items it enforces**. All six are the **same loop**,
@@ -18,7 +18,7 @@ differing only by prompt (`adra/prompts/<skill>.md`) and grounding tools.
 ## How a skill enforces criteria
 
 Each skill's `generate` is **advisory** (the prompt asks the model to behave); the **critic
-enforces**. Deterministic blockers are non-negotiable — e.g. `pr_eval` forces `changes-requested`
+enforces**. Deterministic blockers are non-negotiable: e.g. `pr_eval` forces `changes-requested`
 whenever any grounding tool reports a blocker, regardless of the model's verdict. The rubric items
 each skill is subject to come from `rubric.for_skill(skill)` (cross-cutting items always included).
 
@@ -38,7 +38,7 @@ The orchestrator threads the loop and writes the run record (see
 
 ## See also
 
-- [../methodologies/methodologies.md](../methodologies/methodologies.md) — the methods applied here.
-- [../data-contract/01_intake-contracts.md](../data-contract/01_intake-contracts.md) — the exact
+- [../methodologies/methodologies.md](../methodologies/methodologies.md): the methods applied here.
+- [../data-contract/01_intake-contracts.md](../data-contract/01_intake-contracts.md): the exact
   intake each skill expects.
-- [../guides/02_the-cli.md](../guides/02_the-cli.md) — how to invoke each one.
+- [../guides/02_the-cli.md](../guides/02_the-cli.md): how to invoke each one.

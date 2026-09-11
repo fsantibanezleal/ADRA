@@ -1,15 +1,15 @@
-"""Domain model for ADRA — the typed contracts shared across the package.
+"""Domain model for ADRA: the typed contracts shared across the package.
 
 Everything an orchestrated run produces is expressed with these dataclasses, and
 they are all JSON-serializable so a full run can be replayed and audited (the
 "evidence layer" of the change-history chain):
 
-- :class:`Severity` / :class:`Finding` — one reviewable issue, grounded in evidence.
-- :class:`ToolResult` — the uniform return type of every deterministic tool
+- :class:`Severity` / :class:`Finding`: one reviewable issue, grounded in evidence.
+- :class:`ToolResult`: the uniform return type of every deterministic tool
   (findings + raw evidence). Tools never return bare dicts; the critic and the
   skills consume :class:`Finding` objects, not loosely-shaped dictionaries.
-- :class:`CriticVerdict` — the outcome of one adversarial-critic pass.
-- :class:`RunState` — the mutable state threaded through the orchestrator graph.
+- :class:`CriticVerdict`: the outcome of one adversarial-critic pass.
+- :class:`RunState`: the mutable state threaded through the orchestrator graph.
 """
 
 from __future__ import annotations

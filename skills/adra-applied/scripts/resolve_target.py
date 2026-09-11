@@ -1,4 +1,4 @@
-"""resolve_target.py — turn an entry point into a concrete target.
+"""resolve_target.py · turn an entry point into a concrete target.
 
 Given a PR (id/URL), an issue (URL), or a branch, resolve the repo, host,
 production reference branch, source/target branches, head sha, the command to

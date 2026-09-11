@@ -1,7 +1,7 @@
 """High-quality SVG figures for the ADRA docs.
 
 Each builder draws one figure on an SvgBackend; build.py writes them to ../images/.
-Reuses the shared primitives (svg_lib), icons and components — same visual language
+Reuses the shared primitives (svg_lib), icons and components: same visual language
 as the deck (white page, dark gradient cards, iconography, soft shadows). No mermaid.
 """
 
@@ -36,7 +36,7 @@ def _chip(bk, x, y, w, h, label, accent, name=None):
 # =========================================================================
 def loop(bk, W, H):
     _bg(bk, W, H)
-    _caption(bk, 40, 40, "Adversarial loop — plan · ground · generate · critic · revise · decide")
+    _caption(bk, 40, 40, "Adversarial loop: plan · ground · generate · critic · revise · decide")
     cy = 200
     stages = [("terminal", "Intake", T.MUTE), ("loop", "Plan", T.CYAN),
               ("gear", "Ground", T.BLUE), ("spark", "Generate", T.DPURPLE),
@@ -110,7 +110,7 @@ def module_map(bk, W, H):
 # =========================================================================
 def data_flow(bk, W, H):
     _bg(bk, W, H)
-    _caption(bk, 40, 36, "Data flow — what crosses each boundary")
+    _caption(bk, 40, 36, "Data flow · what crosses each boundary")
     steps = [("Intake", "dict", T.MUTE), ("ground", "ToolResult[]", T.BLUE),
              ("generate", "draft", T.DPURPLE), ("critic", "CriticVerdict", T.RED),
              ("decide", "artifacts", T.GREEN)]
@@ -128,7 +128,7 @@ def data_flow(bk, W, H):
     bk.rect(60, py, 1160, 60, fill=T.CARD2, line=T.STROKE, line_w=1.2, radius=12, shadow=True)
     C.icon_disc(bk, 100, py + 30, 17, "clock", T.PURPLE)
     bk.text(128, py + 6, 1080, 22, [("RunRecord (provenance)", T.WHITE, True, False)], size=12.5, valign="middle")
-    bk.text(128, py + 30, 1080, 22, [("grounding evidence · critic verdicts · decision · artifacts — appended at every step", T.MUTE, False, False)], size=11, valign="middle")
+    bk.text(128, py + 30, 1080, 22, [("grounding evidence · critic verdicts · decision · artifacts, appended at every step", T.MUTE, False, False)], size=11, valign="middle")
     for x in xs:
         bk.line(x + w / 2, y + h, x + w / 2, py, color=T.STROKE, w=1.0, opacity=0.5)
 
@@ -176,7 +176,7 @@ def _class_box(bk, x, y, w, title, fields, accent):
 
 def domain_model(bk, W, H):
     _bg(bk, W, H)
-    _caption(bk, 40, 36, "Domain model — one typed contract")
+    _caption(bk, 40, 36, "Domain model · one typed contract")
     _class_box(bk, 60, 100, 210, "Severity «enum»", ["BLOCKER / MAJOR", "MINOR / NIT", "+ is_blocking"], T.AMBER)
     _class_box(bk, 60, 250, 250, "Finding", ["severity: Severity", "category · message", "location · evidence", "suggested_fix · source"], T.RED)
     _class_box(bk, 400, 110, 270, "ToolResult", ["tool · ran · reason", "findings: Finding[]", "data: dict", "+ blocking() · clean()"], T.BLUE)
@@ -220,9 +220,9 @@ def capability_grounding(bk, W, H):
 # =========================================================================
 def rubric_sources(bk, W, H):
     _bg(bk, W, H)
-    _caption(bk, 40, 36, "One shared rubric — single source for checks and prompts")
+    _caption(bk, 40, 36, "One shared rubric · single source for checks and prompts")
     C.icon_badge(bk, W / 2, 150, 40, "target", T.CYAN)
-    bk.text(W / 2 - 180, 200, 360, 20, [("rubric.py — 17 criteria as data", T.INK, True, False)], size=14, align="center", valign="middle")
+    bk.text(W / 2 - 180, 200, 360, 20, [("rubric.py · 17 criteria as data", T.INK, True, False)], size=14, align="center", valign="middle")
     bk.text(W / 2 - 220, 220, 440, 18, [("severity · category · kind · applies_to · method · incident", T.MUTE2, False, False)], size=10.5, align="center", valign="middle")
     C.node(bk, 120, 300, 460, 110, "gear", "Deterministic enforcement", ["critic.deterministic_attacks", "mechanical, blocking (kind = deterministic)"], T.BLUE)
     C.node(bk, 700, 300, 460, 110, "shield", "Prompt enforcement", ["rubric.prompt_block(skill) → critic prompt", "semantic attacks (kind = semantic)"], T.RED)
@@ -247,7 +247,7 @@ def history_layers(bk, W, H):
               ("database", "Evidence", "raw, reproducible", T.RED)]
     for i, (ic, t, sub, acc) in enumerate(layers):
         y = 110 + i * 64
-        _chip(bk, 520, y, 540, 52, f"{t} — {sub}", acc, ic)
+        _chip(bk, 520, y, 540, 52, f"{t} · {sub}", acc, ic)
         bk.arrow(296, 210, 514, y + 26, color=T.STROKE, w=1.5)
 
 
@@ -258,7 +258,7 @@ def extension_points(bk, W, H):
     rows = [("target", "New criterion", "add a RubricItem → semantic auto-injected; deterministic wires a check", T.CYAN),
             ("spark", "New capability", "Skill subclass + prompts/<skill>.md + register + Node", T.GREEN),
             ("gear", "New tool", "a function returning ToolResult, called from a skill's ground()", T.BLUE),
-            ("doc", "New client", "replace standards/ + rubric incident refs — no code change", T.AMBER)]
+            ("doc", "New client", "replace standards/ + rubric incident refs, no code change", T.AMBER)]
     for i, (ic, t, d, acc) in enumerate(rows):
         y = 110 + i * 84
         bk.rect(60, y, 1140, 68, fill=T.CARD, line=acc, line_w=1.3, radius=12, shadow=True)

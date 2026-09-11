@@ -23,7 +23,7 @@ prompt `adra/prompts/pr_eval.md`.
 
 | id | severity · kind | what it catches |
 |---|---|---|
-| `stale_merge_base` | MAJOR · deterministic | branch behind a fresh target (`behind`) — rebase/recreate first |
+| `stale_merge_base` | MAJOR · deterministic | branch behind a fresh target (`behind`); rebase/recreate first |
 | `destructive_deletions` | BLOCKER · deterministic | a stale-base diff silently removing notebooks/resources |
 | `dropped_bundle_resource` | BLOCKER · deterministic | `.yml → .yml.t` rename dropping a DAB resource |
 | `bundle_validate` | BLOCKER · deterministic | `databricks bundle validate` not returning `Validation OK` |
@@ -58,5 +58,5 @@ adra github-review owner/repo 42 --skill pr_eval                            # a 
 ## See also
 
 - [01_code-review.md](./01_code-review.md) · [05_document.md](./05_document.md)
-- [../frameworks/02_httpx/01_github.md](../frameworks/02_httpx/01_github.md) — fetching a real PR.
+- [../frameworks/02_httpx/01_github.md](../frameworks/02_httpx/01_github.md): fetching a real PR.
 - [../data-contract/01_intake-contracts.md](../data-contract/01_intake-contracts.md)

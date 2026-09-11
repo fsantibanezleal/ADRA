@@ -1,4 +1,4 @@
-# local config and generated artifacts — never commit
+# local config and generated artifacts: never commit
 .env
 runs/
 __pycache__/

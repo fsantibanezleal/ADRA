@@ -14,8 +14,8 @@ prompt `adra/prompts/code_review.md`.
 | **Input** (intake) | `diff` (required); optional `ci_command` + `ci_fixture` |
 | **plan** | declares tools: `lang_scan`, `test_discovery`, `ci_command` |
 | **ground** (deterministic) | `lang_tools.scan_language(diff)` · `discovery_tools.check_test_discovery(added_paths(diff))` · `ci_tools.run_ci_command(ci_command, …)` when a command is given |
-| **generate** | model returns `{summary, semantic_findings:[{severity,category,message,location}]}` — *only* findings the tools cannot settle |
-| **output** | `review.md` — deterministic findings (tool-grounded, with evidence) then semantic findings (model) |
+| **generate** | model returns `{summary, semantic_findings:[{severity,category,message,location}]}`: *only* findings the tools cannot settle |
+| **output** | `review.md`: deterministic findings (tool-grounded, with evidence) then semantic findings (model) |
 
 ## The rubric items it enforces
 
@@ -40,8 +40,8 @@ The critic also forces the **exact-CI** check: in a `code_review`, if `ci_comman
 ## Worked example (offline demo)
 
 The demo feeds a diff with a `*_test.py` suffix, a `# Co-Authored-By: Claude` line, a Spanish
-identifier, and a CI fixture of `Ran 0 tests / No data was collected`. Result: **blocked** —
-BLOCKER session-leak, MAJOR language, MAJOR test-discoverability, BLOCKER 0-tests/no-data — and
+identifier, and a CI fixture of `Ran 0 tests / No data was collected`. Result: **blocked**
+(BLOCKER session-leak, MAJOR language, MAJOR test-discoverability, BLOCKER 0-tests/no-data), and
 the run escalates.
 
 ## Invoke
@@ -59,7 +59,7 @@ adra review my.diff --ci-command 'python -m coverage run -m unittest discover -s
 
 ## See also
 
-- [02_pr-eval.md](./02_pr-eval.md) — the PR-level sibling (adds merge-base + bundle).
+- [02_pr-eval.md](./02_pr-eval.md): the PR-level sibling (adds merge-base + bundle).
 - [../methodologies/04_deterministic-first.md](../methodologies/04_deterministic-first.md)
-- [../data-contract/01_intake-contracts.md](../data-contract/01_intake-contracts.md) — the `diff` /
+- [../data-contract/01_intake-contracts.md](../data-contract/01_intake-contracts.md): the `diff` /
   `ci_*` intake.

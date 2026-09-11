@@ -18,12 +18,12 @@ metadata:
 
 Drive the software lifecycle with one rule:
 
-> **Deterministic tools run first and are ground truth. You are additive — add
+> **Deterministic tools run first and are ground truth. You are additive: add
 > only findings the tools cannot settle, and never contradict them.** When you
 > cannot verify something with a tool or a second method, the honest output is
 > "unknown."
 
-Any deterministic blocker forces "changes requested." Never silently approve —
+Any deterministic blocker forces "changes requested." Never silently approve;
 unresolved blockers **escalate to a human**. Every high-consequence decision stays
 human-owned.
 
@@ -37,7 +37,7 @@ the `azure-devops` extension (`az extension list`), Databricks CLI `databricks`
 Configuration is a local, git-ignored `.env`. Copy `assets/env.example` to `.env`
 and fill it. Endpoints (hosts, warehouse ids, catalogs, org/project) and the
 **production reference branch** (`main` or `develop`, per the team) are
-configuration — never guessed, never committed. See
+configuration: never guessed, never committed. See
 [reference/connections.md](reference/connections.md).
 
 ## Safety defaults (do not skip)
@@ -60,22 +60,22 @@ configuration — never guessed, never committed. See
 plan -> ground -> generate -> CRITIC -> (revise -> CRITIC)* -> decide
 ```
 
-1. **plan** — decide which deterministic checks apply to the input.
-2. **ground** — run them (the scripts in `scripts/`). Their results are the
+1. **plan**: decide which deterministic checks apply to the input.
+2. **ground**: run them (the scripts in `scripts/`). Their results are the
    evidence and the ground truth.
-3. **generate** — draft the artifact, reading the grounding first; add only what
+3. **generate**: draft the artifact, reading the grounding first; add only what
    the tools cannot settle.
-4. **critic** — re-attack the draft against the rubric
+4. **critic**: re-attack the draft against the rubric
    ([reference/rubric.md](reference/rubric.md)). Any surviving blocker means it is
    not clean.
-5. **revise** — feed surviving findings back and redraft.
-6. **decide** — clean → accept; blockers after the round budget → escalate to a
+5. **revise**: feed surviving findings back and redraft.
+6. **decide**: clean → accept; blockers after the round budget → escalate to a
    human with the evidence.
 
 Record the run (plan, grounding, drafts, critic rounds, decision) with
 `scripts/provenance.py` so documentation and the audit trail come from facts.
 
-## Phase 0 — resolve the target
+## Phase 0 · resolve the target
 
 From a PR (id/URL), an issue, or a comment/symptom, resolve repo + host +
 production reference branch + source/target + diff + exact CI command before any
@@ -98,7 +98,7 @@ Pick the phase from the request and follow its playbook:
   Ground with merge-base health, bundle validate (if `resources/` changed), the
   exact CI command, test discovery, and the language scan; add semantic findings;
   any blocker → changes requested.
-- **Experiment** — confirm/refute a hypothesis or evaluate data/pipeline/job/
+- **Experiment**: confirm/refute a hypothesis or evaluate data/pipeline/job/
   resource → [reference/experiments.md](reference/experiments.md). Ranked
   falsifiable hypotheses, probes on the shared SQL warehouse, the 8-point access
   preflight, persisted rows, conclude only what the rows support, synthesize.
@@ -125,7 +125,7 @@ accepts `--fixture <json>` to replay offline, and prints JSON.
 | `scripts/sql_probe.py` | a SQL statement on the shared warehouse; captured rows | ADR-0005 |
 | `scripts/preflight.py` | the 8-point catalog access checklist | ADR-0005 |
 | `scripts/lang_scan.py` | English-only + authoring-tool-leak scan | conventions |
-| `scripts/resolve_target.py` | PR/issue/branch → repo + branches + diff + CI | — |
+| `scripts/resolve_target.py` | PR/issue/branch → repo + branches + diff + CI | n/a |
 | `scripts/provenance.py` | append-only run record | ADR-0006 |
 
 Usage detail and flags: [reference/workflow.md](reference/workflow.md).
@@ -139,7 +139,7 @@ id and portable across clients. Apply them in the critic step; treat every
 
 ## When to stop and escalate
 
-Escalate to a human — do not fabricate a pass — when: a deterministic blocker
+Escalate to a human, do not fabricate a pass, when: a deterministic blocker
 cannot be resolved; access still fails after the full 8-point preflight; a
 conclusion would go beyond what the evidence supports; or an outward action needs
 approval. Hand back the evidence and a clear recommendation.

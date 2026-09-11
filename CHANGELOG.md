@@ -4,11 +4,23 @@ All notable changes to ADRA are documented here. Versions use the `X.XX.XXX` dis
 format (PEP 440 package version in `pyproject.toml` is the normalized equivalent).
 Stays `0.x` while connectors are partly untested-live.
 
-## [0.04.000] — 2026-06-26
+## [0.04.001] · 2026-09-11
+
+### Changed
+- **ADR-0067 content sweep:** every em-dash across the README, the changelog, the engine code and
+  its docstrings, the prompts, the offline mock's canned answers, the artifact templates the skills
+  write (the decide skill's route table and owner line, the experiment and improve pages), the
+  bundled Northwind suite, the CLI, the docs, the diagram sources and images, and the adra-applied
+  skill, replaced by the punctuation the sentence needs; wording untouched. `scripts/check_content.py`
+  guards em-dash and emoji and lists arrows in prose for review; `tests/test_content_guard.py` runs
+  it with the offline suite. Found while the ADRA diffusion package captured the decide artifact
+  from the console (issue #30).
+
+## [0.04.000] · 2026-06-26
 
 ### Added
 - **PyPI publishing** (ADR-0061): `.github/workflows/publish-pypi.yml` builds sdist+wheel
-  and publishes via **PyPI Trusted Publishing (OIDC)** on a published GitHub Release — no
+  and publishes via **PyPI Trusted Publishing (OIDC)** on a published GitHub Release; no
   stored token. `pip install adra` once the first release is published.
 - **`docs/` wiki** (ADR-0056): a navigable 65-file documentation site (architecture /
   frameworks / methodologies / guides / use-cases / data-contract / security).
@@ -30,7 +42,7 @@ Stays `0.x` while connectors are partly untested-live.
   connector-phase security controls relabeled as planned; README synced to the engine
   (pydantic-ai, `adra[llm]`, httpx GitHub connector, config-only providers).
 
-## [0.03.000] — 2026-06-26
+## [0.03.000] · 2026-06-26
 
 ### Added
 - **Connector layer** (`adra/connectors/`): one Protocol family (`RepoProvider` /
@@ -43,7 +55,7 @@ Stays `0.x` while connectors are partly untested-live.
   warehouse. CLI: `adra emu list|review`.
 - `github` extra (httpx); connector tests (now 14 total).
 
-## [0.02.000] — 2026-06-26
+## [0.02.000] · 2026-06-26
 
 ### Added
 - **Real multi-provider LLM layer.** A provider factory behind the `ChatModel` seam:
@@ -57,12 +69,12 @@ Stays `0.x` while connectors are partly untested-live.
 
 ### Changed
 - `mock` is now explicitly the **offline-only** lane (zero keys; the deterministic floor
-  carries the verdict) — not the semantic layer. ADR-0003 rewritten to reflect the
+  carries the verdict), not the semantic layer. ADR-0003 rewritten to reflect the
   multi-provider factory (not a reduction).
 
-## [0.01.000] — 2026-06-26
+## [0.01.000] · 2026-06-26
 
-Initial engine cut — the client-agnostic, deterministic-first adversarial-validation core.
+Initial engine cut: the client-agnostic, deterministic-first adversarial-validation core.
 
 ### Added
 - **Engine (`adra/`)**: the adversarial loop `plan → ground → generate → CRITIC → revise →
@@ -72,7 +84,7 @@ Initial engine cut — the client-agnostic, deterministic-first adversarial-vali
   anchoring, the immutable **provenance** run record, and deterministic **tools**
   (`git`, `ci`, `bundle`, `lang`, `discovery`, `sql`).
 - **Provider seam (`adra/llm.py`)**: a tiny ADRA-owned `ChatModel` interface with a
-  deterministic offline `MockChatModel` and a native-SDK `AnthropicChatModel` — **no
+  deterministic offline `MockChatModel` and a native-SDK `AnthropicChatModel`, **no
   agent framework**; the orchestrator is a hand-rolled deterministic state machine.
 - **Client-agnostic grounding**: `ADRA_CLIENT_DIR` / `Settings.client_dir` select the
   active client's governance suite; bundled fictional client **Northwind Data Platform**

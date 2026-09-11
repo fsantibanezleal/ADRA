@@ -14,11 +14,11 @@ pipeline / job / resource, document an experiment or code, or propose an improve
 PR. It runs deterministic checks first as ground truth, keeps writes dry-run by
 default, and escalates unresolved blockers to a human.
 
-- [`adra-applied/SKILL.md`](adra-applied/SKILL.md) — the skill (frontmatter + lean body).
-- [`adra-applied/reference/`](adra-applied/reference/) — phase playbooks (workflow, connections, rubric, experiments, documentation, pr-authoring), loaded on demand.
-- [`adra-applied/scripts/`](adra-applied/scripts/) — deterministic tools (stdlib Python, dry-run by default, `--fixture` for offline replay): `resolve_target`, `merge_base_health`, `run_ci`, `bundle_validate`, `sql_probe`, `preflight`, `lang_scan`, `provenance`.
-- [`adra-applied/assets/`](adra-applied/assets/) — `env.example` + PR/experiment templates.
-- [`adra-applied/docs/diagrams/`](adra-applied/docs/diagrams/) — architecture, control loop, entry/router, components, connections, experiment lifecycle, and safety diagrams (SVG).
+- [`adra-applied/SKILL.md`](adra-applied/SKILL.md): the skill (frontmatter + lean body).
+- [`adra-applied/reference/`](adra-applied/reference/): phase playbooks (workflow, connections, rubric, experiments, documentation, pr-authoring), loaded on demand.
+- [`adra-applied/scripts/`](adra-applied/scripts/): deterministic tools (stdlib Python, dry-run by default, `--fixture` for offline replay): `resolve_target`, `merge_base_health`, `run_ci`, `bundle_validate`, `sql_probe`, `preflight`, `lang_scan`, `provenance`.
+- [`adra-applied/assets/`](adra-applied/assets/): `env.example` + PR/experiment templates.
+- [`adra-applied/docs/diagrams/`](adra-applied/docs/diagrams/): architecture, control loop, entry/router, components, connections, experiment lifecycle, and safety diagrams (SVG).
 
 ## Skill vs engine
 

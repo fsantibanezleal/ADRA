@@ -1,4 +1,4 @@
-# Connections — how to reach each system
+# Connections · how to reach each system
 
 Default path uses the CLIs (`git`, `gh`, `az`, `databricks`); they are already
 authenticated on the operator's machine and delegate auth safely. Read-only by

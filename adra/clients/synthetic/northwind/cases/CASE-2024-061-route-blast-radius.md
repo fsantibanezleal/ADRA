@@ -1,4 +1,4 @@
-# CASE-2024-061 — Choosing a route by blast radius and precedent
+# CASE-2024-061 · Choosing a route by blast radius and precedent
 
 **Domain:** `catalog` · **Relates to:** ADR-0008
 

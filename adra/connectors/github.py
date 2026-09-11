@@ -1,7 +1,7 @@
 """Real GitHub connector (REST v3 over httpx).
 
-Reads pull requests + their unified diff, lists PRs, and — only when ``allow_external``
-is set (a deliberate, human-gated action) — creates an issue or comments on a PR. The
+Reads pull requests + their unified diff, lists PRs, and, only when ``allow_external``
+is set (a deliberate, human-gated action), creates an issue or comments on a PR. The
 token is read from the environment / passed in and is never logged. Requires the
 ``github`` extra: ``pip install adra[github]``.
 
