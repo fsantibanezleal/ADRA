@@ -1,4 +1,4 @@
-# ADR-0003 — Bundle resource files stay `.yml`
+# ADR-0003 · Bundle resource files stay `.yml`
 
 **Status:** Accepted
 

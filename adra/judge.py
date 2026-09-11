@@ -121,7 +121,7 @@ def compare(
     averaged, and a winner is ``position_consistent`` only when it wins in BOTH orders;
     otherwise the averaged total breaks the tie. Because A occupies the first slot in the
     forward call and the second slot in the reverse call (and vice-versa for B), the swap
-    genuinely varies artifact position — so it exercises and mitigates position bias rather
+    genuinely varies artifact position, so it exercises and mitigates position bias rather
     than re-running an identical call.
     """
     fa, fb, fnotes = _pairwise(model, a, b, reference, rubric)  # A first, B second

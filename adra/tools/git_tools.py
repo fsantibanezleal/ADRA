@@ -41,7 +41,7 @@ def merge_base_health(
         source: The source branch / ref under review.
         target: The integration branch to compare against (default ``develop``).
         fixture: When provided, short-circuits git and supplies ``behind`` (int),
-            ``deletions`` (list[str]) and ``renames`` (list[str]) — used offline.
+            ``deletions`` (list[str]) and ``renames`` (list[str]), used offline.
 
     Returns:
         A :class:`~adra.state.ToolResult`. MAJOR when the branch is behind; BLOCKER

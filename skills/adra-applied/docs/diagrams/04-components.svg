@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="940" viewBox="0 0 1600 940"><defs><filter id="shadow" x="-4%" y="-4%" width="108%" height="112%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.10"/></filter><marker id="arrow_blue" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#2563EB"/></marker><marker id="arrow_teal" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#0D9488"/></marker><marker id="arrow_orange" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#C25E18"/></marker><marker id="arrow_rose" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#BE185D"/></marker><marker id="arrow_amber" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#B45309"/></marker><marker id="arrow_violet" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#7C3AED"/></marker><marker id="arrow_slate" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#475569"/></marker><marker id="arrow_green" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#15803D"/></marker><marker id="arrow_bronze" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#B45309"/></marker><marker id="arrow_silver" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#475569"/></marker><marker id="arrow_gold" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M 0 1 L 12 6 L 0 11 z" fill="#A16207"/></marker></defs><rect x="0" y="0" width="1600" height="940" fill="#FFFFFF"/>
+<rect x="70" y="40" width="70" height="30" rx="7" fill="#1D4ED8"/>
+<text x="105" y="61" font-family="Calibri, Segoe UI, Arial" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">ADRA</text>
+<text x="154" y="70" font-family="Calibri, Segoe UI, Arial" font-size="34" font-weight="700" fill="#0F172A">Skill anatomy · progressive disclosure</text>
+<text x="70" y="110" font-family="Calibri, Segoe UI, Arial" font-size="17" fill="#475569">SKILL.md stays lean; detail lives in reference/, deterministic tools in scripts/, templates in assets/, loaded on demand.</text>
+<line x1="70" y1="126" x2="1560" y2="126" stroke="#CBD5E1" stroke-width="1.2"/>
+<rect x="70" y="123" width="96" height="5" rx="2.5" fill="#2563EB"/>
+<rect x="541" y="172" width="520" height="92" rx="14" fill="#0F172A" opacity="0.06"/>
+<rect x="540" y="170" width="520" height="92" rx="14" fill="#FFFFFF" stroke="#475569" stroke-width="1.6"/>
+<rect x="540" y="170" width="6" height="92" rx="3" fill="#475569"/>
+<path d="M 561.76,181.92 L 577.12,181.92 L 582.88,187.68 L 582.88,209.44 L 561.76,209.44 z" fill="#F1F5F9" stroke="#475569" stroke-width="1.4"/>
+<path d="M 577.12,181.92 L 577.12,187.68 L 582.88,187.68 z" fill="#475569" opacity="0.18"/>
+<line x1="564.32" y1="193.44" x2="571.712" y2="193.44" stroke="#475569" stroke-width="1.2" opacity="0.7"/>
+<line x1="564.32" y1="197.28" x2="571.712" y2="197.28" stroke="#475569" stroke-width="1.2" opacity="0.7"/>
+<line x1="564.32" y1="201.12" x2="571.712" y2="201.12" stroke="#475569" stroke-width="1.2" opacity="0.7"/>
+<line x1="564.32" y1="204.96" x2="569.696" y2="204.96" stroke="#475569" stroke-width="1.2" opacity="0.7"/>
+<text x="598" y="203.0" font-family="Calibri, Segoe UI, Arial" font-size="18" font-weight="700" fill="#0F172A">SKILL.md</text>
+<text x="556" y="232.5" font-family="Calibri, Segoe UI, Arial" font-size="12.5" fill="#475569">frontmatter (name · description · allowed-tools) + lean body: spine, entry</text>
+<text x="556" y="250.0" font-family="Calibri, Segoe UI, Arial" font-size="12.5" fill="#475569">resolution, phase router, safety</text>
+<rect x="61" y="322" width="480" height="470" rx="14" fill="#0F172A" opacity="0.06"/>
+<rect x="60" y="320" width="480" height="470" rx="14" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.6"/>
+<rect x="60" y="320" width="6" height="470" rx="3" fill="#2563EB"/>
+<text x="76" y="343.0" font-family="Calibri, Segoe UI, Arial" font-size="15" font-weight="700" fill="#0F172A">reference/  (playbooks)</text>
+<path d="M 800,264 C 550.0,264 550.0,320 300,320" fill="none" stroke="#2563EB" stroke-width="2.4" stroke-dasharray="6,5" marker-end="url(#arrow_blue)"/>
+<rect x="490.5" y="279.0" width="119" height="20" rx="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.0"/>
+<text x="550.0" y="293.0" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="600" fill="#1D4ED8" text-anchor="middle">loads on demand</text>
+<rect x="150" y="372" width="300" height="34" rx="17.0" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="300.0" y="394.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#1D4ED8" text-anchor="middle">workflow</text>
+<rect x="150" y="420" width="300" height="34" rx="17.0" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="300.0" y="442.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#1D4ED8" text-anchor="middle">connections</text>
+<rect x="150" y="468" width="300" height="34" rx="17.0" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="300.0" y="490.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#1D4ED8" text-anchor="middle">rubric</text>
+<rect x="150" y="516" width="300" height="34" rx="17.0" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="300.0" y="538.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#1D4ED8" text-anchor="middle">experiments</text>
+<rect x="150" y="564" width="300" height="34" rx="17.0" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="300.0" y="586.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#1D4ED8" text-anchor="middle">documentation</text>
+<rect x="150" y="612" width="300" height="34" rx="17.0" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="300.0" y="634.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#1D4ED8" text-anchor="middle">pr-authoring</text>
+<rect x="561" y="322" width="480" height="470" rx="14" fill="#0F172A" opacity="0.06"/>
+<rect x="560" y="320" width="480" height="470" rx="14" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.6"/>
+<rect x="560" y="320" width="6" height="470" rx="3" fill="#7C3AED"/>
+<text x="576" y="343.0" font-family="Calibri, Segoe UI, Arial" font-size="15" font-weight="700" fill="#0F172A">scripts/  (deterministic tools)</text>
+<path d="M 800,264 C 800.0,264 800.0,320 800,320" fill="none" stroke="#7C3AED" stroke-width="2.4" stroke-dasharray="6,5" marker-end="url(#arrow_violet)"/>
+<rect x="740.5" y="279.0" width="119" height="20" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="1.0"/>
+<text x="800.0" y="293.0" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="600" fill="#6D28D9" text-anchor="middle">loads on demand</text>
+<rect x="650" y="372" width="300" height="34" rx="17.0" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.2"/>
+<text x="800.0" y="394.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#6D28D9" text-anchor="middle">resolve_target</text>
+<rect x="650" y="420" width="300" height="34" rx="17.0" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.2"/>
+<text x="800.0" y="442.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#6D28D9" text-anchor="middle">merge_base_health</text>
+<rect x="650" y="468" width="300" height="34" rx="17.0" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.2"/>
+<text x="800.0" y="490.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#6D28D9" text-anchor="middle">run_ci</text>
+<rect x="650" y="516" width="300" height="34" rx="17.0" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.2"/>
+<text x="800.0" y="538.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#6D28D9" text-anchor="middle">bundle_validate</text>
+<rect x="650" y="564" width="300" height="34" rx="17.0" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.2"/>
+<text x="800.0" y="586.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#6D28D9" text-anchor="middle">sql_probe</text>
+<rect x="650" y="612" width="300" height="34" rx="17.0" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.2"/>
+<text x="800.0" y="634.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#6D28D9" text-anchor="middle">preflight</text>
+<rect x="650" y="660" width="300" height="34" rx="17.0" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.2"/>
+<text x="800.0" y="682.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#6D28D9" text-anchor="middle">lang_scan</text>
+<rect x="650" y="708" width="300" height="34" rx="17.0" fill="#E9D5FF" stroke="#7C3AED" stroke-width="1.2"/>
+<text x="800.0" y="730.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#6D28D9" text-anchor="middle">provenance</text>
+<rect x="1061" y="322" width="480" height="470" rx="14" fill="#0F172A" opacity="0.06"/>
+<rect x="1060" y="320" width="480" height="470" rx="14" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.6"/>
+<rect x="1060" y="320" width="6" height="470" rx="3" fill="#0D9488"/>
+<text x="1076" y="343.0" font-family="Calibri, Segoe UI, Arial" font-size="15" font-weight="700" fill="#0F172A">assets/  (templates)</text>
+<path d="M 800,264 C 1050.0,264 1050.0,320 1300,320" fill="none" stroke="#0D9488" stroke-width="2.4" stroke-dasharray="6,5" marker-end="url(#arrow_teal)"/>
+<rect x="990.5" y="279.0" width="119" height="20" rx="10" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.0"/>
+<text x="1050.0" y="293.0" font-family="Calibri, Segoe UI, Arial" font-size="11" font-weight="600" fill="#0F766E" text-anchor="middle">loads on demand</text>
+<rect x="1150" y="372" width="300" height="34" rx="17.0" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.2"/>
+<text x="1300.0" y="394.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F766E" text-anchor="middle">env.example</text>
+<rect x="1150" y="420" width="300" height="34" rx="17.0" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.2"/>
+<text x="1300.0" y="442.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F766E" text-anchor="middle">pr_body_template</text>
+<rect x="1150" y="468" width="300" height="34" rx="17.0" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.2"/>
+<text x="1300.0" y="490.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F766E" text-anchor="middle">experiment_parent</text>
+<rect x="1150" y="516" width="300" height="34" rx="17.0" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.2"/>
+<text x="1300.0" y="538.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F766E" text-anchor="middle">experiment_version</text>
+<rect x="1150" y="564" width="300" height="34" rx="17.0" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.2"/>
+<text x="1300.0" y="586.4" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="700" fill="#0F766E" text-anchor="middle">experiment_synthesis</text>
+<text x="60" y="838" font-family="Calibri, Segoe UI, Arial" font-size="13" font-weight="600" fill="#475569" text-anchor="start">scripts wrap the already-authenticated CLIs (dry-run by default):</text>
+<rect x="560" y="820" width="116" height="32" rx="16.0" fill="#F9E8DB" stroke="#C25E18" stroke-width="1.2"/>
+<text x="618.0" y="841.1" font-family="Calibri, Segoe UI, Arial" font-size="12" font-weight="700" fill="#9A3412" text-anchor="middle">git</text>
+<rect x="690" y="820" width="116" height="32" rx="16.0" fill="#F1F5F9" stroke="#475569" stroke-width="1.2"/>
+<text x="748.0" y="841.1" font-family="Calibri, Segoe UI, Arial" font-size="12" font-weight="700" fill="#1E293B" text-anchor="middle">gh</text>
+<rect x="820" y="820" width="116" height="32" rx="16.0" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="878.0" y="841.1" font-family="Calibri, Segoe UI, Arial" font-size="12" font-weight="700" fill="#1D4ED8" text-anchor="middle">az</text>
+<rect x="950" y="820" width="116" height="32" rx="16.0" fill="#FBCFE8" stroke="#BE185D" stroke-width="1.2"/>
+<text x="1008.0" y="841.1" font-family="Calibri, Segoe UI, Arial" font-size="12" font-weight="700" fill="#9D174D" text-anchor="middle">databricks</text>
+<text x="70" y="918" font-family="Calibri, Segoe UI, Arial" font-size="11" fill="#475569">Metadata loads for every skill; the body loads on trigger; reference/scripts/assets load only when referenced.</text></svg>

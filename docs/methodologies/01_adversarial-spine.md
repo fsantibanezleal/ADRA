@@ -11,13 +11,13 @@ Read order: **01** → 02. Landing: [methodologies.md](./methodologies.md).
 `criticize(model, state)` runs two passes over the **same rubric** and merges their blocking
 findings (deduped by `(category, message)`):
 
-1. **`deterministic_attacks` — the hard floor.** Collects the blocking findings already raised by
+1. **`deterministic_attacks` · the hard floor.** Collects the blocking findings already raised by
    the grounding tools, plus critic-level rubric checks: an unverified-claim language scan
    (`probably`, `i assume`, `likely`, `seems to`, `no access`, …), the exact-CI-reproduced check
    for review skills, the "no access without preflight" check for experiments, and an AI-leak /
    language scan of the draft text itself. These are non-overridable.
-2. **`llm_critique` — semantic attacks.** Asks the model to *break* the draft against the rubric
-   ("Try to BREAK it. Return JSON {clean, blocking, notes}") — catching what tools cannot encode:
+2. **`llm_critique` · semantic attacks.** Asks the model to *break* the draft against the rubric
+   ("Try to BREAK it. Return JSON {clean, blocking, notes}"), catching what tools cannot encode:
    a hidden assumption, a contract the change quietly widens, a place it would harm production, a
    conclusion the data doesn't support.
 
@@ -37,7 +37,7 @@ while True:
 ```
 
 The loop is **bounded** by `max_rounds` (default 3). If blockers survive revision, the run
-**escalates to a human** with the evidence and a recommendation — it never silently approves
+**escalates to a human** with the evidence and a recommendation; it never silently approves
 (ADR-0005). The default `revise` records the unresolved blockers on the draft, so the loop *cannot
 mask* a blocker (`skills/base.py`).
 
@@ -53,7 +53,7 @@ mask* a blocker (`skills/base.py`).
 | Ungrounded self-refinement games its reward | **Spontaneous Reward Hacking** (`arXiv:2407.04549`) | **why the critic's first pass is deterministic** |
 
 The last row is the crux: Reflexion/Self-Refine help **only when feedback is grounded**. So
-ADRA's critic runs the deterministic floor first and treats it as ground truth — the LLM pass may
+ADRA's critic runs the deterministic floor first and treats it as ground truth: the LLM pass may
 only *add* attacks, never overturn a tool's blocker (see
 [04_deterministic-first.md](./04_deterministic-first.md)).
 
@@ -61,7 +61,7 @@ only *add* attacks, never overturn a tool's blocker (see
 
 - **IS** a blocking, refutation-oriented critic with bounded revision and honest escalation.
 - **IS NOT** "self-refine until the model is happy". The critic is adversarial and grounded, and
-  the loop terminates in `accepted` or `escalate` — never an unbounded self-approval.
+  the loop terminates in `accepted` or `escalate`, never an unbounded self-approval.
 
 ## References
 

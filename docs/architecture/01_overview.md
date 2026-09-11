@@ -25,7 +25,7 @@ plan ─▶ ground ─▶ generate ─▶ CRITIC ─▶ (revise ─▶ CRITIC)* 
 | `revise` | yes | Address the critic's blocking findings and re-enter the critic. Bounded by `max_rounds`. | `Skill.revise` |
 | `decide` | no | `accepted` when the critic is clean; `escalate` when blockers survive `max_rounds`. Render artifacts; write the `RunRecord`. | `Orchestrator.run`, `Skill.finalize` |
 
-The loop is implemented in `Orchestrator.run` (`adra/orchestrator.py`) — a single readable
+The loop is implemented in `Orchestrator.run` (`adra/orchestrator.py`), a single readable
 method. Its core is literally:
 
 ```python
@@ -45,22 +45,22 @@ state.artifacts = impl.finalize(self.settings, state)
 
 ## Why a hand-rolled state machine (not an agent framework)
 
-ADR-0002 records the decision. The whole flow is a fixed, six-node pipeline — there is no need
+ADR-0002 records the decision. The whole flow is a fixed, six-node pipeline; there is no need
 for a planner that invents arbitrary tool call sequences, and a heavy runtime would hide the one
 property that matters most: **the critic is mandatory, blocking, and the last gate.** A
 framework-free loop is:
 
-- **Readable and auditable** — you can see in ~45 lines that nothing bypasses the critic and
+- **Readable and auditable**: you can see in ~45 lines that nothing bypasses the critic and
   that every node writes a provenance event (`record.event(...)`).
-- **Deterministic offline** — every LLM call is tagged with its `Node` (`adra/nodes.py`), so the
+- **Deterministic offline**: every LLM call is tagged with its `Node` (`adra/nodes.py`), so the
   offline `mock` provider answers per node and the loop runs identically with no key.
-- **Stable under wrapping** — if a richer runtime is ever desired, the node contracts
+- **Stable under wrapping**: if a richer runtime is ever desired, the node contracts
   (`plan/ground/generate/critic/revise/finalize`) are the interface; nothing internal leaks.
 
 ## Per-role model routing inside one run
 
 The orchestrator resolves a model **per role** (`plan` / `generate` / `critic` / `judge`) via a
-`ModelRouter`, so a single run can orchestrate across providers — e.g. a strong model for the
+`ModelRouter`, so a single run can orchestrate across providers, e.g. a strong model for the
 critic/judge and a cheaper/faster one for generation (`ADRA_MODEL_CRITIC`, `ADRA_MODEL_GENERATE`;
 see [guides/03_multi-provider-routing.md](../guides/03_multi-provider-routing.md)). An explicitly
 passed `model` (tests / single-model runs) wins for every role.
@@ -68,13 +68,13 @@ passed `model` (tests / single-model runs) wins for every role.
 ## What this page IS and is NOT
 
 - **IS** the canonical description of the control flow every skill obeys.
-- **IS NOT** a description of *what each skill checks* — that is the rubric
+- **IS NOT** a description of *what each skill checks*; that is the rubric
   ([methodologies/03_shared-rubric.md](../methodologies/03_shared-rubric.md)) and the per-skill
   use-case pages ([use-cases/](../use-cases/use-cases.md)).
 
 ## See also
 
-- [02_layered-design.md](./02_layered-design.md) — the three layers and the module map.
-- [04_run-sequence.md](./04_run-sequence.md) — the same loop traced concretely for `pr_eval`.
-- [methodologies/01_adversarial-spine.md](../methodologies/01_adversarial-spine.md) — the
+- [02_layered-design.md](./02_layered-design.md) · the three layers and the module map.
+- [04_run-sequence.md](./04_run-sequence.md) · the same loop traced concretely for `pr_eval`.
+- [methodologies/01_adversarial-spine.md](../methodologies/01_adversarial-spine.md) · the
   research lineage of generate→critic→revise (Reflexion, Self-Refine, Constitutional AI).

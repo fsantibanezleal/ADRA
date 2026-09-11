@@ -3,7 +3,7 @@
 A thin, fully-owned REST client (ADR-0008 / dossier §2: the official ``azure-devops``
 SDK is a stale, sync-only, untyped beta with no native Entra auth, so we own the few
 endpoints we need). Lists repositories and pull requests, fetches a PR with its unified
-diff, and — only when ``allow_external`` is set (a deliberate, human-gated action) —
+diff, and, only when ``allow_external`` is set (a deliberate, human-gated action),
 posts a pull-request comment thread.
 
 Auth is a Personal Access Token (Basic auth, empty username) or an Entra bearer token;

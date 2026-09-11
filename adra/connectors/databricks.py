@@ -7,7 +7,7 @@ the control plane + SQL; we skip ``databricks-sql-connector``).
 
 Read-only is the default posture: the engine never issues writes here, and the
 recommendation is to back it with a SELECT-only service principal at the grant/RBAC level
-(deterministic, not enforced in agent logic — dossier §4). As a defence-in-depth in-loop
+(deterministic, not enforced in agent logic; dossier §4). As a defence-in-depth in-loop
 guard we also reject obviously-mutating statements before they leave the process.
 
 Degrades cleanly: if the SDK is missing, or credentials/warehouse are absent, a clear
@@ -23,7 +23,7 @@ from __future__ import annotations
 
 import os
 
-# Statements that mutate state — rejected in-loop as a second line of defence behind a
+# Statements that mutate state, rejected in-loop as a second line of defence behind a
 # SELECT-only grant. The connector is for read-only experiment probes only.
 _FORBIDDEN_PREFIXES = (
     "insert", "update", "delete", "merge", "drop", "truncate", "alter",

@@ -1,4 +1,4 @@
-# 06 · `decide` — route analysis ("paths to follow")
+# 06 · `decide` · route analysis ("paths to follow")
 
 Given a problem and candidate routes, produce a decision artifact: a routes table with honest
 trade-offs (effort · blast radius · reversibility · risk · precedent), a recommendation, and an
@@ -16,7 +16,7 @@ prompt `adra/prompts/decide.md`.
 | **plan** | declares tool: `lang_scan` |
 | **ground** (deterministic) | `lang_tools.scan_language(problem)` |
 | **generate** | model returns `{problem, routes:[{name,summary,effort,blast_radius,reversibility,risk,precedent}], recommendation, rationale, open_question, decision_owner}`; `decision_owner` defaults to **`human`** |
-| **output** | `route_analysis.md` — Problem / Routes table / Recommendation / Rationale / Decision (Owner: **human** + open question) |
+| **output** | `route_analysis.md`: Problem / Routes table / Recommendation / Rationale / Decision (Owner: **human** + open question) |
 
 ## The rubric items it enforces
 
@@ -27,7 +27,7 @@ prompt `adra/prompts/decide.md`.
 | `language_leak` | BLOCKER · deterministic (cross-cutting) | English-only + no AI-session leak |
 
 The skill **prefers the smallest reversible route justified against a precedent** and flags any
-route that edits shared/templated assets (broad blast radius). The recommendation is exactly that —
+route that edits shared/templated assets (broad blast radius). The recommendation is exactly that:
 a recommendation; the decision stays human-owned.
 
 ## Why human-owned
@@ -61,6 +61,6 @@ adra decide "Raise the refresh cadence" "edit the shared CI template" "change it
 ## See also
 
 - [../methodologies/05_human-escalation.md](../methodologies/05_human-escalation.md)
-- [../security/02_gated-writes.md](../security/02_gated-writes.md) — the gates a chosen route still
+- [../security/02_gated-writes.md](../security/02_gated-writes.md): the gates a chosen route still
   passes through.
 - [../adr/ADR-0007-client-agnostic-grounding.md](../adr/ADR-0007-client-agnostic-grounding.md)

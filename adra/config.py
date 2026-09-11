@@ -13,13 +13,13 @@ from pathlib import Path
 
 from adra.utils import client_dir as _client_dir
 
-# Default Anthropic model — claude-haiku-4-5 per ADR-0053 (cost-appropriate default for
+# Default Anthropic model: claude-haiku-4-5 per ADR-0053 (cost-appropriate default for
 # private/quality apps; switch to claude-sonnet-4-6 when reasoning depth matters). Overridable via ADRA_MODEL.
 DEFAULT_ANTHROPIC_MODEL = "claude-haiku-4-5"
 
 # Built-in providers. Anthropic uses its native SDK; every entry below speaks the
 # OpenAI-compatible Chat Completions API, so OpenAI, Groq, xAI, Mistral, DeepSeek,
-# OpenRouter, Together AND local servers (Ollama / LM Studio / vLLM) all work — bring
+# OpenRouter, Together AND local servers (Ollama / LM Studio / vLLM) all work; bring
 # whatever you have, or run a local model for free. Any other OpenAI-compatible service
 # works via ADRA_BASE_URL + ADRA_API_KEY.
 PROVIDERS: dict[str, dict[str, str]] = {

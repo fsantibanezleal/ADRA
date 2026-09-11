@@ -13,7 +13,7 @@ dist/
 .venv/
 venv/
 
-# Secrets / local config — NEVER commit a real .env (secrets live in your own secret store)
+# Secrets / local config: NEVER commit a real .env (secrets live in your own secret store)
 .env
 *.local
 

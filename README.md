@@ -1,4 +1,4 @@
-# ADRA — Adversarial Dev Review Agent
+# ADRA · Adversarial Dev Review Agent
 
 [![License](https://img.shields.io/github/license/fsantibanezleal/ADRA)](LICENSE)
 [![Version](https://img.shields.io/github/v/tag/fsantibanezleal/ADRA?label=version&sort=semver)](https://github.com/fsantibanezleal/ADRA/tags)
@@ -10,7 +10,7 @@
 > grounded by **deterministic tools**, with **immutable provenance**. Runs **offline with
 > no API key**.
 
-`pip install adra` · Python ≥ 3.11 · Apache-2.0 · status: `v0.04.000`
+`pip install adra` · Python ≥ 3.11 · Apache-2.0 · status: `v0.04.001`
 
 ---
 
@@ -19,14 +19,14 @@
 The AI-code-review market splits in two, and both miss the same spot:
 
 - **Reviewers** (CodeRabbit, Greptile, Qodo, Korbit, Sourcery, Bito) feed linters into an
-  LLM, but the **model's prose is the verdict** — hallucinated and "consistently-stated-
+  LLM, but the **model's prose is the verdict**: hallucinated and "consistently-stated-
   but-false" findings leak through; the deterministic signals are inputs, never the gate.
 - **Autonomous coders** (Devin, OpenHands, SWE-agent, Sweep) *write* code and treat
   "tests pass" as success rather than adversarially trying to prove the change **wrong**.
 
 ADRA occupies the gap: a **deterministic spine** (git / CI / static analysis / SQL probes)
 that *grounds* a **blocking adversarial critic** whose job is to **refute**, not bless, each
-artifact — every finding carrying its evidence, with disciplined **human escalation** when
+artifact: every finding carrying its evidence, with disciplined **human escalation** when
 nothing deterministic backs the verdict. Existing tools generate opinions; ADRA generates
 proofs and refutations, and escalates when it can't.
 
@@ -39,16 +39,26 @@ proofs and refutations, and escalates when it can't.
 | `experiment` | Hypothesis-driven validation experiment: SQL-warehouse probes + synthesis |
 | `improve` | Minimum-functional improvement proposal (prune filler, smallest safe diff) |
 | `document` | Turn a run record into a PR page / experiment page / methodology-history row |
-| `decide` | Route analysis: candidate routes + trade-offs + recommendation — **human-owned** |
+| `decide` | Route analysis: candidate routes + trade-offs + recommendation · **human-owned** |
 
 Each skill is the same loop, differing only by its domain prompt and deterministic tools.
+
+## Use it as a Claude Code skill
+
+ADRA also ships as a portable **Claude Code Agent Skill** at
+[`skills/adra-applied/`](skills/adra-applied/): the same deterministic-first method
+delivered into an interactive coding agent. It has no model runtime of its own (the
+agent harness is the runtime) and reaches systems through the already-authenticated
+CLIs (`gh`, `az`, `databricks`, `git`), read-only by default. Install it by copying
+the folder into `~/.claude/skills/`, or enable this repo as a plugin. See
+[`skills/README.md`](skills/README.md).
 
 ## Why deterministic-first
 
 Tools (`git`, the exact CI command, `bundle validate`, language scan, SQL probe) run
 **first** and become both the grounding the model may not contradict and the evidence in
 the provenance log. Because the deterministic floor carries the verdict, the whole loop
-runs — and the test suite passes — **offline with no API key**. Connecting a real provider
+runs, and the test suite passes, **offline with no API key**. Connecting a real provider
 adds the semantic layer on top.
 
 ## Architecture
@@ -59,21 +69,21 @@ intake ─▶ plan ─▶ ground (deterministic tools) ─▶ generate ─▶ CR
                                                       └── accepted / escalate ─▶ artifacts + run record
 ```
 
-- `adra/state.py` — the typed **domain model** (`Severity`, `Finding`, `ToolResult`,
+- `adra/state.py` · the typed **domain model** (`Severity`, `Finding`, `ToolResult`,
   `CriticVerdict`, `RunState`). One contract end to end.
-- `adra/rubric.py` — the shared adversarial **rubric** (criteria as typed data); drives both
+- `adra/rubric.py` · the shared adversarial **rubric** (criteria as typed data); drives both
   the deterministic critic and the critic prompt, so "what we check" never drifts.
-- `adra/orchestrator.py` — the hand-rolled, **framework-free** state machine.
-- `adra/critic.py` — deterministic red-team pass (rubric-driven) + LLM semantic attacks.
-- `adra/judge.py` — rubric scoring with **swap-and-average** + reference anchoring.
-- `adra/llm.py` — the tiny ADRA-owned `ChatModel` seam: `mock` (offline) | any real provider
+- `adra/orchestrator.py` · the hand-rolled, **framework-free** state machine.
+- `adra/critic.py` · deterministic red-team pass (rubric-driven) + LLM semantic attacks.
+- `adra/judge.py` · rubric scoring with **swap-and-average** + reference anchoring.
+- `adra/llm.py` · the tiny ADRA-owned `ChatModel` seam: `mock` (offline) | any real provider
   via **pydantic-ai** (`provider:model`, config-only). No LangChain/LangGraph.
-- `adra/tools/` — each returns a `ToolResult` (git / CI / bundle / lang / discovery / sql).
-- `adra/skills/` — the `Skill` base + the six skills.
-- `adra/clients/` — client governance suites (the bundled fictional **Northwind Data
+- `adra/tools/` · each returns a `ToolResult` (git / CI / bundle / lang / discovery / sql).
+- `adra/skills/` · the `Skill` base + the six skills.
+- `adra/clients/` · client governance suites (the bundled fictional **Northwind Data
   Platform**); selectable via `ADRA_CLIENT_DIR`.
-- `adra/provenance.py` — the immutable run record (the deep change-history layer).
-- `cli/` — the `adra` command. `refs/` — annotated bibliography + papers. `docs/` — deep
+- `adra/provenance.py` · the immutable run record (the deep change-history layer).
+- `cli/` · the `adra` command. `refs/` · annotated bibliography + papers. `docs/` · deep
   docs + engine ADRs (`docs/adr/`).
 
 ## Quickstart (offline, no key)
@@ -110,14 +120,14 @@ Default is **dry-run / read-only**.
 ## Client-agnostic grounding
 
 A *client* = a governance suite (conventions, ADRs, CI standards, glossary, incident cases)
-the engine grounds on. ADRA ships a complete, **fictional** client — **Northwind Data
-Platform** — under `adra/clients/synthetic/northwind/`. Point ADRA at any client:
+the engine grounds on. ADRA ships a complete, **fictional** client, **Northwind Data
+Platform**, under `adra/clients/synthetic/northwind/`. Point ADRA at any client:
 
 ```bash
 export ADRA_CLIENT_DIR=/path/to/your/standards   # or Settings(client_dir=...)
 ```
 
-The rubric references the suite by id and the prompts cite it — the engine code does not
+The rubric references the suite by id and the prompts cite it; the engine code does not
 change per client.
 
 ## Connectors & emulator
@@ -140,12 +150,12 @@ Deterministic floor (tools are ground truth; the LLM cannot overturn a blocker) 
 by default (writes require `--external` **and** explicit human confirmation) · human gates on
 PR create / push / merge and any risk claim · English-only + AI-authorship-leak scan on
 anything written to disk · immutable provenance for every run. The agent reads **untrusted**
-repo/PR/issue content — a dual-LLM / capability split + sandboxed, egress-filtered execution are
+repo/PR/issue content; a dual-LLM / capability split + sandboxed, egress-filtered execution are
 planned for the connector phase (not yet implemented; OWASP LLM/Agentic Top-10).
 
 ## Two-repo layout
 
-ADRA is the **public-destined OSS engine** (this repo) — no secrets, ever. A separate
+ADRA is the **public-destined OSS engine** (this repo): no secrets, ever. A separate
 private **ADRA Console** (a private web app + backend) *consumes* this engine for
 experiments and real connections behind access control. The engine is the serious tool you
 can run anywhere with your own tokens; the console is the connected instance.
@@ -157,18 +167,24 @@ can run anywhere with your own tokens; the console is the connected instance.
 - **New capability:** add a `Skill` subclass + a `prompts/<skill>.md`, register it in
   `adra/skills/__init__.py`, add a `Node`.
 - **New tool:** a function returning a `ToolResult`; call it from a skill's `ground`.
-- **New provider:** config only — set `ADRA_PROVIDER` / `ADRA_MODEL` / `ADRA_MODEL_<ROLE>`
+- **New provider:** config only; set `ADRA_PROVIDER` / `ADRA_MODEL` / `ADRA_MODEL_<ROLE>`
   (pydantic-ai resolves the `provider:model`); no new code.
+
+## Quality gates
+
+`python scripts/check_content.py` is the content guard (ADR-0067): it fails on any em-dash or
+emoji in the tracked text surfaces and lists directional arrows found in Markdown prose so a
+reviewer can confirm they are notation; `tests/test_content_guard.py` runs it inside `pytest -q`.
 
 ## Status
 
-`v0.04.000` — the engine is complete and green offline, and the GitHub / Azure DevOps / Databricks
+`v0.04.001`: the engine is complete and green offline, and the GitHub / Azure DevOps / Databricks
 / Azure connectors plus the offline emulator are implemented. Multi-industry synthetic clients and
 the web console are the next phases. Stays `0.x` while connectors are partly untested-live.
 
 ## License
 
-Apache-2.0 — see [LICENSE](LICENSE).
+Apache-2.0; see [LICENSE](LICENSE).
 
 ## References
 

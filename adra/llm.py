@@ -1,9 +1,9 @@
-"""LLM layer — the house standard: pydantic-ai over a `provider:model` seam (ADR-0007
+"""LLM layer · the house standard: pydantic-ai over a `provider:model` seam (ADR-0007
 lane-c, ADR-0053), multi-provider/agnostic, with a deterministic offline fallback (ADR-0052).
 
 - Real providers go through **pydantic-ai** (`Agent`): `anthropic` / `openai` / `groq` /
   `google` / `mistral` natively, and the OpenAI-compatible long tail (`xai` / `deepseek` /
-  `openrouter` / `together` / local `ollama`) via an OpenAI-compatible base URL — the same
+  `openrouter` / `together` / local `ollama`) via an OpenAI-compatible base URL, the same
   LiteLLM-class seam. Models are `provider:model` strings chosen by env (ADR-0053).
 - `mock` is the deterministic, keyless fallback so the engine + tests run offline; nothing
   here is tied to a model version (the `temperature`/params are pydantic-ai's concern).
@@ -63,10 +63,10 @@ _CANNED: dict[Node, str] = {
     Node.DECIDE: json.dumps({
         "problem": "Offline route analysis.",
         "routes": [
-            {"name": "Route A — scoped change", "summary": "change only the owning repo",
+            {"name": "Route A · scoped change", "summary": "change only the owning repo",
              "effort": "low", "blast_radius": "low (single repo)", "reversibility": "high",
              "risk": "low", "precedent": "sibling pattern in the repo"},
-            {"name": "Route B — shared template", "summary": "edit the shared ndp-ci template",
+            {"name": "Route B · shared template", "summary": "edit the shared ndp-ci template",
              "effort": "low", "blast_radius": "high (every consumer)", "reversibility": "low",
              "risk": "high", "precedent": "none"}],
         "recommendation": "Route A",
@@ -156,8 +156,8 @@ def make_chat_model(settings: Settings) -> ChatModel:
 
 
 class ModelRouter:
-    """Resolve a :class:`ChatModel` per flow role so one run can orchestrate across providers
-    — a strong model for the critic/judge, a cheaper/faster one for generation. Cached by
+    """Resolve a :class:`ChatModel` per flow role so one run can orchestrate across providers:
+    a strong model for the critic/judge, a cheaper/faster one for generation. Cached by
     ``(provider, model)`` and built lazily.
     """
 

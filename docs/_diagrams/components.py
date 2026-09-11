@@ -1,6 +1,6 @@
 """Reusable, high-quality slide components.
 
-Gradient fills, soft shadows and real icon badges — so slides read as designed
+Gradient fills, soft shadows and real icon badges, so slides read as designed
 infographics, not boxes with bullet lists. All draw on the SvgBackend.
 """
 
@@ -94,7 +94,7 @@ def icon_badge(bk, cx, cy, r, name, accent, ring=True):
 
 
 def icon_disc(bk, cx, cy, r, name, accent):
-    """Outlined disc (dark fill, accent ring) with accent icon — lighter weight."""
+    """Outlined disc (dark fill, accent ring) with accent icon, lighter weight."""
     bk.oval(cx, cy, r, fill=T.CARD2, line=accent, line_w=1.6)
     s = r * 1.1
     icons.draw(bk, name, cx - s / 2, cy - s / 2, s, col=accent)

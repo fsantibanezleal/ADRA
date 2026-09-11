@@ -1,4 +1,4 @@
-# 02 · httpx — the GitHub + Azure DevOps REST connectors
+# 02 · httpx · the GitHub + Azure DevOps REST connectors
 
 **httpx** is the HTTP client behind ADRA's two **thin, fully-owned REST connectors**: GitHub
 (REST v3) and Azure DevOps (REST 7.1). ADR-0008 records the decision to own the few endpoints
@@ -19,15 +19,15 @@ ADRA needs over a `httpx.Client` rather than depend on a vendor SDK (githubkit, 
 
 ## Read in order
 
-1. [01_github.md](./01_github.md) — the GitHub connector: reads (PRs + unified diff + files),
+1. [01_github.md](./01_github.md) · the GitHub connector: reads (PRs + unified diff + files),
    gated writes (issue, PR comment), auth, and the REST surface.
-2. [02_azure-devops.md](./02_azure-devops.md) — the Azure DevOps connector: REST 7.1, PAT vs
+2. [02_azure-devops.md](./02_azure-devops.md) · the Azure DevOps connector: REST 7.1, PAT vs
    Entra bearer auth, iteration-changes (no raw patch), gated comment thread + work item.
 
 ## Why a thin REST client over httpx (ADR-0008)
 
 > Adapters: GitHub via a **thin REST client over `httpx`** (read PRs + diff, issues, comments;
-> writes gated) — githubkit/GraphQL optional later for line-level review composition; Azure DevOps
+> writes gated), githubkit/GraphQL optional later for line-level review composition; Azure DevOps
 > via **raw REST 7.1 over `httpx`** (the official `azure-devops` SDK is a stale, sync-only, untyped
 > beta with no native Entra auth, so we own the few endpoints we need).
 
@@ -48,8 +48,8 @@ ADRA needs over a `httpx.Client` rather than depend on a vendor SDK (githubkit, 
 
 ## See also
 
-- [../../data-contract/02_connector-shapes.md](../../data-contract/02_connector-shapes.md) — the
+- [../../data-contract/02_connector-shapes.md](../../data-contract/02_connector-shapes.md) · the
   `PullRequest` / `Issue` shapes these connectors return.
-- [../../security/02_gated-writes.md](../../security/02_gated-writes.md) — how `allow_external`
+- [../../security/02_gated-writes.md](../../security/02_gated-writes.md) · how `allow_external`
   gates `create_issue` / `comment_on_pull_request`.
-- [../../guides/02_the-cli.md](../../guides/02_the-cli.md) — `adra github-review owner/repo PR#`.
+- [../../guides/02_the-cli.md](../../guides/02_the-cli.md) · `adra github-review owner/repo PR#`.

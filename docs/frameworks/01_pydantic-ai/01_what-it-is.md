@@ -1,9 +1,9 @@
-# pydantic-ai — what it is, and where ADRA uses it
+# pydantic-ai · what it is, and where ADRA uses it
 
 **pydantic-ai** is a Python agent/LLM framework from the Pydantic team. ADRA uses only its thin
 **model layer**: a single `Agent` object addresses any provider through a uniform
 `provider:model` string and returns text. ADRA does not use pydantic-ai's higher-level agent
-graph, tools, or dependency injection — the orchestration is ADRA's own hand-rolled state machine
+graph, tools, or dependency injection; the orchestration is ADRA's own hand-rolled state machine
 (see [architecture](../../architecture/architecture.md)).
 
 ## The `provider:model` convention
@@ -26,10 +26,10 @@ So ADRA's `anthropic` + `claude-haiku-4-5` becomes the pydantic-ai model string
 `anthropic:claude-haiku-4-5`, `anthropic:claude-opus-4-8`, `anthropic:claude-sonnet-4-6`.
 
 Any provider **not** in that native map is reached as an **OpenAI-compatible** endpoint instead
-(`xai` / `deepseek` / `openrouter` / `together` / local `ollama`, or any custom base URL) — see
+(`xai` / `deepseek` / `openrouter` / `together` / local `ollama`, or any custom base URL); see
 [03_usage-and-gotchas.md](./03_usage-and-gotchas.md).
 
-## Where ADRA uses it — the `ChatModel` seam
+## Where ADRA uses it · the `ChatModel` seam
 
 The engine never imports pydantic-ai outside `adra/llm.py`. That module defines a minimal seam:
 
@@ -53,7 +53,7 @@ can use a strong model for the critic/judge and a cheaper one for generation.
 
 ## The node tag (why the offline mock is deterministic)
 
-`invoke_text` appends a hidden tag to the system prompt — `[[ADRA-NODE:<node>]]` — before calling
+`invoke_text` appends a hidden tag to the system prompt, `[[ADRA-NODE:<node>]]`, before calling
 `ChatModel.generate`. The real provider ignores it; the `MockChatModel` reads it to return a
 node-keyed canned answer (`adra/llm.py`, `_CANNED`). This is what lets the *same* code path run
 identically with a real provider or fully offline.
@@ -66,5 +66,5 @@ identically with a real provider or fully offline.
 
 ## See also
 
-- [02_why.md](./02_why.md) — the rationale and the ADRs.
-- [03_usage-and-gotchas.md](./03_usage-and-gotchas.md) — install, providers, routing, gotchas.
+- [02_why.md](./02_why.md) · the rationale and the ADRs.
+- [03_usage-and-gotchas.md](./03_usage-and-gotchas.md) · install, providers, routing, gotchas.

@@ -53,7 +53,7 @@ agent's job is to surface a defensible recommendation; the consequential commit 
 
 Keeping high-consequence actions human-owned and gating high-impact agent actions is exactly the
 *manage/govern* posture of the NIST AI RMF GenAI Profile and the ToolEmu finding. The point of an
-adversarial reviewer is to *refuse to act* when it can't prove safety — and to ask.
+adversarial reviewer is to *refuse to act* when it can't prove safety, and to ask.
 
 ## What this IS and is NOT
 
@@ -64,6 +64,6 @@ adversarial reviewer is to *refuse to act* when it can't prove safety — and to
 ## See also
 
 - [01_read-only-default.md](./01_read-only-default.md) · [03_untrusted-content.md](./03_untrusted-content.md)
-- [../frameworks/02_httpx/01_github.md](../frameworks/02_httpx/01_github.md) — the gated GitHub
+- [../frameworks/02_httpx/01_github.md](../frameworks/02_httpx/01_github.md) · the gated GitHub
   writes.
 - [../adr/ADR-0005-blocking-critic-and-escalation.md](../adr/ADR-0005-blocking-critic-and-escalation.md)

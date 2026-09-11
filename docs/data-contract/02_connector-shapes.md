@@ -63,7 +63,7 @@ class Issue:
 
 ## The `DataProvider` table shape
 
-`run_sql` always returns `{"columns": [...], "rows": [[...]]}` — across Databricks SQL (ANSI),
+`run_sql` always returns `{"columns": [...], "rows": [[...]]}`, across Databricks SQL (ANSI),
 Azure Log Analytics (**KQL**, same method name), and the emulator's SQLite. The uniform shape is
 what lets the `experiment` probe runner stay platform-agnostic.
 
@@ -87,12 +87,12 @@ becomes `git_fixture`; `pr.ci` becomes `ci_command` + `ci_fixture` (or `bundle_f
 ## What this IS and is NOT
 
 - **IS** one Protocol family with platform-agnostic dataclasses; adapters are interchangeable.
-- **IS NOT** a leaky abstraction — except the documented `diff` difference (patch vs change
+- **IS NOT** a leaky abstraction: except the documented `diff` difference (patch vs change
   summary), the skills don't know which platform they're on.
 
 ## See also
 
-- [../frameworks/02_httpx/02_httpx.md](../frameworks/02_httpx/02_httpx.md) — the REST adapters.
-- [../frameworks/05_stdlib-emulator/01_the-emulator.md](../frameworks/05_stdlib-emulator/01_the-emulator.md)
-  — the offline implementations.
-- [01_intake-contracts.md](./01_intake-contracts.md) — what the builders produce.
+- [../frameworks/02_httpx/02_httpx.md](../frameworks/02_httpx/02_httpx.md): the REST adapters.
+- [../frameworks/05_stdlib-emulator/01_the-emulator.md](../frameworks/05_stdlib-emulator/01_the-emulator.md):
+  the offline implementations.
+- [01_intake-contracts.md](./01_intake-contracts.md): what the builders produce.

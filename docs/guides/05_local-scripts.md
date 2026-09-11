@@ -2,7 +2,7 @@
 
 `scripts/` holds thin, offline-first wrappers around the engine: one-command setup/test/demo, and
 per-skill runners. Each runner inserts the repo root on `sys.path`, builds `Settings`, runs the
-orchestrator, and prints the artifacts — handy for driving ADRA without the installed `adra`
+orchestrator, and prints the artifacts, handy for driving ADRA without the installed `adra`
 console script.
 
 Read order: 04 → **05**. Landing: [guides.md](./guides.md).
@@ -11,10 +11,10 @@ Read order: 04 → **05**. Landing: [guides.md](./guides.md).
 
 | Script | What it does |
 |---|---|
-| `scripts/setup.sh` / `setup.ps1` | create `.venv`, `pip install -e ".[dev]"` — offline-ready, no key |
+| `scripts/setup.sh` / `setup.ps1` | create `.venv`, `pip install -e ".[dev]"`; offline-ready, no key |
 | `scripts/test.sh` / `test.ps1` | run the offline test suite |
 | `scripts/demo.sh` / `demo.ps1` | run the end-to-end offline demo |
-| `scripts/demo_offline.py` | the demo itself — all six skills with bundled Northwind fixtures; writes records under `runs/` |
+| `scripts/demo_offline.py` | the demo itself: all six skills with bundled Northwind fixtures; writes records under `runs/` |
 | `scripts/run_review.py` | `python scripts/run_review.py change.diff [--ci "<cmd>"] [--repo <path>] [--external]` |
 | `scripts/run_pr_eval.py` | run `pr_eval` over a branch/PR |
 | `scripts/run_experiment.py` | `python scripts/run_experiment.py spec.json [--external]` |
@@ -63,5 +63,5 @@ prints a one-line view; the artifacts (e.g. `review.md`, `pr_body.md`, `route_an
 ## See also
 
 - [01_install-and-run.md](./01_install-and-run.md) · [02_the-cli.md](./02_the-cli.md)
-- [../data-contract/01_intake-contracts.md](../data-contract/01_intake-contracts.md) — the intake
+- [../data-contract/01_intake-contracts.md](../data-contract/01_intake-contracts.md) · the intake
   shapes these runners build.

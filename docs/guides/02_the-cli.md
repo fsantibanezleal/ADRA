@@ -1,7 +1,7 @@
 # 02 · The CLI
 
 The `adra` command (`cli/__main__.py`) runs a capability through the adversarial loop and prints
-the artifacts — over a provided intake, a **real GitHub PR**, or the offline **emulator**. Offline
+the artifacts, over a provided intake, a **real GitHub PR**, or the offline **emulator**. Offline
 by default (the `mock` provider). `--external` (a global flag) lets tools/connectors call out;
 default is read-only.
 
@@ -26,7 +26,7 @@ Read order: 01 → **02** → 03. Landing: [guides.md](./guides.md).
 
 `_print_run` prints each artifact, then the blocking findings (if any), then
 `[decision: <accepted|escalate>]  run record: <id>.json`. The process exits **0** when accepted,
-**2** otherwise — so escalation is detectable in CI.
+**2** otherwise, so escalation is detectable in CI.
 
 ## Examples
 
@@ -84,6 +84,6 @@ Without `--external`, probes replay their `fixture` (offline). With `--external`
 
 ## See also
 
-- [03_multi-provider-routing.md](./03_multi-provider-routing.md) — add the semantic layer.
-- [05_local-scripts.md](./05_local-scripts.md) — `scripts/` wrappers around the same calls.
-- [../use-cases/use-cases.md](../use-cases/use-cases.md) — what each skill checks.
+- [03_multi-provider-routing.md](./03_multi-provider-routing.md) · add the semantic layer.
+- [05_local-scripts.md](./05_local-scripts.md) · `scripts/` wrappers around the same calls.
+- [../use-cases/use-cases.md](../use-cases/use-cases.md) · what each skill checks.

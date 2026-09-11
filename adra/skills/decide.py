@@ -1,4 +1,4 @@
-"""decide skill — route analysis ("paths to follow").
+"""decide skill: route analysis ("paths to follow").
 
 Given a problem and candidate routes, produces a decision artifact: a routes table
 with honest trade-offs (effort, blast radius, reversibility, risk, precedent), a
@@ -53,6 +53,6 @@ class DecideSkill(Skill):
               f"## Routes\n\n" + "\n".join(rows) + "\n\n"
               f"## Recommendation\n{d.get('recommendation','')}\n\n"
               f"## Rationale\n{d.get('rationale','')}\n\n"
-              f"## Decision\nOwner: **{d.get('decision_owner','human')}** — open question: "
+              f"## Decision\nOwner: **{d.get('decision_owner','human')}** · open question: "
               f"{d.get('open_question','')}\n")
         return {"route_analysis.md": md}

@@ -1,4 +1,4 @@
-# CASE-2024-052 — "No access" to a catalog, concluded prematurely
+# CASE-2024-052 · "No access" to a catalog, concluded prematurely
 
 **Domain:** `payments` · **Relates to:** ADR-0005
 

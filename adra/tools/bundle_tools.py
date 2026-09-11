@@ -1,6 +1,6 @@
 """Databricks Asset Bundle validation (deterministic).
 
-"Validate with the build's own tool" — run ``databricks bundle validate -t <env>``
+"Validate with the build's own tool": run ``databricks bundle validate -t <env>``
 and surface its verdict, rather than eyeballing the YAML. Read-only by default.
 """
 

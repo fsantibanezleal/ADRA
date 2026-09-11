@@ -230,6 +230,6 @@ def test_azure_degrades_without_sdk():
 def test_azure_runsql_is_kql_named_for_protocol():
     pytest.importorskip("azure.identity")
     from adra.connectors.azure import AzureMonitorData
-    # run_sql exists (Protocol-named) and the dialect is KQL — documented behaviour.
+    # run_sql exists (Protocol-named) and the dialect is KQL: documented behaviour.
     assert callable(AzureMonitorData.run_sql)
     assert AzureMonitorData.name == "azure"
