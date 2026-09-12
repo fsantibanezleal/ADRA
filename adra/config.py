@@ -90,6 +90,17 @@ class Settings:
     # Adversarial loop
     max_rounds: int = 3  # generate -> critic -> revise iterations before escalation
     judge_swap_average: bool = True  # evaluate pairwise comparisons in both orders
+    # Precision/recall controls for the semantic critic (validated 2026 patterns):
+    #   critic_runs > 1  aggregates several independent semantic passes and unions their
+    #     candidates (self-consistency; raises recall; empirically up to +43.67% F1).
+    #   refute = True    adds a refutation gate: an adversarial "kill mandate" pass tries
+    #     to DISPROVE each semantic candidate, and only survivors are kept (raises
+    #     precision; the Refute-or-Promote pattern). Deterministic findings (the hard
+    #     floor) are never refuted. Both default off so behavior is unchanged unless
+    #     enabled; pair `refute` with a cross-family critic (ADRA_MODEL_REFUTE) for the
+    #     Cross-Model Critic benefit.
+    critic_runs: int = 1
+    refute: bool = False
 
     # Provenance
     runs_dir: Path = field(default_factory=lambda: Path("runs"))
@@ -106,7 +117,7 @@ class Settings:
     allow_external_calls: bool = False
 
     def role(self, role: str) -> tuple[str, str]:
-        """Resolve (provider, model) for a flow role: 'plan'|'generate'|'critic'|'judge'.
+        """Resolve (provider, model) for a flow role: 'plan'|'generate'|'critic'|'judge'|'refute'.
 
         Falls back to the run's default provider/model; overridden per role via
         ``role_models`` (``ADRA_MODEL_<ROLE>``), value ``"provider:model"`` or ``"model"``.
@@ -142,7 +153,7 @@ def load_settings(**overrides) -> Settings:
     provider = os.environ.get("ADRA_PROVIDER") or _autodetect_provider()
 
     role_models: dict[str, str] = {}
-    for role in ("plan", "generate", "critic", "judge"):
+    for role in ("plan", "generate", "critic", "judge", "refute"):
         spec = os.environ.get(f"ADRA_MODEL_{role.upper()}")
         if spec:
             role_models[role] = spec
@@ -153,6 +164,8 @@ def load_settings(**overrides) -> Settings:
         temperature=float(os.environ.get("ADRA_TEMPERATURE", "0.0")),
         max_tokens=int(os.environ.get("ADRA_MAX_TOKENS", "4096")),
         max_rounds=int(os.environ.get("ADRA_MAX_ROUNDS", "3")),
+        critic_runs=int(os.environ.get("ADRA_CRITIC_RUNS", "1")),
+        refute=os.environ.get("ADRA_REFUTE", "0") == "1",
         allow_external_calls=os.environ.get("ADRA_ALLOW_EXTERNAL", "0") == "1",
         role_models=role_models,
     )
