@@ -4,6 +4,29 @@ All notable changes to ADRA are documented here. Versions use the `X.XX.XXX` dis
 format (PEP 440 package version in `pyproject.toml` is the normalized equivalent).
 Stays `0.x` while connectors are partly untested-live.
 
+## [0.06.000] · 2026-09-12
+
+### Added
+- **10 generic review rubric items** distilled from real review/validation practice
+  (kept client-agnostic: no client names, data, or secrets in the engine; client-
+  specific criteria live in a client suite via `ADRA_CLIENT_DIR` / consumer playbooks):
+  - `fixed_by_deletion` (BLOCKER) - a finding answered by deleting the artifact.
+  - `over_deletion_regression` (BLOCKER, deterministic) - a scoped diff also removes
+    unrelated declared keys, silently changing behavior (governed source -> file fallback).
+  - `feature_self_activates` (BLOCKER) - ships `enabled: true` and turns on in prod on merge.
+  - `validated_config_mismatch` (MAJOR) - the validated config is not the shipped one.
+  - `premise_vs_prod` (MAJOR) - validate a change's premises against prod when its output
+    is not yet deployed.
+  - `aggressive_threshold_no_fallback` (MAJOR) - threshold tighter than the real
+    distribution, no fallback.
+  - `driver_collect_oom` (MAJOR) - full-table `toPandas`/`collect` (serverless OOM); do
+    not flag ML fit/predict or small-aggregate pandas.
+  - `temporary_exception_not_fix` (MAJOR) - a temporary exception is not a resolution and
+    invalidates anything validated against current state.
+  - `warm_cache_not_evidence` (MAJOR) - a warm-cache "it worked" is not proof of access.
+  - `conflicting_reference_values` (MAJOR) - multiple conflicting sources for one value.
+- Tests: `tests/test_rubric_additions.py`.
+
 ## [0.05.000] · 2026-09-12
 
 ### Added
