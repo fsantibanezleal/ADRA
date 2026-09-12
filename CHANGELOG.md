@@ -4,6 +4,51 @@ All notable changes to ADRA are documented here. Versions use the `X.XX.XXX` dis
 format (PEP 440 package version in `pyproject.toml` is the normalized equivalent).
 Stays `0.x` while connectors are partly untested-live.
 
+## [0.06.000] · 2026-09-12
+
+### Added
+- **10 generic review rubric items** distilled from real review/validation practice
+  (kept client-agnostic: no client names, data, or secrets in the engine; client-
+  specific criteria live in a client suite via `ADRA_CLIENT_DIR` / consumer playbooks):
+  - `fixed_by_deletion` (BLOCKER) - a finding answered by deleting the artifact.
+  - `over_deletion_regression` (BLOCKER, deterministic) - a scoped diff also removes
+    unrelated declared keys, silently changing behavior (governed source -> file fallback).
+  - `feature_self_activates` (BLOCKER) - ships `enabled: true` and turns on in prod on merge.
+  - `validated_config_mismatch` (MAJOR) - the validated config is not the shipped one.
+  - `premise_vs_prod` (MAJOR) - validate a change's premises against prod when its output
+    is not yet deployed.
+  - `aggressive_threshold_no_fallback` (MAJOR) - threshold tighter than the real
+    distribution, no fallback.
+  - `driver_collect_oom` (MAJOR) - full-table `toPandas`/`collect` (serverless OOM); do
+    not flag ML fit/predict or small-aggregate pandas.
+  - `temporary_exception_not_fix` (MAJOR) - a temporary exception is not a resolution and
+    invalidates anything validated against current state.
+  - `warm_cache_not_evidence` (MAJOR) - a warm-cache "it worked" is not proof of access.
+  - `conflicting_reference_values` (MAJOR) - multiple conflicting sources for one value.
+- Tests: `tests/test_rubric_additions.py`.
+
+## [0.05.000] · 2026-09-12
+
+### Added
+- **Precision/recall controls for the semantic critic** (validated 2026 patterns):
+  - `ADRA_CRITIC_RUNS` (>1) aggregates several independent semantic critic passes and
+    unions their candidates (self-consistency; higher recall).
+  - `ADRA_REFUTE=1` adds a **refutation gate** (the Refute-or-Promote "kill mandate"):
+    an adversarial pass tries to DISPROVE each semantic candidate, and only survivors
+    are kept (higher precision). Deterministic findings (the hard floor) are never
+    refuted. Prompt: `adra/prompts/refute.md`.
+  - New `refute` flow role (`ADRA_MODEL_REFUTE`) so the refuter can be a different model
+    family than the critic (Cross-Model Critic, to catch correlated blind spots).
+- Critic findings are now **ranked most-severe first**.
+- Tests: `tests/test_critic_precision.py` (ensemble aggregation, refutation gate,
+  offline no-op, severity ranking, backward-compatible single pass).
+
+### Notes
+- Defaults are unchanged (`critic_runs=1`, `refute=0`): existing behavior and the
+  offline `mock` path are identical; the new gates activate only when enabled with a
+  real provider. Basis: 2026 research on multi-agent review precision (Refute-or-Promote,
+  arXiv 2604.19049) and LLM false-positive reduction (ICSE 2026, arXiv 2601.18844).
+
 ## [0.04.001] · 2026-09-11
 
 ### Changed

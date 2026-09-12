@@ -152,6 +152,71 @@ RUBRIC: tuple[RubricItem, ...] = (
         "Decision-support outputs must not claim to 'detect', 'predict', 'guarantee' or "
         "'prevent' an outcome; frame as likelihood / risk / recommendation with its evidence.",
         "ADR-0007: outputs are decision support, not guaranteed event detection."),
+    RubricItem(
+        "fixed_by_deletion", "Fixed by deletion", Severity.BLOCKER, "destructive",
+        "semantic", ("pr_eval", "code_review"),
+        "A review finding answered by DELETING the artifact instead of correcting it "
+        "removes the defect from view without resolving it; reopen it and require a real fix.",
+        "Recurring: a flagged file was deleted between review rounds, making the defect unreviewable."),
+    RubricItem(
+        "over_deletion_regression", "Over-deletion regression", Severity.BLOCKER, "destructive",
+        "deterministic", ("pr_eval",),
+        "A diff scoped for one change that also removes unrelated declared keys "
+        "(catalog / config entries) can silently change behavior (a governed source "
+        "falling back to a file); resolve every removed key across the before/after revisions.",
+        "Recurring: a change deleted unrelated catalog lines, silently reverting UC tables to CSV."),
+    RubricItem(
+        "feature_self_activates", "Feature self-activates in prod", Severity.BLOCKER, "risk",
+        "semantic", ("pr_eval", "code_review"),
+        "A new feature that ships enabled by default (e.g. `enabled: true` with an "
+        "unconditional runner) turns itself on in production on merge; new behavior must be "
+        "off by default and enabled deliberately.",
+        "Recurring: a reconciliation feature shipped `enabled: true` and activated in prod on deploy."),
+    RubricItem(
+        "validated_config_mismatch", "Validated config is not the shipped config", Severity.MAJOR,
+        "evidence", "semantic", ("pr_eval", "experiment"),
+        "The configuration that was validated must be the one that ships; a green result for "
+        "config A does not vouch for a different config B present in the diff.",
+        "Recurring: the shipped configuration differed from the one the tests validated."),
+    RubricItem(
+        "premise_vs_prod", "Validate premises, not just output", Severity.MAJOR, "evidence",
+        "semantic", ("experiment", "pr_eval"),
+        "When a change's output is not yet in production, validate its PREMISES against "
+        "production data (the tables / ranges / latencies it assumes), not its absent output.",
+        "Recurring: a data-correctness check validated the PR's premises because its output was not yet deployed."),
+    RubricItem(
+        "aggressive_threshold_no_fallback", "Aggressive threshold, no fallback", Severity.MAJOR,
+        "risk", "semantic", ("code_review", "pr_eval"),
+        "A threshold set tighter than the real data distribution, with no safety fallback, "
+        "silently drops valid data (a 90-minute cap when the measured median is 139); check the "
+        "threshold against the measured distribution and a fallback path.",
+        "Recurring: a freshness cap below the measured median left the compute set empty with no fallback."),
+    RubricItem(
+        "driver_collect_oom", "Full-table collect / toPandas", Severity.MAJOR, "efficiency",
+        "semantic", ("code_review",),
+        "`SELECT *` then `.toPandas()` / `.collect()` of a fact table (especially on serverless) "
+        "risks a driver OOM; aggregate in Spark and materialize only the small result. Do NOT "
+        "flag ML `.fit` / `.predict` or small-aggregate pandas.",
+        "Recurring: a fact table pulled to the driver via toPandas on serverless."),
+    RubricItem(
+        "temporary_exception_not_fix", "Temporary exception is not a fix", Severity.MAJOR, "risk",
+        "semantic", ("decide", "pr_eval"),
+        "A temporary exception (a firewall carve-out, a disabled check, a manual grant) is not a "
+        "fix; it expires and it invalidates anything validated against the current state. Name the "
+        "real fix and the deadline.",
+        "Recurring: a temporary access exception was treated as a resolution."),
+    RubricItem(
+        "warm_cache_not_evidence", "Warm-cache 'it worked' is not evidence", Severity.MAJOR, "access",
+        "semantic", ("experiment",),
+        "A 'it worked a minute ago' result on a warm warehouse is a cache hit, not proof of "
+        "access nor a bound on impact; re-verify on a cold path before concluding.",
+        "Recurring: warm-cache reads were mistaken for partial-access evidence."),
+    RubricItem(
+        "conflicting_reference_values", "Conflicting references for one value", Severity.MAJOR,
+        "evidence", "semantic", ("decide", "experiment", "document"),
+        "Multiple conflicting sources for a single value (operator vs config vs control system) "
+        "mean the value is unresolved; reconcile them and name the authoritative one.",
+        "Recurring: one setpoint had three conflicting documented values."),
 )
 
 _BY_ID = {item.id: item for item in RUBRIC}

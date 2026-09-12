@@ -95,25 +95,98 @@ def llm_critique(model: ChatModel, system: str, state: RunState) -> tuple[list[F
     return findings, str(data.get("notes", ""))
 
 
-def criticize(model: ChatModel, state: RunState) -> CriticVerdict:
-    """Full critic pass: deterministic rubric (hard floor) + LLM semantic attacks.
+_SEVERITY_RANK = {Severity.BLOCKER: 0, Severity.MAJOR: 1, Severity.MINOR: 2, Severity.NIT: 3}
+
+
+def _rank(findings: list[Finding]) -> list[Finding]:
+    """Order findings most-severe first (stable within a severity)."""
+    return sorted(findings, key=lambda f: _SEVERITY_RANK.get(f.severity, 9))
+
+
+def _dedupe(findings: list[Finding]) -> list[Finding]:
+    """Drop duplicates by (category, message), preserving order."""
+    seen: set[tuple[str, str]] = set()
+    out: list[Finding] = []
+    for f in findings:
+        key = (f.category, f.message)
+        if key not in seen:
+            seen.add(key)
+            out.append(f)
+    return out
+
+
+def refute_candidates(refuter: ChatModel, state: RunState,
+                      candidates: list[Finding]) -> list[Finding]:
+    """Refutation gate (the "kill mandate"): try to DISPROVE each semantic candidate.
+
+    For every candidate finding the refuter is asked to prove it false, already
+    handled, or unsupported by the evidence; only candidates it CANNOT refute survive.
+    This trades a little recall for precision (LLMs optimize plausibility, not
+    correctness), following the Refute-or-Promote pattern. Pair it with a cross-family
+    refuter (``ADRA_MODEL_REFUTE``) to catch correlated blind spots. Deterministic
+    findings never reach here: the hard floor is ground truth and is never re-litigated.
+
+    Returns:
+        The surviving (non-refuted) findings, in their original order.
+    """
+    if not candidates:
+        return candidates
+    system = load_prompt("refute") or (
+        "You are a refuter. Try to DISPROVE the candidate finding. It survives only if "
+        "it cannot be refuted with an independent second method.")
+    survivors: list[Finding] = []
+    for f in candidates:
+        user = (
+            "Try to REFUTE this candidate finding. Return JSON {refuted: bool, reason: str}. "
+            "It is refuted only if it is false, already handled, or unsupported by the "
+            "evidence in the grounding/draft.\n\n"
+            f"SKILL: {state.skill}\nGROUNDING: {state.to_dict()['grounding']}\n"
+            f"DRAFT: {state.draft}\nCANDIDATE: {f.message}")
+        data = parse_json(invoke_text(refuter, system, user, node=Node.CRITIC))
+        if not bool(data.get("refuted", False)):
+            survivors.append(f)
+    return survivors
+
+
+def criticize(model: ChatModel, state: RunState, settings=None,
+              refuter: ChatModel | None = None) -> CriticVerdict:
+    """Full critic pass: deterministic rubric (hard floor) + LLM semantic attacks,
+    optionally aggregated over several passes and filtered by a refutation gate.
 
     Args:
         model: The chat model for the semantic pass.
         state: The current run state (grounding already executed).
+        settings: Optional run settings. When given, ``critic_runs`` aggregates that
+            many independent semantic passes (self-consistency, higher recall) and
+            ``refute`` enables the refutation gate (higher precision). When omitted,
+            behaves as a single semantic pass (backward compatible).
+        refuter: Optional chat model for the refutation gate; defaults to ``model``.
+            Set a different family (``ADRA_MODEL_REFUTE``) for the Cross-Model Critic.
 
     Returns:
-        A :class:`~adra.state.CriticVerdict`; ``clean`` is True only when no blocking
-        finding survives. Findings are deduped by (category, message).
+        A :class:`~adra.state.CriticVerdict`; ``clean`` is True only when no finding
+        survives. Findings are deduped by (category, message) and ranked most-severe first.
     """
     system = _system(state.skill)
-    llm_findings, notes = llm_critique(model, system, state)
-    seen: set[tuple[str, str]] = set()
-    blocking: list[Finding] = []
-    for f in deterministic_attacks(state) + llm_findings:
-        key = (f.category, f.message)
-        if key not in seen:
-            seen.add(key)
-            blocking.append(f)
+    runs = max(1, getattr(settings, "critic_runs", 1)) if settings is not None else 1
+
+    # Semantic candidates, optionally aggregated over independent passes (recall).
+    semantic: list[Finding] = []
+    notes_parts: list[str] = []
+    for _ in range(runs):
+        found, notes = llm_critique(model, system, state)
+        semantic.extend(found)
+        if notes:
+            notes_parts.append(notes)
+    semantic = _dedupe(semantic)
+
+    # Refutation gate over the SEMANTIC candidates only (precision); the deterministic
+    # hard floor is never refuted. Skipped offline (mock) where refutation is a no-op.
+    if (settings is not None and getattr(settings, "refute", False)
+            and getattr(settings, "provider", "mock") != "mock"):
+        semantic = refute_candidates(refuter or model, state, semantic)
+
+    blocking = _rank(_dedupe(deterministic_attacks(state) + semantic))
     attacks = [it.id for it in rubric.for_skill(state.skill)]
-    return CriticVerdict(clean=not blocking, blocking=blocking, attacks_tried=attacks, notes=notes)
+    return CriticVerdict(clean=not blocking, blocking=blocking,
+                         attacks_tried=attacks, notes=" ".join(notes_parts))

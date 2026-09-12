@@ -60,7 +60,8 @@ class Orchestrator:
 
         # CRITIC -> revise loop
         while True:
-            verdict = critic_mod.criticize(self._model("critic"), state)
+            verdict = critic_mod.criticize(
+                self._model("critic"), state, self.settings, refuter=self._model("refute"))
             state.critic_history.append(verdict)
             record.event("critic", "critic", {**verdict.to_dict(), "model": self._model_id("critic")})
             if verdict.clean:
